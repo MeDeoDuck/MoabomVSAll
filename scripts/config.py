@@ -67,6 +67,11 @@ PRODUCT_IMAGE_ENABLED = os.getenv(
 SERPER_IMAGES_ENDPOINT = os.getenv(
     "SERPER_IMAGES_ENDPOINT", "https://google.serper.dev/images"
 )
+# Serper Google Web Search 엔드포인트 (검색 후보 자동 제안에서 사용).
+# 키 없으면 빈 결과로 안전 퇴화 — suggest 는 보조 기능이므로 5xx 금지.
+SERPER_SEARCH_ENDPOINT = os.getenv(
+    "SERPER_SEARCH_ENDPOINT", "https://google.serper.dev/search"
+)
 # 검색 후보 수(1등이 늘 정확하진 않음 → 여러 개 받아 검증).
 PRODUCT_IMAGE_SEARCH_NUM = int(os.getenv("PRODUCT_IMAGE_SEARCH_NUM", "10"))
 # (보강 B) 검색 순위 기반 컷 제거 — 명백한 노이즈가 아닌 후보는 검색

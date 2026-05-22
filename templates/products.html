@@ -167,6 +167,53 @@
             border-radius: 14px; padding: 32px; text-align: center; color: var(--muted);
         }
 
+        /* ── Suggest panel (검색 후보 자동 제안) ──────────── */
+        .search-grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
+            align-items: start;
+        }
+        .suggest-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px;
+            min-height: 220px;
+            box-shadow: var(--shadow);
+        }
+        .suggest-panel .suggest-title {
+            font-size: 13px; font-weight: 700; color: var(--muted);
+            margin: 0 0 12px; letter-spacing: 0.02em;
+        }
+        .suggest-panel .suggest-state {
+            font-size: 13px; color: var(--muted); padding: 8px 4px;
+        }
+        .suggest-list { display: flex; flex-direction: column; gap: 8px; }
+        .suggest-card {
+            display: block; width: 100%; text-align: left;
+            border: 1px solid var(--border); border-radius: 10px;
+            padding: 10px 12px; background: #fafafd;
+            font-family: inherit; font-size: 14px; color: var(--text);
+            cursor: pointer; transition: border-color 0.12s, background 0.12s, transform 0.08s;
+        }
+        .suggest-card:hover {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+        }
+        .suggest-card:active { transform: translateY(1px); }
+        .suggest-card .sc-name { font-weight: 600; }
+        .suggest-card .sc-meta {
+            font-size: 12px; color: var(--muted); margin-top: 4px;
+            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+        }
+        .suggest-card .sc-badge {
+            display: inline-block; padding: 1px 6px; border-radius: 6px;
+            font-size: 11px; font-weight: 600;
+        }
+        .sc-badge.has-report { background: #e6f4ea; color: #137333; }
+        .sc-badge.serper { background: #fef3c7; color: #92400e; }
+
         /* ── Responsive ────────────────────────────────── */
         @media (max-width: 720px) {
             .page { padding: 20px 16px 60px; }
@@ -175,6 +222,7 @@
             .pillars { grid-template-columns: 1fr; }
             .form-row { flex-direction: column; }
             .btn-primary { width: 100%; }
+            .search-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -215,17 +263,25 @@
         <!-- Add product -->
         <section class="section">
             <h2>제품 추가</h2>
-            <div class="card">
-                <form id="productForm" autocomplete="off">
-                    <div class="form-row">
-                        <label class="field" for="name">
-                            <span class="field-label">분석할 제품명</span>
-                            <input type="text" id="name" name="name" placeholder="예: 갤럭시 S25, 아이폰 17, 에어팟 4" required>
-                        </label>
-                        <button type="submit" class="btn-primary">분석 시작 →</button>
-                    </div>
-                    <p class="form-hint">제품을 등록하면 다음 화면에서 AI 가 분석할 영상을 자동 선정합니다.</p>
-                </form>
+            <div class="search-grid">
+                <div class="card">
+                    <form id="productForm" autocomplete="off">
+                        <div class="form-row">
+                            <label class="field" for="name">
+                                <span class="field-label">분석할 제품명</span>
+                                <input type="text" id="name" name="name" placeholder="예: 갤럭시 S25, 아이폰 17, 에어팟 4" required>
+                            </label>
+                            <input type="hidden" id="brand" name="brand">
+                            <button type="submit" class="btn-primary">분석 시작 →</button>
+                        </div>
+                        <p class="form-hint">제품명을 입력하면 우측에 정확 제품 후보를 띄워드립니다. 후보를 클릭하면 바로 분석으로 넘어가요.</p>
+                    </form>
+                </div>
+                <aside class="suggest-panel" id="suggestPanel" aria-live="polite">
+                    <p class="suggest-title">검색 후보</p>
+                    <div class="suggest-state" id="suggestState">두 글자 이상 입력하면 후보가 표시됩니다.</div>
+                    <div class="suggest-list" id="suggestList"></div>
+                </aside>
             </div>
         </section>
 
@@ -251,6 +307,112 @@
     </div>
 
     <script>
+        // ── 검색 후보 자동 제안 ─────────────────────────────────────
+        const nameInput = document.getElementById('name');
+        const brandInput = document.getElementById('brand');
+        const stateEl = document.getElementById('suggestState');
+        const listEl = document.getElementById('suggestList');
+        let suggestController = null;
+        let suggestDebounce = null;
+        window.__lastSuggestSource = null;
+
+        function renderSuggestState(msg) {
+            stateEl.textContent = msg;
+            stateEl.style.display = '';
+            listEl.innerHTML = '';
+        }
+
+        function renderSuggestItems(items) {
+            listEl.innerHTML = '';
+            if (!items || items.length === 0) {
+                renderSuggestState('일치하는 정확 제품명을 찾지 못했어요. 입력값 그대로 분석 시작이 가능합니다.');
+                return;
+            }
+            stateEl.style.display = 'none';
+            for (const it of items) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'suggest-card';
+                btn.dataset.name = it.name || '';
+                btn.dataset.brand = it.brand || '';
+                btn.dataset.existingReport = it.has_report ? '1' : '';
+                btn.dataset.productId = it.product_id || '';
+
+                const nameRow = document.createElement('div');
+                nameRow.className = 'sc-name';
+                nameRow.textContent = it.name;
+                btn.appendChild(nameRow);
+
+                const meta = document.createElement('div');
+                meta.className = 'sc-meta';
+                if (it.brand) {
+                    const b = document.createElement('span');
+                    b.textContent = it.brand;
+                    meta.appendChild(b);
+                }
+                if (it.has_report) {
+                    const tag = document.createElement('span');
+                    tag.className = 'sc-badge has-report';
+                    tag.textContent = '보고서 있음';
+                    meta.appendChild(tag);
+                }
+                if (it.source === 'serper') {
+                    const tag = document.createElement('span');
+                    tag.className = 'sc-badge serper';
+                    tag.textContent = 'web';
+                    meta.appendChild(tag);
+                }
+                btn.appendChild(meta);
+
+                btn.addEventListener('click', () => onSuggestPick(it));
+                listEl.appendChild(btn);
+            }
+        }
+
+        async function fetchSuggest(q) {
+            if (suggestController) suggestController.abort();
+            suggestController = new AbortController();
+            try {
+                const res = await fetch('/products/suggest?q=' + encodeURIComponent(q) + '&limit=6', {
+                    signal: suggestController.signal,
+                });
+                if (!res.ok) {
+                    renderSuggestState('후보를 가져오지 못했어요. 잠시 후 다시 시도해주세요.');
+                    return;
+                }
+                const data = await res.json();
+                const items = (data && data.items) || [];
+                window.__lastSuggestSource = items.length > 0 ? items[0].source : null;
+                renderSuggestItems(items);
+            } catch (err) {
+                if (err.name === 'AbortError') return;
+                renderSuggestState('후보를 가져오는 중 오류가 발생했어요.');
+            }
+        }
+
+        nameInput.addEventListener('input', () => {
+            const q = nameInput.value.trim();
+            brandInput.value = '';
+            clearTimeout(suggestDebounce);
+            if (q.length < 2) {
+                if (suggestController) suggestController.abort();
+                renderSuggestState('두 글자 이상 입력하면 후보가 표시됩니다.');
+                return;
+            }
+            renderSuggestState('검색 중…');
+            suggestDebounce = setTimeout(() => fetchSuggest(q), 350);
+        });
+
+        function onSuggestPick(item) {
+            nameInput.value = item.name;
+            brandInput.value = item.brand || '';
+            // 자동 submit — 기존 분석된 제품이면 POST 응답의 existing_report 가
+            // truthy → 보고서로 즉시 이동. 신규면 product_detail 로 이동해
+            // 영상 선정 에이전트가 시작된다(기존 동작 유지).
+            document.getElementById('productForm').requestSubmit();
+        }
+
+        // ── 폼 submit ───────────────────────────────────────────────
         document.getElementById('productForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
@@ -258,7 +420,10 @@
             submitBtn.disabled = true;
             submitBtn.textContent = '생성 중...';
 
-            const data = { name: document.getElementById('name').value.trim() };
+            const data = {
+                name: nameInput.value.trim(),
+                brand: brandInput.value.trim(),
+            };
             if (!data.name) { submitBtn.disabled = false; submitBtn.textContent = original; return; }
 
             try {
@@ -273,6 +438,7 @@
                     return;
                 }
                 const product = await response.json();
+                // existing_report 가 있으면 같은 product_detail 경로로 이동(보고서 자동 로드는 페이지가 담당).
                 window.location.href = '/products/' + product.product_id;
             } catch (error) {
                 alert('Error: ' + error);
