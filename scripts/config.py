@@ -72,6 +72,21 @@ SERPER_IMAGES_ENDPOINT = os.getenv(
 SERPER_SEARCH_ENDPOINT = os.getenv(
     "SERPER_SEARCH_ENDPOINT", "https://google.serper.dev/search"
 )
+
+# ── 검색 후보 자동 제안 v2 — 임베딩 시맨틱 fallback ──
+# DB ILIKE + alias 가 못 잡는 표현을 multilingual 임베딩 cosine 으로 보강.
+SUGGEST_VECTOR_DB_PATH = os.getenv(
+    "SUGGEST_VECTOR_DB_PATH",
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "seeds", ".vector_cache.sqlite3"),
+)
+SUGGEST_VECTOR_TOP_K = int(os.getenv("SUGGEST_VECTOR_TOP_K", "6"))
+# cross-lingual 매칭 컷오프. 너무 낮으면 false positive(아이폰 검색에 맥북 끌려옴),
+# 너무 높으면 fallback 무력. 첫 배포 후 [SUGGEST_PERF] top_score 로그 보고 튜닝.
+SUGGEST_VECTOR_MIN_SCORE = float(os.getenv("SUGGEST_VECTOR_MIN_SCORE", "0.55"))
+# 1/true/yes/on → 활성. 임베딩 모델 장애 시 0/false 로 즉시 비활성 가능.
+SUGGEST_SEMANTIC_ENABLED = os.getenv(
+    "SUGGEST_SEMANTIC_ENABLED", "1"
+).strip().lower() not in ("0", "false", "no", "off")
 # 검색 후보 수(1등이 늘 정확하진 않음 → 여러 개 받아 검증).
 PRODUCT_IMAGE_SEARCH_NUM = int(os.getenv("PRODUCT_IMAGE_SEARCH_NUM", "10"))
 # (보강 B) 검색 순위 기반 컷 제거 — 명백한 노이즈가 아닌 후보는 검색

@@ -23,6 +23,7 @@ from typing import Any, Dict, List
 
 import psycopg2.extras
 
+from scripts.api.suggest_aliases import apply_aliases
 from scripts.database.queries import query_all, query_one, execute_update
 
 
@@ -39,12 +40,15 @@ LLM_CONFIDENCE_THRESHOLD = 0.70
 def normalize_query(q: str) -> str:
     """캐시 키·매칭 일관성 위한 정규화.
 
-    NFKC → LOWER → 공백/하이픈 제거. 한글 자모 분해는 v1 SKIP(후속).
+    NFKC → LOWER → 공백/하이픈 제거 → 영-한 alias 치환. 한글 자모 분해는 SKIP.
+    alias 치환은 v2 고도화: "galaxy s25" → "갤럭시s25" 등 영문 입력을 한국
+    정식명 정규형과 매칭되도록(scripts/api/suggest_aliases.py 참조).
     """
     if not q:
         return ""
     s = unicodedata.normalize("NFKC", q).lower().strip()
-    return s.replace(" ", "").replace("-", "")
+    s = s.replace(" ", "").replace("-", "")
+    return apply_aliases(s)
 
 
 # ── DB 매칭 ─────────────────────────────────────────────────────────────
@@ -327,19 +331,47 @@ def suggest(q: str, limit: int = DEFAULT_LIMIT) -> List[Dict[str, Any]]:
         return cached[:limit]
 
     db_hits = db_match(q_norm, limit=limit)
-    serper_items: List[Dict[str, Any]] = []
+
+    # 임베딩 시맨틱 fallback (v2 고도화) — DB 부족 시에만 발동.
+    # alias 가 못 잡은 영문 표현·오타·축약을 multilingual cosine 으로 보강.
+    semantic_items: List[Dict[str, Any]] = []
+    semantic_called = False
     if len(db_hits) <= MIN_DB_HITS:
+        try:
+            from scripts.config import (
+                SUGGEST_SEMANTIC_ENABLED,
+                SUGGEST_VECTOR_DB_PATH,
+                SUGGEST_VECTOR_TOP_K,
+                SUGGEST_VECTOR_MIN_SCORE,
+            )
+            if SUGGEST_SEMANTIC_ENABLED:
+                from scripts.api.suggest_vector import search_semantic
+                semantic_called = True
+                semantic_items = search_semantic(
+                    q,
+                    db_path=SUGGEST_VECTOR_DB_PATH,
+                    top_k=SUGGEST_VECTOR_TOP_K,
+                    min_score=SUGGEST_VECTOR_MIN_SCORE,
+                )
+        except Exception as e:
+            # 시맨틱 실패는 DB/Serper 경로에 영향 X — 격리
+            print(f"[SUGGEST_PERF] semantic_search failed err={e}")
+
+    serper_items: List[Dict[str, Any]] = []
+    # Serper 발동 조건도 갱신: DB + semantic 합산이 부족할 때만.
+    if len(db_hits) + len(semantic_items) <= MIN_DB_HITS:
         payload = serper_search(q)
         serper_called = True
-        serper_items = llm_extract(q, payload, db_hits)
+        serper_items = llm_extract(q, payload, db_hits + semantic_items)
         llm_called = bool(payload)
 
-    merged = _dedupe(db_hits + serper_items)[:limit]
+    merged = _dedupe(db_hits + semantic_items + serper_items)[:limit]
     _cache_set(q_norm, merged)
 
     ms = (perf_counter() - t0) * 1000
     print(
         f"[SUGGEST_PERF] q={q!r} cache=MISS db_hits={len(db_hits)} "
+        f"semantic_called={semantic_called} semantic_hits={len(semantic_items)} "
         f"serper_called={serper_called} llm_called={llm_called} "
         f"merged={len(merged)} total_ms={ms:.1f}"
     )
