@@ -1,5 +1,26 @@
 [
   {
+    "name": "갤럭시 S26",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "갤럭시 S26 울트라",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "갤럭시 S26+",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
     "name": "아이폰 17",
     "brand": "Apple",
     "category": "스마트폰",
@@ -75,6 +96,69 @@
     "category": "스마트폰",
     "release_year": 2025,
     "source": "https://ko.wikipedia.org/wiki/삼성_갤럭시_Z_플립_7"
+  },
+  {
+    "name": "갤럭시 와이드 8",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://ko.wikipedia.org/wiki/삼성_갤럭시_와이드8"
+  },
+  {
+    "name": "갤럭시 점프 4",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://namu.wiki/w/갤럭시%20점프4"
+  },
+  {
+    "name": "갤럭시 퀀텀 6",
+    "brand": "Samsung",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://news.sktelecom.com/214156"
+  },
+  {
+    "name": "Xiaomi 14T",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-14t/"
+  },
+  {
+    "name": "Xiaomi 14T Pro",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/support/faq/details/KA-503177/"
+  },
+  {
+    "name": "Xiaomi 15",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-15/"
+  },
+  {
+    "name": "Xiaomi 15 Ultra",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://m.economidaily.com/amp/20250325110336877"
+  },
+  {
+    "name": "Xiaomi 15T Pro",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-15t-pro/"
+  },
+  {
+    "name": "레드미 노트 14 Pro 5G",
+    "brand": "Xiaomi",
+    "category": "스마트폰",
+    "release_year": 2025,
+    "source": "https://www.fnnews.com/news/202501151104547018"
   },
   {
     "name": "아이폰 16",
@@ -462,11 +546,116 @@
     "source": "https://ko.wikipedia.org/wiki/삼성_갤럭시_폴드"
   },
   {
+    "name": "갤럭시 버즈4",
+    "brand": "Samsung",
+    "category": "무선이어폰",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "갤럭시 버즈4 프로",
+    "brand": "Samsung",
+    "category": "무선이어폰",
+    "release_year": 2026,
+    "source": "https://www.samsung.com/sec/buds/galaxy-buds/galaxy-buds4-pro/"
+  },
+  {
+    "name": "소니 WF-1000XM6",
+    "brand": "Sony",
+    "category": "무선이어폰",
+    "release_year": 2026,
+    "source": "https://magazine.hankyung.com/money/article/202602238208c"
+  },
+  {
+    "name": "에어팟 Pro 3",
+    "brand": "Apple",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.apple.com/newsroom/2025/09/introducing-airpods-pro-3-the-ultimate-audio-experience/"
+  },
+  {
+    "name": "보스 QuietComfort Ultra Headphones 2세대",
+    "brand": "Bose",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.bose.co.kr/shop_view/?idx=282"
+  },
+  {
+    "name": "갤럭시 버즈3 FE",
+    "brand": "Samsung",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
     "name": "소니 WH-1000XM6",
     "brand": "Sony",
     "category": "무선이어폰",
     "release_year": 2025,
     "source": "https://en.wikipedia.org/wiki/DSEE"
+  },
+  {
+    "name": "Xiaomi Buds 5 Pro",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-buds-5-pro/"
+  },
+  {
+    "name": "Xiaomi 오픈웨어 스테레오 프로",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-openwear-stereo-pro/"
+  },
+  {
+    "name": "레드미 Buds 6",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.betanews.net/article/view/beta202504300018"
+  },
+  {
+    "name": "레드미 Buds 6 Active",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.betanews.net/article/view/beta202504300018"
+  },
+  {
+    "name": "레드미 Buds 6 Play",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/redmi-buds-6-play/"
+  },
+  {
+    "name": "레드미 Buds 6 Pro",
+    "brand": "Xiaomi",
+    "category": "무선이어폰",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/redmi-buds-6-pro/"
+  },
+  {
+    "name": "에어팟 4",
+    "brand": "Apple",
+    "category": "무선이어폰",
+    "release_year": 2024,
+    "source": "https://namu.wiki/w/AirPods%204"
+  },
+  {
+    "name": "에어팟 4 ANC",
+    "brand": "Apple",
+    "category": "무선이어폰",
+    "release_year": 2024,
+    "source": "https://www.apple.com/kr/shop/buy-airpods/airpods-4"
+  },
+  {
+    "name": "에어팟 Max (USB-C)",
+    "brand": "Apple",
+    "category": "무선이어폰",
+    "release_year": 2024,
+    "source": "https://en.wikipedia.org/wiki/AirPods_Max"
   },
   {
     "name": "보스 QuietComfort Earbuds (2세대)",
@@ -488,6 +677,20 @@
     "category": "무선이어폰",
     "release_year": 2024,
     "source": "https://www.lgcorp.com/media/release/27696"
+  },
+  {
+    "name": "AKG N5 하이브리드",
+    "brand": "Samsung",
+    "category": "무선이어폰",
+    "release_year": 2024,
+    "source": "https://www.samsung.com/sec/harman-life-style-audio/akg-earphone-akgn5hybrid-d2c/"
+  },
+  {
+    "name": "AKG N9 하이브리드",
+    "brand": "Samsung",
+    "category": "무선이어폰",
+    "release_year": 2024,
+    "source": "https://iheadlinenews.co.kr/news/articleView.html?idxno=73961"
   },
   {
     "name": "갤럭시 버즈3",
@@ -700,11 +903,46 @@
     "source": "https://ko.wikipedia.org/wiki/에어팟"
   },
   {
+    "name": "애플워치 SE 3",
+    "brand": "Apple",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.apple.com/kr/newsroom/2025/09/apple-watch-se-3-introduces-advanced-health-features/"
+  },
+  {
+    "name": "애플워치 Series 11",
+    "brand": "Apple",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.apple.com/kr/newsroom/2025/09/apple-introduces-apple-watch-series-11/"
+  },
+  {
+    "name": "애플워치 Ultra 3",
+    "brand": "Apple",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.apple.com/newsroom/2025/09/introducing-apple-watch-ultra-3/"
+  },
+  {
+    "name": "가민 베누 4",
+    "brand": "Garmin",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.garmin.com/ko-KR/newsroom/press-release/news-2026-jan-venu4-instinct-crossover-amoled/"
+  },
+  {
     "name": "가민 인스팅트 3",
     "brand": "Garmin",
     "category": "스마트워치",
     "release_year": 2025,
     "source": "https://www.garmin.com/"
+  },
+  {
+    "name": "가민 인스팅트 크로스오버 AMOLED",
+    "brand": "Garmin",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.garmin.com/ko-KR/newsroom/press-release/news-2026-jan-venu4-instinct-crossover-amoled/"
   },
   {
     "name": "가민 페닉스 8 Pro",
@@ -714,11 +952,25 @@
     "source": "https://en.wikipedia.org/wiki/Garmin_Fenix"
   },
   {
+    "name": "갤럭시 워치 Ultra (2025)",
+    "brand": "Samsung",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/watches/galaxy-watch/galaxy-watch-ultra-2025/"
+  },
+  {
     "name": "갤럭시 워치8",
     "brand": "Samsung",
     "category": "스마트워치",
     "release_year": 2025,
     "source": "https://en.wikipedia.org/wiki/Samsung_Galaxy_Watch_series"
+  },
+  {
+    "name": "갤럭시 워치8 클래식",
+    "brand": "Samsung",
+    "category": "스마트워치",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/watches/galaxy-watch/galaxy-watch8-classic/"
   },
   {
     "name": "애플워치 Series 10",
@@ -936,6 +1188,167 @@
     "category": "스마트워치",
     "release_year": 2018,
     "source": "https://en.wikipedia.org/wiki/Apple_Watch"
+  },
+  {
+    "name": "ROG Strix SCAR 18 (2026)",
+    "brand": "ASUS",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://sports.khan.co.kr/article/202605200236003/"
+  },
+  {
+    "name": "맥북 Pro 14인치 M5 Max",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://zdnet.co.kr/view/?no=20260304075449"
+  },
+  {
+    "name": "맥북 Pro 14인치 M5 Pro",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://zdnet.co.kr/view/?no=20260304075449"
+  },
+  {
+    "name": "맥북 Pro 16인치 M5 Max",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://zdnet.co.kr/view/?no=20260304075449"
+  },
+  {
+    "name": "맥북 Pro 16인치 M5 Pro",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://zdnet.co.kr/view/?no=20260304075449"
+  },
+  {
+    "name": "맥북 에어 13인치 M5",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/"
+  },
+  {
+    "name": "맥북 에어 15인치 M5",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://www.apple.com/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/"
+  },
+  {
+    "name": "LG 그램 AI 2026 14인치",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://live.lge.co.kr/2601-lg-gram-1/"
+  },
+  {
+    "name": "LG 그램 AI 2026 15인치",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://live.lge.co.kr/2601-lg-gram-1/"
+  },
+  {
+    "name": "LG 그램 Pro 360 AI 2026 16인치 (16T90TP/16T95TP)",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://www.lge.co.kr/notebook/16t95tp-kd7bk"
+  },
+  {
+    "name": "LG 그램 Pro AI 2026 16인치 (16Z90U/16Z95U)",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://live.lge.co.kr/2601-lg-gram-1/"
+  },
+  {
+    "name": "LG 그램북 AI 2026 15인치",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://live.lge.co.kr/2601-lg-gram-1/"
+  },
+  {
+    "name": "LG 그램북 AI 2026 16인치",
+    "brand": "LG",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://live.lge.co.kr/2601-lg-gram-1/"
+  },
+  {
+    "name": "갤럭시 북6 14인치",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://namu.wiki/w/갤럭시%20북6"
+  },
+  {
+    "name": "갤럭시 북6 16인치",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://namu.wiki/w/갤럭시%20북6"
+  },
+  {
+    "name": "갤럭시 북6 Edge",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://namu.wiki/w/갤럭시%20북6%20Edge"
+  },
+  {
+    "name": "갤럭시 북6 Pro 14인치",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "갤럭시 북6 Pro 16인치",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "갤럭시 북6 Ultra",
+    "brand": "Samsung",
+    "category": "노트북",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "ROG Strix SCAR 18 (2025) G835",
+    "brand": "ASUS",
+    "category": "노트북",
+    "release_year": 2025,
+    "source": "https://rog.asus.com/kr/laptops/rog-strix/rog-strix-scar-18-2025/wtb/"
+  },
+  {
+    "name": "ROG Zephyrus G14 (2025) GA403",
+    "brand": "ASUS",
+    "category": "노트북",
+    "release_year": 2025,
+    "source": "https://rog.asus.com/kr/laptops/rog-zephyrus/rog-zephyrus-g14-2025/"
+  },
+  {
+    "name": "ROG Zephyrus G16 (2025) GU605",
+    "brand": "ASUS",
+    "category": "노트북",
+    "release_year": 2025,
+    "source": "https://rog.asus.com/kr/laptops/rog-zephyrus/rog-zephyrus-g16-2025-gu605/"
+  },
+  {
+    "name": "맥북 Pro 14인치 M5",
+    "brand": "Apple",
+    "category": "노트북",
+    "release_year": 2025,
+    "source": "https://www.apple.com/newsroom/2025/10/apple-unveils-new-14-inch-macbook-pro-powered-by-the-m5-chip/"
   },
   {
     "name": "맥북 에어 13인치 M4",
@@ -1638,6 +2051,13 @@
     "source": "https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_S_series"
   },
   {
+    "name": "샤오미 패드 7",
+    "brand": "Xiaomi",
+    "category": "태블릿",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-pad-7/"
+  },
+  {
     "name": "아이패드 Air 11인치 M2",
     "brand": "Apple",
     "category": "태블릿",
@@ -1869,6 +2289,55 @@
     "source": "https://en.wikipedia.org/wiki/Samsung_Galaxy_Tab_S_series"
   },
   {
+    "name": "캐논 EOS R50 V",
+    "brand": "Canon",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://kr.canon/company/brand/news/detail/11829"
+  },
+  {
+    "name": "캐논 EOS R6 Mark III",
+    "brand": "Canon",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://kr.canon/"
+  },
+  {
+    "name": "후지필름 GFX100RF",
+    "brand": "Fujifilm",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://fujifilm-korea.co.kr/products/id/1344"
+  },
+  {
+    "name": "후지필름 X-E5",
+    "brand": "Fujifilm",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://www.fujifilm.com/kr/en/news/hq/12428"
+  },
+  {
+    "name": "니콘 Z5 II",
+    "brand": "Nikon",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://www.nikc.nikon.com/product/mirrorless/Z5II"
+  },
+  {
+    "name": "파나소닉 루믹스 S1 II",
+    "brand": "Panasonic",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://en.wikipedia.org/wiki/Panasonic_LUMIX_S1_II"
+  },
+  {
+    "name": "파나소닉 루믹스 S1R II",
+    "brand": "Panasonic",
+    "category": "카메라",
+    "release_year": 2025,
+    "source": "https://www.panasonic.co.kr/event/news_view.do?seq=155"
+  },
+  {
     "name": "소니 알파 7 V",
     "brand": "Sony",
     "category": "카메라",
@@ -1876,11 +2345,25 @@
     "source": "https://en.wikipedia.org/wiki/Sony_%CE%B17_V"
   },
   {
+    "name": "캐논 EOS R1",
+    "brand": "Canon",
+    "category": "카메라",
+    "release_year": 2024,
+    "source": "https://kr.canon/company/brand/news/detail/11329"
+  },
+  {
     "name": "캐논 EOS R5 Mark II",
     "brand": "Canon",
     "category": "카메라",
     "release_year": 2024,
     "source": "https://en.wikipedia.org/wiki/Canon_EOS_R5"
+  },
+  {
+    "name": "후지필름 GFX100S II",
+    "brand": "Fujifilm",
+    "category": "카메라",
+    "release_year": 2024,
+    "source": "https://www.fujifilm-korea.co.kr/products/id/1335"
   },
   {
     "name": "후지필름 X-T50",
@@ -1895,6 +2378,13 @@
     "category": "카메라",
     "release_year": 2024,
     "source": "https://en.wikipedia.org/wiki/Fujifilm_X100VI"
+  },
+  {
+    "name": "니콘 Z50 II",
+    "brand": "Nikon",
+    "category": "카메라",
+    "release_year": 2024,
+    "source": "https://www.nikc.nikon.com/product/mirrorless/Z50II"
   },
   {
     "name": "니콘 Z6 III",
@@ -1916,6 +2406,13 @@
     "category": "카메라",
     "release_year": 2024,
     "source": "https://en.wikipedia.org/wiki/Sony_ZV-E10_II"
+  },
+  {
+    "name": "소니 알파 1 II",
+    "brand": "Sony",
+    "category": "카메라",
+    "release_year": 2024,
+    "source": "https://www.sony.co.kr/electronics/interchangeable-lens-cameras/ilce-1m2"
   },
   {
     "name": "캐논 EOS R100",
@@ -2226,6 +2723,13 @@
     "source": "https://en.wikipedia.org/wiki/Sony_%CE%B17_III"
   },
   {
+    "name": "하이센스 U8",
+    "brand": "Hisense",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.newsis.com/view/ALSX20250422_0000002666"
+  },
+  {
     "name": "LG OLED B5",
     "brand": "LG",
     "category": "TV",
@@ -2254,6 +2758,13 @@
     "source": "https://en.wikipedia.org/wiki/LG_OLED"
   },
   {
+    "name": "LG QNED evo",
+    "brand": "LG",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.lg.co.kr/media/release/28896"
+  },
+  {
     "name": "삼성 OLED S85F",
     "brand": "Samsung",
     "category": "TV",
@@ -2275,6 +2786,20 @@
     "source": "https://en.wikipedia.org/wiki/Samsung_Electronics"
   },
   {
+    "name": "삼성 OLED SF90",
+    "brand": "Samsung",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/tvs/oled-sf90ae-d2c/"
+  },
+  {
+    "name": "삼성 OLED SF95",
+    "brand": "Samsung",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/tvs/oled-sf95-d2c/"
+  },
+  {
     "name": "삼성 네오 QLED QN900F",
     "brand": "Samsung",
     "category": "TV",
@@ -2294,6 +2819,27 @@
     "category": "TV",
     "release_year": 2025,
     "source": "https://en.wikipedia.org/wiki/Samsung_Electronics"
+  },
+  {
+    "name": "삼성 네오 QLED QNF90",
+    "brand": "Samsung",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf90-d2c/"
+  },
+  {
+    "name": "삼성 네오 QLED QNF95",
+    "brand": "Samsung",
+    "category": "TV",
+    "release_year": 2025,
+    "source": "https://www.samsung.com/sec/tvs/neo-qled-4k-qnf95-d2c/"
+  },
+  {
+    "name": "하이센스 U7N",
+    "brand": "Hisense",
+    "category": "TV",
+    "release_year": 2024,
+    "source": "https://www.etnews.com/20250123000353"
   },
   {
     "name": "LG OLED B4",
@@ -2646,6 +3192,69 @@
     "source": "https://en.wikipedia.org/wiki/Sony_Bravia"
   },
   {
+    "name": "다이슨 V16 피스톤 애니멀",
+    "brand": "Dyson",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://www.dyson.co.kr/products/vacuum-cleaners/cord-free/piston-animal/owners"
+  },
+  {
+    "name": "다이슨 V16 피스톤 애니멀 서브마린",
+    "brand": "Dyson",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://www.dyson.co.kr/"
+  },
+  {
+    "name": "다이슨 펜슬백 플러피",
+    "brand": "Dyson",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://www.dyson.co.kr/fluffy-black"
+  },
+  {
+    "name": "다이슨 펜슬백 플러피콘",
+    "brand": "Dyson",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://www.dyson.co.kr/fluffycones-black"
+  },
+  {
+    "name": "LG 코드제로 오브제컬렉션 A9 AI",
+    "brand": "LG",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://live.lge.co.kr/2504-a9ai/"
+  },
+  {
+    "name": "로보락 F25 Ultra",
+    "brand": "Roborock",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://biz.newdaily.co.kr/"
+  },
+  {
+    "name": "로보락 F25 에이스",
+    "brand": "Roborock",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://zdnet.co.kr/view/?no=20250210103425"
+  },
+  {
+    "name": "로보락 F25 에이스 콤보",
+    "brand": "Roborock",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://biz.newdaily.co.kr/"
+  },
+  {
+    "name": "삼성 비스포크 AI 제트 (2025년형)",
+    "brand": "Samsung",
+    "category": "무선청소기",
+    "release_year": 2025,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
     "name": "LG 코드제로 A9 에어",
     "brand": "LG",
     "category": "무선청소기",
@@ -2686,6 +3295,13 @@
     "category": "무선청소기",
     "release_year": 2024,
     "source": "https://prod.danawa.com/info/?pcode=75938528"
+  },
+  {
+    "name": "다이슨 V15s 디텍트 서브마린",
+    "brand": "Dyson",
+    "category": "무선청소기",
+    "release_year": 2023,
+    "source": "https://www.dyson.co.kr/products/vacuum-cleaners/wet-and-dry/v15s-detect-submarine/overview"
   },
   {
     "name": "LG 코드제로 오브제컬렉션 A9S",
@@ -2772,11 +3388,95 @@
     "source": "https://www.dyson.co.kr/products/cord-free"
   },
   {
+    "name": "에코백스 디봇 T90 프로 옴니",
+    "brand": "Ecovacs",
+    "category": "로봇청소기",
+    "release_year": 2026,
+    "source": "https://biz.newdaily.co.kr/"
+  },
+  {
+    "name": "삼성 비스포크 AI 스팀 (2026년형)",
+    "brand": "Samsung",
+    "category": "로봇청소기",
+    "release_year": 2026,
+    "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "드리미 L40s 프로 울트라",
+    "brand": "Dreame",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://zdnet.co.kr/view/?no=20250331102948"
+  },
+  {
+    "name": "드리미 X50 Master",
+    "brand": "Dreame",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://www.ajunews.com/view/20250120113202840"
+  },
+  {
+    "name": "드리미 X50 Ultra",
+    "brand": "Dreame",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://kr.dreametech.com/products/x50-ultra"
+  },
+  {
+    "name": "에코백스 디봇 T80 옴니",
+    "brand": "Ecovacs",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://zdnet.co.kr/view/?no=20250523142624"
+  },
+  {
+    "name": "에코백스 디봇 X11 옴니사이클론",
+    "brand": "Ecovacs",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://zdnet.co.kr/view/?no=20251020191620"
+  },
+  {
+    "name": "에코백스 디봇 X8 프로 옴니",
+    "brand": "Ecovacs",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://www.hankyung.com/article/2025020555465"
+  },
+  {
+    "name": "로보락 Saros 10",
+    "brand": "Roborock",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://kr.roborock.com/pages/roborock-s9-maxv-ultra"
+  },
+  {
+    "name": "로보락 Saros 10R",
+    "brand": "Roborock",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://www.inews24.com/view/1801766"
+  },
+  {
+    "name": "로보락 Saros Z70",
+    "brand": "Roborock",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://kr.roborock.com/products/로보락-saros-z70-로봇청소기"
+  },
+  {
     "name": "삼성 비스포크 AI 스팀",
     "brand": "Samsung",
     "category": "로봇청소기",
     "release_year": 2025,
     "source": "https://news.samsung.com/kr/"
+  },
+  {
+    "name": "샤오미 로봇청소기 X20 Max",
+    "brand": "Xiaomi",
+    "category": "로봇청소기",
+    "release_year": 2025,
+    "source": "https://www.mi.com/kr/product/xiaomi-robot-vacuum-x20-max/"
   },
   {
     "name": "로보락 Qrevo Curv",
@@ -2933,6 +3633,13 @@
     "source": "https://www.breville.com/ko-kr/product/bes870"
   },
   {
+    "name": "쿠쿠 미식 컬렉션 마스터셰프 트윈프레셔 (2025년형)",
+    "brand": "Cuckoo",
+    "category": "밥솥",
+    "release_year": 2025,
+    "source": "https://www.cuckoo.co.kr/mall/productView?productNo=3875"
+  },
+  {
     "name": "쿠첸 121 플러스 IH",
     "brand": "Cuchen",
     "category": "밥솥",
@@ -2980,5 +3687,40 @@
     "category": "에어프라이어",
     "release_year": 2019,
     "source": "https://www.philips.co.kr/c-p/HD9630_95/premium-airfryer-xxl"
+  },
+  {
+    "name": "다이슨 에어랩 코안다 2x",
+    "brand": "Dyson",
+    "category": "헤어드라이어",
+    "release_year": 2025,
+    "source": "https://www.economidaily.com/view/20250428155658913"
+  },
+  {
+    "name": "다이슨 슈퍼소닉 뉴럴",
+    "brand": "Dyson",
+    "category": "헤어드라이어",
+    "release_year": 2024,
+    "source": "https://www.dyson.co.kr/products/hair-care/hair-dryers/supersonic-nural/overview"
+  },
+  {
+    "name": "다이슨 에어스트레이트",
+    "brand": "Dyson",
+    "category": "헤어드라이어",
+    "release_year": 2024,
+    "source": "https://www.dyson.co.kr/products/hair-care/wet-to-dry-straighteners/airstrait"
+  },
+  {
+    "name": "코웨이 노블 정수기 세로",
+    "brand": "Coway",
+    "category": "정수기",
+    "release_year": 2025,
+    "source": "https://company.coway.com/newsroom/press/235"
+  },
+  {
+    "name": "LG 퓨리케어 오브제컬렉션 스탠드 정수기 (2025년형)",
+    "brand": "LG",
+    "category": "정수기",
+    "release_year": 2025,
+    "source": "https://live.lge.co.kr/2510-puricarestand/"
   }
 ]

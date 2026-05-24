@@ -38,6 +38,7 @@ VALID_CATEGORIES = {
     "스마트폰", "무선이어폰", "스마트워치", "노트북", "태블릿",
     "카메라", "TV", "무선청소기", "로봇청소기", "커피머신",
     "밥솥", "인덕션", "에어프라이어", "모니터",
+    "헤어드라이어", "정수기",
 }
 
 
@@ -120,28 +121,25 @@ def upsert(name: str, brand: str, category: str) -> str:
 
 
 def auto_import_if_empty(json_path: str | None = None) -> dict:
-    """앱 startup 자동 시드 — seeded row 가 0건일 때만 1회 적재.
+    """앱 startup 자동 시드 — DB seeded count < JSON 항목 수 일 때만 import.
+
+    이전 버전은 `seeded > 0` 이면 무조건 skip 이라 시드 JSON 이 늘어나도
+    운영 PG 에 반영되지 않는 함정이 있었다. 이제는 JSON 추가분이 자동
+    반영된다 (단, 항상 멱등 — 이미 있는 row 는 UNIQUE INDEX·ON CONFLICT
+    가 차단). 함수명은 호환성 위해 유지.
 
     멱등성 4중 가드:
-      ① 이 함수 자체가 `WHERE seeded=true` count 0 일 때만 실행
+      ① count 비교로 동등하면 즉시 return (보통 부팅에서 SELECT 1회만)
       ② upsert 가 (LOWER name, LOWER brand) 매칭으로 기존 row 보호
       ③ INSERT ... ON CONFLICT DO NOTHING 가 race 대비
       ④ Container Apps replica 2~5 동시 부팅 시 UNIQUE INDEX 가 중복 차단
 
-    어떤 실패도 RuntimeError 로 던지지 않는다 (호출부가 try/except 로 격리하고
-    부팅을 계속하도록). seeds JSON 부재·깨짐·DB 일시 단절 모두 빈 dict 반환.
+    어떤 실패도 RuntimeError 로 던지지 않는다 (호출부가 try/except 로 격리).
     """
-    out = {"skipped": True, "reason": "", "inserted": 0, "skip_duplicate": 0, "error": 0}
-    try:
-        existing = query_one(
-            "SELECT COUNT(*) AS c FROM tech_products WHERE seeded=true"
-        )
-        if existing and existing.get("c", 0) > 0:
-            out["reason"] = f"already_seeded ({existing['c']}건)"
-            return out
-    except Exception as e:
-        out["reason"] = f"count_query_failed: {e}"
-        return out
+    out = {
+        "skipped": True, "reason": "", "inserted": 0,
+        "skip_duplicate": 0, "error": 0,
+    }
 
     if json_path is None:
         json_path = os.path.join(
@@ -160,8 +158,26 @@ def auto_import_if_empty(json_path: str | None = None) -> dict:
         out["reason"] = f"load_failed: {e}"
         return out
 
+    try:
+        existing = query_one(
+            "SELECT COUNT(*) AS c FROM tech_products WHERE seeded=true"
+        )
+        existing_count = (existing or {}).get("c", 0) or 0
+    except Exception as e:
+        out["reason"] = f"count_query_failed: {e}"
+        return out
+
+    json_count = len(valid)
+    if existing_count >= json_count:
+        out["reason"] = (
+            f"already_seeded (DB={existing_count}건, JSON={json_count}건)"
+        )
+        return out
+
     out["skipped"] = False
-    out["reason"] = "auto_imported"
+    out["reason"] = (
+        f"importing (DB={existing_count}건 → JSON={json_count}건)"
+    )
     for it in valid:
         status = upsert(it["name"], it["brand"], it["category"])
         if status == "inserted":
