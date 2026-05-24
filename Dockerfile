@@ -19,6 +19,7 @@ COPY scripts/ ./scripts/
 COPY video_selection_agent/ ./video_selection_agent/
 COPY comment_filtering_agent/ ./comment_filtering_agent/
 COPY templates/ ./templates/
+COPY seeds/ ./seeds/
 
 EXPOSE 8000
 

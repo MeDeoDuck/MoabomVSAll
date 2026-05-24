@@ -65,6 +65,24 @@ async def startup_event():
     init_db()
     print("[STARTUP] Database ready")
 
+    # 자동 시드: tech_products 에 seeded=true row 가 0 건일 때만 1회 실행.
+    # 멱등이라 매 부팅 호출해도 두 번째 부팅부터는 count 쿼리 1회만(<10ms).
+    # 어떤 실패도 부팅을 막지 않는다 (검색 후보 시드는 보조 기능).
+    try:
+        from scripts.import_seed_products import auto_import_if_empty
+        result = auto_import_if_empty()
+        if result.get("skipped"):
+            print(f"[STARTUP] Seed auto-import skipped — {result.get('reason')}")
+        else:
+            print(
+                f"[STARTUP] Seed auto-import done — "
+                f"inserted={result.get('inserted')} "
+                f"skip_duplicate={result.get('skip_duplicate')} "
+                f"error={result.get('error')}"
+            )
+    except Exception as e:
+        print(f"[STARTUP][WARN] Seed auto-import failed (booting anyway): {e}")
+
 
 # ============================================================================
 # REGISTER ALL ROUTES

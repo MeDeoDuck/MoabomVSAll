@@ -119,6 +119,60 @@ def upsert(name: str, brand: str, category: str) -> str:
     return "inserted" if product_id else "skip_duplicate"
 
 
+def auto_import_if_empty(json_path: str | None = None) -> dict:
+    """앱 startup 자동 시드 — seeded row 가 0건일 때만 1회 적재.
+
+    멱등성 4중 가드:
+      ① 이 함수 자체가 `WHERE seeded=true` count 0 일 때만 실행
+      ② upsert 가 (LOWER name, LOWER brand) 매칭으로 기존 row 보호
+      ③ INSERT ... ON CONFLICT DO NOTHING 가 race 대비
+      ④ Container Apps replica 2~5 동시 부팅 시 UNIQUE INDEX 가 중복 차단
+
+    어떤 실패도 RuntimeError 로 던지지 않는다 (호출부가 try/except 로 격리하고
+    부팅을 계속하도록). seeds JSON 부재·깨짐·DB 일시 단절 모두 빈 dict 반환.
+    """
+    out = {"skipped": True, "reason": "", "inserted": 0, "skip_duplicate": 0, "error": 0}
+    try:
+        existing = query_one(
+            "SELECT COUNT(*) AS c FROM tech_products WHERE seeded=true"
+        )
+        if existing and existing.get("c", 0) > 0:
+            out["reason"] = f"already_seeded ({existing['c']}건)"
+            return out
+    except Exception as e:
+        out["reason"] = f"count_query_failed: {e}"
+        return out
+
+    if json_path is None:
+        json_path = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)),
+            "seeds",
+            "manual_products.json",
+        )
+    if not os.path.exists(json_path):
+        out["reason"] = f"seed_json_not_found: {json_path}"
+        return out
+
+    try:
+        items = load_json(json_path)
+        valid, _ = validate(items)
+    except Exception as e:
+        out["reason"] = f"load_failed: {e}"
+        return out
+
+    out["skipped"] = False
+    out["reason"] = "auto_imported"
+    for it in valid:
+        status = upsert(it["name"], it["brand"], it["category"])
+        if status == "inserted":
+            out["inserted"] += 1
+        elif status == "skip_duplicate":
+            out["skip_duplicate"] += 1
+        else:
+            out["error"] += 1
+    return out
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Import curated product seed JSON")
     parser.add_argument(
