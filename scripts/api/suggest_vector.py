@@ -12,7 +12,8 @@ RAG 와 스키마/제품키 충돌 없음.
 설계:
 - 시드 JSON 변경 감지: name+brand 의 sha256 hash 비교. 신규/변경 항목만 재임베딩.
 - 메모리 cosine: sqlite3 전체 row 1회 로드 후 순회. 532행 × 1536차원 ≈ 6.5MB.
-- MIN_SCORE 컷: 0.55 보수적 출발. cross-lingual 매칭은 통상 0.4~0.7 범위.
+- MIN_SCORE 컷: 0.45 (RunYourAI text-embedding-3-small 13쌍 실측 — MATCH 최저
+  0.48 vs NO-MATCH 최고 0.40 사이 중앙컷). 0.55 는 0.70+만 통과시켜 dead code.
 
 모든 실패는 호출부(suggest.py)가 try/except 로 격리 — semantic 단계가 죽어도
 DB+alias+Serper 경로는 계속 동작.
@@ -215,7 +216,7 @@ def search_semantic(
     q: str,
     db_path: str,
     top_k: int = 6,
-    min_score: float = 0.55,
+    min_score: float = 0.45,
 ) -> List[Dict[str, Any]]:
     """sqlite3 벡터 인덱스에서 cosine top_k 검색.
 

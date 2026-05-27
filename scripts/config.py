@@ -81,8 +81,12 @@ SUGGEST_VECTOR_DB_PATH = os.getenv(
 )
 SUGGEST_VECTOR_TOP_K = int(os.getenv("SUGGEST_VECTOR_TOP_K", "6"))
 # cross-lingual 매칭 컷오프. 너무 낮으면 false positive(아이폰 검색에 맥북 끌려옴),
-# 너무 높으면 fallback 무력. 첫 배포 후 [SUGGEST_PERF] top_score 로그 보고 튜닝.
-SUGGEST_VECTOR_MIN_SCORE = float(os.getenv("SUGGEST_VECTOR_MIN_SCORE", "0.55"))
+# 너무 높으면 fallback 무력. 머지 전 RunYourAI text-embedding-3-small 실측으로
+# 13쌍 측정한 결과: MATCH 최저 ('아이폰' ↔ 'iPhone 17 Apple 스마트폰') = 0.4802,
+# NO-MATCH 최고 ('아이폰' ↔ 'Galaxy S25 Samsung 스마트폰') = 0.4030. 두 분포 중앙
+# 0.45 로 잡아 false positive 0 · true positive 보존 최대화. 0.55 는 0.70+만 통과
+# 시켜 사실상 dead code 였음. 배포 후 [SUGGEST_PERF] top_score 로그로 재튜닝.
+SUGGEST_VECTOR_MIN_SCORE = float(os.getenv("SUGGEST_VECTOR_MIN_SCORE", "0.45"))
 # 1/true/yes/on → 활성. 임베딩 모델 장애 시 0/false 로 즉시 비활성 가능.
 SUGGEST_SEMANTIC_ENABLED = os.getenv(
     "SUGGEST_SEMANTIC_ENABLED", "1"
