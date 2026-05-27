@@ -6,7 +6,7 @@ import os
 from time import perf_counter
 
 from fastapi import BackgroundTasks, HTTPException, Request
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 from scripts.database.queries import query_one, query_all, execute_insert, execute_update
 from scripts.reports.pdf_generator import render_report_pdf
@@ -24,6 +24,7 @@ from scripts.reports.product_integrated_insight import (
     get_last_comment_heal_perf,
     get_last_input_expansion_perf,
 )
+from scripts.api.suggest import suggest as suggest_products
 from scripts.utils.markdown_renderer import markdown_to_html
 
 templates = Jinja2Templates(directory="templates")
@@ -77,22 +78,71 @@ def register_product_routes(app):
             "show_product_list": show_product_list,
         })
     
+    # ────────────────────────────────────────────────────────────────
+    # 검색 후보 자동 제안 (search-suggest)
+    # ────────────────────────────────────────────────────────────────
+    @app.get("/products/suggest")
+    async def suggest_endpoint(q: str = "", limit: int = 6):
+        """모호 검색어 → 정확 제품명 후보 카드 리스트.
+
+        DB → Serper Web Search → LLM 추출 캐스케이드. 어떤 외부 호출 실패도
+        5xx 로 나가지 않는다 (suggest 는 보조 기능). 동기 함수라 asyncio
+        이벤트 루프 차단 회피 위해 to_thread.
+        """
+        import asyncio
+        items = await asyncio.to_thread(suggest_products, q, max(1, min(limit, 10)))
+        return JSONResponse(
+            content={"items": items, "q": q},
+            headers={"Cache-Control": "public, max-age=300"},
+        )
+
     @app.post("/products")
     async def create_product(data: dict):
-        """Create a new product."""
+        """Create a new product.
+
+        dedupe: 같은 (LOWER(name), LOWER(brand)) 조합 row 가 이미 있으면
+        새로 INSERT 하지 않고 기존 product_id 재사용. 응답에 existing_report
+        (해당 제품의 최신 product_integrated_reports.id 또는 null) 동봉 →
+        프론트가 캐시 적중 시 보고서로 즉시 이동.
+        """
         name = data.get("name", "").strip()
-        brand = data.get("brand", "").strip() or None
-        category = data.get("category", "").strip() or None
-        
+        brand = (data.get("brand") or "").strip() or None
+        category = (data.get("category") or "").strip() or None
+
         if not name:
             raise HTTPException(status_code=400, detail="Product name is required")
-        
-        product_id = execute_insert(
-            "INSERT INTO tech_products (name, brand, category) VALUES (%s, %s, %s) RETURNING product_id",
-            (name, brand, category)
+
+        existing = query_one(
+            """
+            SELECT product_id FROM tech_products
+            WHERE LOWER(name) = LOWER(%s)
+              AND COALESCE(LOWER(brand), '') = COALESCE(LOWER(%s), '')
+            ORDER BY product_id ASC
+            LIMIT 1
+            """,
+            (name, brand or ""),
         )
-        
-        product = query_one("SELECT * FROM tech_products WHERE product_id = %s", (product_id,))
+        if existing:
+            product_id = existing["product_id"]
+        else:
+            product_id = execute_insert(
+                "INSERT INTO tech_products (name, brand, category) VALUES (%s, %s, %s) RETURNING product_id",
+                (name, brand, category),
+            )
+
+        product = query_one(
+            "SELECT * FROM tech_products WHERE product_id = %s", (product_id,)
+        )
+        latest_report = query_one(
+            """
+            SELECT id FROM product_integrated_reports
+            WHERE product_id = %s
+            ORDER BY id DESC LIMIT 1
+            """,
+            (product_id,),
+        )
+        product = dict(product) if product else {}
+        product["existing_report"] = latest_report["id"] if latest_report else None
         return product
     
     @app.get("/products/{product_id}", response_class=HTMLResponse)

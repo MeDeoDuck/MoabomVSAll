@@ -588,6 +588,51 @@ def init_db():
         );
     """)
 
+    # ========================================
+    # 검색 후보 자동 제안 (search-suggest)
+    # ========================================
+    # tech_products.seeded — seed_products.py 가 일괄 적재한 row 표시. 롤백/검수 용이.
+    cursor.execute("""
+        ALTER TABLE tech_products
+        ADD COLUMN IF NOT EXISTS seeded BOOLEAN DEFAULT FALSE;
+    """)
+
+    # (LOWER(name), LOWER(brand)) UNIQUE INDEX — 정규화 중복 방지.
+    # 기존 row 충돌 시 init_db 가 부팅 자체를 막을 수 있으므로 dry-run 가드.
+    cursor.execute("""
+        SELECT LOWER(name) AS lname, COALESCE(LOWER(brand), '') AS lbrand, COUNT(*) AS cnt
+        FROM tech_products
+        GROUP BY 1, 2
+        HAVING COUNT(*) > 1
+        LIMIT 5
+    """)
+    conflicts = cursor.fetchall()
+    if conflicts:
+        print(
+            f"[SCHEMA][WARN] tech_products 정규화 중복 {len(conflicts)}건 — "
+            f"UNIQUE INDEX uq_tech_products_name_brand_ci 생성 SKIP "
+            f"(예: {conflicts[0]}). 운영 정리 후 재기동하면 활성화됨."
+        )
+    else:
+        cursor.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS uq_tech_products_name_brand_ci
+              ON tech_products (LOWER(name), COALESCE(LOWER(brand), ''));
+        """)
+
+    # suggest_cache — Container Apps replica 간 공유, TTL 기반 만료.
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS suggest_cache (
+            query_norm    VARCHAR(255) PRIMARY KEY,
+            response_json JSONB NOT NULL,
+            created_at    TIMESTAMPTZ DEFAULT NOW(),
+            expires_at    TIMESTAMPTZ NOT NULL
+        );
+    """)
+    cursor.execute("""
+        CREATE INDEX IF NOT EXISTS idx_suggest_cache_expires
+          ON suggest_cache(expires_at);
+    """)
+
     conn.commit()
     cursor.close()
     conn.close()

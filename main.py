@@ -65,6 +65,45 @@ async def startup_event():
     init_db()
     print("[STARTUP] Database ready")
 
+    # 자동 시드: tech_products 에 seeded=true row 가 0 건일 때만 1회 실행.
+    # 멱등이라 매 부팅 호출해도 두 번째 부팅부터는 count 쿼리 1회만(<10ms).
+    # 어떤 실패도 부팅을 막지 않는다 (검색 후보 시드는 보조 기능).
+    try:
+        from scripts.import_seed_products import auto_import_if_empty
+        result = auto_import_if_empty()
+        if result.get("skipped"):
+            print(f"[STARTUP] Seed auto-import skipped — {result.get('reason')}")
+        else:
+            print(
+                f"[STARTUP] Seed auto-import done — "
+                f"inserted={result.get('inserted')} "
+                f"skip_duplicate={result.get('skip_duplicate')} "
+                f"error={result.get('error')}"
+            )
+    except Exception as e:
+        print(f"[STARTUP][WARN] Seed auto-import failed (booting anyway): {e}")
+
+    # 임베딩 시맨틱 인덱스 빌드 (v2 고도화) — content_hash 비교로 변경분만
+    # 재임베딩. 매 부팅 호출해도 두 번째 부터는 hash 비교 1회만(<100ms).
+    # 어떤 실패도 부팅을 막지 않는다 — semantic 단계는 DB+alias+Serper 의
+    # 보조이므로 graceful degrade.
+    try:
+        import os as _os
+        from scripts.api.suggest_vector import build_index_if_needed
+        from scripts.config import SUGGEST_VECTOR_DB_PATH
+        json_path = _os.path.join(
+            _os.path.dirname(_os.path.abspath(__file__)),
+            "seeds", "manual_products.json",
+        )
+        vec = build_index_if_needed(json_path, SUGGEST_VECTOR_DB_PATH)
+        print(
+            f"[STARTUP] Vector index ready — built={vec.get('built')} "
+            f"cached={vec.get('cached')} embed_ms={vec.get('embed_ms')} "
+            f"reason={vec.get('reason')!r}"
+        )
+    except Exception as e:
+        print(f"[STARTUP][WARN] Vector index build failed (booting anyway): {e}")
+
 
 # ============================================================================
 # REGISTER ALL ROUTES
