@@ -572,6 +572,22 @@ def init_db():
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_usage_event_type ON usage_events(event_type);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_usage_ts ON usage_events(ts);")
 
+    # ── Phase 5: 팝업용 제품 메타(가격·스펙) 캐시 ──────────────────
+    # ★ 신규 테이블 1개만. 기존 14테이블·tech_products 무변경(§15 합의).
+    # 외부 출처(공식 제조사 검색)에서 한 번 가져온 값을 재사용해 외부 호출
+    # 폭증·지연을 막는다. 실패해도 팝업 자체는 §7 fallback 으로 계속 동작.
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS product_meta_cache (
+            product_id    INT PRIMARY KEY REFERENCES tech_products(product_id) ON DELETE CASCADE,
+            price_raw     INTEGER,       -- 원 단위 정수(예: 1290000) — 표시는 만원 단위
+            price_display VARCHAR(64),   -- 사람이 보는 표기(예: "최저 129만 원~")
+            screen_size   VARCHAR(32),   -- 예: "6.7인치"
+            release_year  INTEGER,       -- 예: 2026
+            source        TEXT,          -- 출처 메타(URL 등, 디버그용)
+            fetched_at    TIMESTAMP DEFAULT NOW()
+        );
+    """)
+
     # ========================================
     # 검색 후보 자동 제안 (search-suggest)
     # ========================================

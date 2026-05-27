@@ -114,3 +114,16 @@ PRODUCT_IMAGE_VISION_MODEL = os.getenv(
 PRODUCT_IMAGE_QUERY_SUFFIX = os.getenv(
     "PRODUCT_IMAGE_QUERY_SUFFIX", "공식 제품 사진"
 )
+
+# ── Phase 5: 팝업 — 가격·스펙 외부 수집 on/off ──
+# off 면 외부 호출을 통째로 건너뛰고 "정보 없음"으로 표시(§5-E).
+# 키 부재여도 안전 퇴화 — 팝업 자체는 §7 fallback 으로 계속 동작.
+PRODUCT_META_FETCH_ENABLED = os.getenv(
+    "PRODUCT_META_FETCH_ENABLED", "1"
+).strip().lower() not in ("0", "false", "no", "off")
+# 가격·스펙 검색 쿼리 접미사. 작업 3 재시도 — "공식 출시가" 가 결과를
+# 너무 좁혀 가격 추출률을 낮춤(5/5 None 의 직접 원인 후보). 일반화하여
+# 가격이 포함된 organic 결과(쇼핑몰·뉴스·블로그) 노출 확률 ↑.
+PRODUCT_META_QUERY_SUFFIX = os.getenv(
+    "PRODUCT_META_QUERY_SUFFIX", "가격 사양 출시"
+)

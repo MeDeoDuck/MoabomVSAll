@@ -30,6 +30,35 @@ from scripts.utils.markdown_renderer import markdown_to_html
 templates = Jinja2Templates(directory="templates")
 
 
+# 작업 4 — DB 의 tech_products.category 가 NULL 인 케이스(실측: 운영 DB 의
+# 모든 행 NULL) 대비 가벼운 키워드 추론. brand→domain 매핑(Phase 3 출처
+# 등급)·페르소나 끝맺음(작업 1)과 같은 철학: 무거운 규칙 없이 흔한 제품군
+# 몇 가지만. DB 추론 결과 — 매핑 못 찾으면 빈 문자열(스펙 줄에서 자연 생략).
+_CATEGORY_KEYWORDS = [
+    ("이어폰", ("에어팟", "에어팟프로", "버즈", "이어폰", "이어버드",
+                 "프리바이트", "freebuds", "airpods", "buds")),
+    ("스마트폰", ("아이폰", "갤럭시", "픽셀", "샤오미", "iphone", "galaxy",
+                 "pixel", "노바폰")),
+    ("태블릿", ("아이패드", "갤럭시탭", "탭", "ipad", "tab")),
+    ("노트북", ("그램", "맥북", "갤럭시북", "ZenBook", "ThinkPad",
+                "MacBook", "Yoga")),
+    ("스마트워치", ("애플워치", "갤럭시워치", "watch")),
+    ("헤드폰", ("헤드폰", "헤드셋", "headphone", "headset", "에어팟맥스")),
+]
+
+
+def _infer_category_from_name(name: str) -> str:
+    """제품명 키워드 → 카테고리. 매칭 없으면 ''(자연 생략)."""
+    if not name:
+        return ""
+    low = name.lower()
+    for category, keywords in _CATEGORY_KEYWORDS:
+        for kw in keywords:
+            if kw.lower() in low:
+                return category
+    return ""
+
+
 def register_product_routes(app):
     """Register all product-related routes"""
     
@@ -321,6 +350,91 @@ def register_product_routes(app):
             "created_at": latest.get("created_at").isoformat() if latest.get("created_at") else None,
         }
 
+    @app.get("/products/{product_id}/popup-summary")
+    async def get_product_popup_summary(product_id: int):
+        """Phase 5: 최종 판정 팝업이 쓰는 모든 값을 한 JSON 으로 반환.
+
+        ★ LLM 호출 0건 — ④ 마크다운을 결정론적으로 추출(§4) + 가격·스펙 캐시
+        (§5)만 사용. ④ 가 아직 없으면 404 (프론트는 안전 퇴화로 곧장 ④ 화면).
+        외부 호출(가격·스펙) 실패는 §7 fallback 으로 항목만 빈 값.
+        """
+        from scripts.popup.extractor import extract_popup_data
+        from scripts.popup.product_meta import collect_and_cache_meta
+
+        product = query_one(
+            "SELECT product_id, name, brand, category, image_url "
+            "FROM tech_products WHERE product_id = %s",
+            (product_id,),
+        )
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found")
+
+        latest = get_latest_product_integrated_report(product_id)
+        if not latest or not latest.get("report_text"):
+            # ④ 부재 — 프론트는 모달 띄우지 않고 곧장 ④ 생성/조회로(§3-C).
+            raise HTTPException(status_code=404,
+                                detail="통합 인사이트 보고서가 아직 없습니다")
+
+        # 1) ④ 결정론적 추출 (순수)
+        popup = extract_popup_data(latest["report_text"])
+
+        # 2) 가격·스펙 — 외부 수집(캐시 hit 우선). sync → to_thread 로 비동기화.
+        meta_result = await asyncio.to_thread(
+            collect_and_cache_meta, product_id,
+            product.get("name") or "", product.get("brand") or "",
+        )
+
+        # 3) 스펙 한 줄 조립 (가져온 항목만 — §7).
+        # 작업 4 — category 가 DB 에서 NULL 인 경우(실측: 운영 DB 의 모든
+        # tech_products 행이 NULL) 제품명 키워드로 가벼운 추론. DB 데이터
+        # 결손이 코드 측 fallback 으로 자연 보완 — 스키마/생성 로직 무변경.
+        category = (product.get("category") or "").strip()
+        if not category:
+            category = _infer_category_from_name(product.get("name") or "")
+        spec_parts = []
+        if meta_result.get("screen_size"):
+            spec_parts.append(meta_result["screen_size"])
+        if meta_result.get("release_year"):
+            spec_parts.append(f"{meta_result['release_year']}년 출시")
+        if category:
+            spec_parts.append(category)
+        spec_display = " · ".join(spec_parts) if spec_parts else None
+
+        # 4) missing 합산
+        missing = list(popup.get("missing", []))
+        if not meta_result.get("price_display"):
+            missing.append("price")
+        if not meta_result.get("screen_size"):
+            missing.append("spec.screen_size")
+        if not meta_result.get("release_year"):
+            missing.append("spec.release_year")
+        if not (product.get("image_url") or "").strip():
+            missing.append("image_url")
+        if not spec_display:
+            missing.append("spec_display")
+
+        return {
+            "product": {
+                "product_id": product_id,
+                "name": product.get("name"),
+                "brand": product.get("brand"),
+                "category": product.get("category"),
+                "image_url": product.get("image_url"),
+            },
+            "meta": {
+                "videos": popup.get("videos_n"),
+                "comments": popup.get("comments_n"),
+            },
+            "verdict": popup["verdict"],
+            "pros": popup["pros"],
+            "cons": popup["cons"],
+            "caveat": popup["caveat"],
+            "price_display": meta_result.get("price_display"),
+            "spec_display": spec_display,
+            "missing": missing,
+            "report_id": latest["id"],   # 프론트가 후속 PDF 등 연결 가능
+        }
+
     @app.get("/products/{product_id}/integrated-insight/{report_id}.pdf")
     async def download_integrated_insight_pdf(product_id: int, report_id: int):
         """통합 인사이트 보고서를 PDF로 다운로드한다."""
@@ -340,3 +454,55 @@ def register_product_routes(app):
             media_type="application/pdf",
             headers={"Content-Disposition": f'attachment; filename="{filename}"'},
         )
+
+    # ────────────────────────────────────────────────────────────
+    # feature/similar-products — 유사 제품 비교하기 (축소판)
+    #   - GET /products/{id}/similar               혼합 모드(내부+외부) 카드 3개
+    #   - GET /products/{id}/has-integrated-report 카드 클릭 분기용 보고서 보유 여부
+    # 변경 범위: 라우트 2개만. 기존 라우트·DB 스키마·Agent 무변경.
+    # 직전 보강(external-analyze + background-task + 자동 모달 트리거) 는
+    # 사용자 명세 변경에 따라 *물리적 삭제* — 카드 클릭은 같은 페이지 안에서
+    # 세 번째 박스(최종 팝업/안내) 토글로 처리.
+    # ────────────────────────────────────────────────────────────
+
+    @app.get("/products/{product_id}/similar")
+    async def get_similar_products(product_id: int):
+        """유사 제품 카드 3개. DB 매칭 우선, 부족분 Serper 검색으로 보충."""
+        from scripts.popup.similar import build_similar_payload
+
+        product = query_one(
+            "SELECT product_id FROM tech_products WHERE product_id = %s",
+            (product_id,),
+        )
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found")
+        return await build_similar_payload(product_id)
+
+    @app.get("/products/{product_id}/has-integrated-report")
+    async def has_integrated_report(product_id: int):
+        """카드 클릭 분기용 — 종합 인사이트 보고서 보유 여부.
+        있으면 다이얼로그 → 세 번째 박스에 유사 제품 최종 팝업.
+        없으면 안내 박스로 'MOABOM 을 통해 확인해보세요' 노출."""
+        row = query_one(
+            "SELECT EXISTS (SELECT 1 FROM product_integrated_reports "
+            "WHERE product_id = %s) AS has_report",
+            (product_id,),
+        )
+        return {"has_report": bool(row and row.get("has_report"))}
+
+    # ────────────────────────────────────────────────────────────
+    # feature/loading-tips — 로딩 화면 TIP 슬라이드
+    #   - GET /loading-tips  정적 문장 23개 + 동적 인기 제품 한 줄 (5분 캐시)
+    # 영상 선정 / 종합 인사이트 두 로딩 카드 하단 TIP 박스에서 5초마다 회전.
+    # 보조 기능 — 어떤 실패도 사용자 경험을 죽이지 않음 (DB 실패 → 정적만 반환).
+    # ────────────────────────────────────────────────────────────
+
+    @app.get("/loading-tips")
+    async def get_loading_tips():
+        """로딩 화면 TIP 슬라이드의 *동적 인기 제품 한 줄*만 반환.
+
+        정적 풀(23개)은 프론트(JS)가 보유 — fetch 가 실패해도 100% 동작.
+        fetch 성공 시 JS 가 동적 한 줄을 풀에 push.
+        """
+        from scripts.api._loading_tips import get_popular_products_tip
+        return {"dynamic_tip": get_popular_products_tip()}
