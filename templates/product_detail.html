@@ -1265,17 +1265,140 @@
         .p5-btn-secondary:disabled { color: #9aa0a6; cursor: not-allowed; }
         .p5-btn-primary { background: #111; color: #fff; }
         .p5-btn-primary:hover { background: #000; }
+
+        /* ===== 화면 5: 선정 영상 목록 페이지 (스크린1 블루 팔레트) ===== */
+        .svl-topbar { text-align: center; padding: 8px 0 18px; }
+        .svl-wordmark {
+            margin: 0; font-size: 34px; font-weight: 800; letter-spacing: 0.04em;
+            color: #121833;
+        }
+        .svl-divider { height: 1px; background: #e7eaf1; margin: 0 0 26px; border: 0; }
+
+        /* 제품 요약 카드 */
+        .svl-summary {
+            display: flex; align-items: center; gap: 26px;
+            background: #fbfcfe; border: 1px solid #e7eaf1; border-radius: 24px;
+            padding: 22px 26px; box-shadow: 0 4px 16px rgba(28, 35, 64, 0.05);
+            margin-bottom: 30px;
+        }
+        .svl-summary-img {
+            flex: none; width: 150px; height: 150px; border-radius: 18px; overflow: hidden;
+            background: #f5f7fb; display: flex; align-items: center; justify-content: center;
+        }
+        .svl-summary-img img { width: 100%; height: 100%; object-fit: contain; }
+        .svl-summary-img-ph {
+            font-size: 16px; font-weight: 800; letter-spacing: 0.12em; color: #abafbe;
+        }
+        .svl-summary-text {
+            flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px;
+            padding-right: 12px; border-right: 1px solid #e7eaf1;
+        }
+        .svl-badge {
+            align-self: flex-start; font-size: 12.5px; font-weight: 700; color: #4b5573;
+            background: #eaf0fb; padding: 4px 12px; border-radius: 999px;
+        }
+        .svl-pname { margin: 2px 0 0; font-size: 34px; font-weight: 800; letter-spacing: -0.02em; color: #121833; }
+        .svl-pcount { margin: 0; font-size: 14.5px; color: #8b90a0; }
+        .svl-summary-action {
+            flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+        }
+        .svl-insight-btn {
+            display: flex; align-items: center; gap: 14px;
+            background: #3a6df0; color: #fff; border: none; cursor: pointer;
+            padding: 22px 40px; border-radius: 18px; font-family: inherit;
+            box-shadow: 0 8px 22px rgba(58, 109, 240, 0.28);
+            transition: background 0.15s ease, transform 0.1s ease;
+        }
+        .svl-insight-btn:hover { background: #2c5be0; transform: translateY(-1px); }
+        .svl-insight-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .svl-insight-ico {
+            flex: none; width: 42px; height: 42px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.18); display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+        }
+        .svl-insight-txt { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; line-height: 1.2; }
+        .svl-insight-main { font-size: 20px; font-weight: 800; }
+        .svl-insight-sub { font-size: 12.5px; font-weight: 500; color: rgba(255, 255, 255, 0.82); }
+        .svl-summary-action .integrated-insight-msg { font-size: 13px; color: #8b90a0; text-align: center; }
+
+        /* 선정 영상 목록 */
+        .svl-list-head {
+            display: flex; align-items: center; gap: 9px; margin: 0 0 16px;
+            font-size: 20px; font-weight: 800; color: #121833;
+        }
+        .svl-list-ico {
+            flex: none; width: 26px; height: 26px; border-radius: 7px;
+            background: #e9f0ff; color: #3a6df0; display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+        }
+        .svl-cards { display: flex; flex-direction: column; gap: 16px; }
+        .video-card.svl-card {
+            flex-direction: row; align-items: center; gap: 26px;
+            padding: 16px 20px; border-radius: 20px; border-color: #e7eaf1;
+            background: #fbfcfe;
+        }
+        .video-card.svl-card:hover {
+            border-color: #c9d6f7; transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(28, 35, 64, 0.08);
+        }
+        .svl-thumb {
+            flex: none; position: relative; width: 188px; height: 112px;
+            border-radius: 14px; overflow: hidden; background: #f5f7fb;
+        }
+        .svl-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .svl-thumb-ph { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: #abafbe; font-size: 26px; }
+        .svl-dur {
+            position: absolute; right: 7px; bottom: 7px;
+            font-size: 12px; font-weight: 700; color: #fff;
+            background: rgba(18, 24, 51, 0.82); padding: 2px 8px; border-radius: 8px;
+        }
+        .svl-meta { flex: 1; min-width: 0; display: flex; gap: 30px; flex-wrap: wrap; }
+        .svl-col { display: flex; flex-direction: column; gap: 4px; min-width: 90px; }
+        .svl-col-label { font-size: 12.5px; color: #abafbe; font-weight: 600; }
+        .svl-col-value { font-size: 15px; color: #1c2340; font-weight: 700; }
+        .svl-analyze {
+            flex: none; background: #3a6df0; color: #fff; font-size: 14.5px; font-weight: 700;
+            padding: 11px 22px; border-radius: 999px;
+            transition: background 0.15s ease;
+        }
+        .video-card.svl-card:hover .svl-analyze { background: #2c5be0; }
+        .svl-note {
+            margin: 24px 0 0; text-align: center; font-size: 13px; color: #abafbe;
+        }
+        .svl-note::before { content: "ⓘ "; }
+        @media (max-width: 760px) {
+            .svl-summary { flex-direction: column; align-items: stretch; text-align: center; }
+            .svl-summary-img { width: 100%; height: 180px; }
+            .svl-summary-text { border-right: 0; border-bottom: 1px solid #e7eaf1; padding: 0 0 16px; align-items: center; }
+            .svl-badge { align-self: center; }
+            .svl-insight-btn { justify-content: center; }
+            .video-card.svl-card { flex-direction: column; align-items: stretch; }
+            .svl-thumb { width: 100%; height: 200px; }
+            .svl-analyze { text-align: center; }
+        }
     </style>
 </head>
 <body>
+    {#- 화면5: 한글 수량 단위(만/억) · 영상 길이(mm:ss) 표시 포맷 매크로 -#}
+    {%- macro fmt_kcount(n, unit) -%}
+        {%- if n is none -%}
+        {%- elif n >= 100000000 -%}{{ "%.1f"|format(n / 100000000) }}억{{ unit }}
+        {%- elif n >= 10000 -%}{{ n // 10000 }}{%- if (n % 10000) // 1000 -%}.{{ (n % 10000) // 1000 }}{%- endif -%}만{{ unit }}
+        {%- else -%}{{ "{:,}".format(n) }}{{ unit }}
+        {%- endif -%}
+    {%- endmacro -%}
+    {%- macro fmt_dur(s) -%}
+        {%- if s is not none and s > 0 -%}
+            {%- if s >= 3600 -%}{{ s // 3600 }}:{{ "%02d"|format((s % 3600) // 60) }}:{{ "%02d"|format(s % 60) }}
+            {%- else -%}{{ s // 60 }}:{{ "%02d"|format(s % 60) }}{%- endif -%}
+        {%- endif -%}
+    {%- endmacro -%}
     <div class="page">
-        <!-- Top bar -->
-        <div class="topbar">
-            <a href="/products">
-                <div class="logo">M</div>
-                <div class="brand">모아봄<span class="sub">MOABOM</span></div>
-            </a>
+        <!-- Top bar (화면5: 중앙 워드마크 + 구분선) -->
+        <div class="svl-topbar">
+            <h1 class="svl-wordmark">MOABOM</h1>
         </div>
+        <hr class="svl-divider">
 
         <div class="back-link">
             <!-- fix/integrated-insight-screen-mode: 모드별 라벨·동작 분기.
@@ -1286,28 +1409,44 @@
                onclick="return handleBackLink(event)">← <span id="backLinkLabel">제품 목록으로</span></a>
         </div>
 
-        <!-- Header card -->
-        <div class="header-card">
-            <h1>{{ product.name }}</h1>
-            <div class="meta">등록일: {{ product.created_at }}</div>
-
-            <div class="actions-row">
-                <button class="select-btn" onclick="toggleSelectConfig()" id="selectToggleBtn">🎯 AI 영상 선택</button>
+        <!-- 제품 요약 카드 (화면5) -->
+        <div class="svl-summary">
+            <div class="svl-summary-img">
+                {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}">
+                {% else %}
+                    <div class="svl-summary-img-ph">MOABOM</div>
+                {% endif %}
+            </div>
+            <div class="svl-summary-text">
+                <span class="svl-badge">검색한 제품</span>
+                <h1 class="svl-pname">{{ product.name }}</h1>
+                <p class="svl-pcount">{{ product.name }} 관련 선정 영상 {{ videos|length }}개</p>
+            </div>
+            <div class="svl-summary-action">
                 {% if videos and videos|length >= 2 %}
                     <button id="integratedInsightBtn"
-                            class="integrated-insight-btn"
+                            class="integrated-insight-btn svl-insight-btn"
                             type="button"
                             onclick="runIntegratedInsight()">
-                        🧩 종합 인사이트
+                        <span class="svl-insight-ico" aria-hidden="true">📊</span>
+                        <span class="svl-insight-txt">
+                            <span class="svl-insight-main">종합 인사이트 확인</span>
+                            <span class="svl-insight-sub">{{ videos|length }}개 영상 종합 분석</span>
+                        </span>
                     </button>
                 {% endif %}
-                <div id="syncProgress" class="sync-progress" aria-hidden="true">
-                    <div id="syncProgressFill" class="sync-progress-fill"></div>
-                </div>
-                <span id="syncStatus" class="sync-status"></span>
                 <span id="integratedInsightStatus" class="integrated-insight-msg"></span>
             </div>
+        </div>
 
+        <!-- 보존: 재선정/동기화 UI (목업 비노출, 기능·id·구조 유지) -->
+        <div class="svl-preserved" hidden>
+            <button class="select-btn" onclick="toggleSelectConfig()" id="selectToggleBtn">🎯 AI 영상 선택</button>
+            <div id="syncProgress" class="sync-progress" aria-hidden="true">
+                <div id="syncProgressFill" class="sync-progress-fill"></div>
+            </div>
+            <span id="syncStatus" class="sync-status"></span>
             <div id="selectConfig" class="select-config">
                 <div class="mode-row">
                     <label><input type="radio" name="selMode" value="auto" checked> Auto (AI 자동 선택)</label>
@@ -1334,29 +1473,47 @@
                  #videosSection 래핑. 같은 <section> 안의 p5Overlay(모달)·
                  integratedInsightPanel 은 형제 노드로 유지(숨김 영향 X). -->
             <div id="videosSection">
-                <h2>분석 영상 <span class="count">{{ videos|length }}</span></h2>
+                <div class="svl-list-head"><span class="svl-list-ico" aria-hidden="true">▶</span>선정된 영상 목록</div>
                 {% if videos %}
-                    <div class="video-grid">
+                    <div class="svl-cards">
                         {% for video in videos %}
-                            <a class="video-card"
+                            <a class="video-card svl-card"
                                href="/products/{{ product.product_id }}/videos/{{ video.video_id }}"
                                data-video-id="{{ video.video_id }}">
-                                <div class="thumb-wrap">
+                                <div class="svl-thumb">
                                     {% if video.thumbnail_url %}
-                                        <img src="{{ video.thumbnail_url }}" alt="thumbnail">
+                                        <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}">
+                                    {% else %}
+                                        <div class="svl-thumb-ph">▶</div>
+                                    {% endif %}
+                                    {% set _dur = fmt_dur(video.duration_seconds)|trim %}
+                                    {% if _dur %}<span class="svl-dur">{{ _dur }}</span>{% endif %}
+                                </div>
+                                <div class="svl-meta">
+                                    {% if video.channel_name %}
+                                        <div class="svl-col">
+                                            <span class="svl-col-label">채널명</span>
+                                            <span class="svl-col-value">{{ video.channel_name }}</span>
+                                        </div>
+                                    {% endif %}
+                                    {% if video.channel_subscriber_count %}
+                                        <div class="svl-col">
+                                            <span class="svl-col-label">구독자수</span>
+                                            <span class="svl-col-value">구독자 {{ fmt_kcount(video.channel_subscriber_count, '명')|trim }}</span>
+                                        </div>
+                                    {% endif %}
+                                    {% if video.view_count is not none %}
+                                        <div class="svl-col">
+                                            <span class="svl-col-label">조회수</span>
+                                            <span class="svl-col-value">조회수 {{ fmt_kcount(video.view_count, '회')|trim }}</span>
+                                        </div>
                                     {% endif %}
                                 </div>
-                                <div class="body">
-                                    <div class="title">{{ video.title }}</div>
-                                    <div class="stats">
-                                        <span>👁 {{ video.view_count }}</span>
-                                        <span>👍 {{ video.like_count }}</span>
-                                        <span>💬 {{ video.comment_count }}</span>
-                                    </div>
-                                </div>
+                                <span class="svl-analyze">영상 분석</span>
                             </a>
                         {% endfor %}
                     </div>
+                    <p class="svl-note">AI가 다양한 기준으로 분석하여 객관적으로 선정한 영상입니다.</p>
                 {% else %}
                     <div class="empty">아직 분석된 영상이 없습니다. 위 "AI 영상 선택" 버튼을 눌러 시작하세요.</div>
                 {% endif %}
