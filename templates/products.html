@@ -426,6 +426,108 @@
             .vs-mode { grid-template-columns: 1fr; }
             .vs-choice-btns { grid-template-columns: 1fr; }
         }
+
+        /* ── AI 영상 선택 로딩 모달 (화면 3) ───────────────────────────── */
+        .vl-overlay {
+            position: fixed; inset: 0;
+            background: rgba(18, 24, 51, 0.55);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 24px; z-index: 1100;
+        }
+        .vl-overlay.show { display: flex; }
+        .vl-modal {
+            width: 100%; max-width: 540px;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 38px 34px 26px;
+            text-align: center;
+            animation: vsPop 0.22s ease;
+        }
+        .vl-spinner {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 5px solid var(--primary-soft);
+            border-top-color: var(--primary);
+            animation: vlSpin 0.9s linear infinite;
+            margin: 0 auto 22px;
+        }
+        @keyframes vlSpin { to { transform: rotate(360deg); } }
+        .vl-title {
+            margin: 0; font-size: 26px; font-weight: 800;
+            letter-spacing: -0.02em; color: var(--text-strong);
+        }
+        .vl-sub { margin: 8px 0 24px; font-size: 14px; color: var(--muted); }
+        .vl-progress-box {
+            background: var(--surface-soft); border-radius: var(--radius-md);
+            padding: 16px 18px; margin-bottom: 18px;
+        }
+        .vl-progress-meta {
+            display: flex; justify-content: space-between; align-items: baseline;
+            font-size: 14px; color: var(--muted); margin-bottom: 12px;
+        }
+        .vl-progress-meta strong { color: var(--primary-strong); font-weight: 800; }
+        .vl-progress-track {
+            height: 8px; border-radius: var(--radius-pill);
+            background: var(--border-strong); overflow: hidden;
+        }
+        .vl-progress-fill {
+            height: 100%; width: 0%; border-radius: var(--radius-pill);
+            background: linear-gradient(90deg, var(--primary), var(--primary-strong));
+            transition: width 0.3s ease;
+        }
+        .vl-steps { display: flex; flex-direction: column; gap: 10px; }
+        .vl-step {
+            display: flex; align-items: center; gap: 13px; text-align: left;
+            padding: 13px 16px; border-radius: var(--radius-md);
+            background: var(--surface-soft); border: 1px solid var(--border);
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .vl-step.active { background: var(--primary-soft); border-color: transparent; }
+        .vl-step-num {
+            flex: none; width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px;
+            background: var(--muted-2); color: #fff;
+            transition: background 0.2s;
+        }
+        .vl-step.active .vl-step-num { background: var(--primary); }
+        .vl-step.done .vl-step-num { background: var(--badge-green-text); }
+        .vl-num-spin {
+            display: inline-block; width: 15px; height: 15px; border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.45); border-top-color: #fff;
+            animation: vlSpin 0.8s linear infinite;
+        }
+        .vl-step-label { font-size: 15px; font-weight: 600; color: var(--text); }
+        .vl-step.active .vl-step-label { color: var(--primary-strong); font-weight: 700; }
+        .vl-step-badge {
+            margin-left: auto; flex: none; font-size: 12.5px; font-weight: 600;
+            padding: 4px 11px; border-radius: var(--radius-pill);
+            background: var(--surface); color: var(--muted-2); border: 1px solid var(--border);
+        }
+        .vl-step.active .vl-step-badge { background: var(--primary); color: #fff; border-color: transparent; }
+        .vl-step.done .vl-step-badge { background: var(--badge-green-bg); color: var(--badge-green-text); border-color: transparent; }
+        .vl-tip-box {
+            display: flex; align-items: center; gap: 12px; text-align: left;
+            background: var(--primary-soft); border-radius: var(--radius-md);
+            padding: 13px 16px; margin-top: 18px;
+        }
+        .vl-tip-label {
+            flex: none; font-size: 12px; font-weight: 800; color: #fff;
+            background: var(--primary); padding: 3px 12px; border-radius: var(--radius-pill);
+        }
+        .vl-tip-text { font-size: 13.5px; color: var(--chip-text); line-height: 1.45; transition: opacity 0.3s ease; }
+        .vl-tip-text.vl-tip-out { opacity: 0; }
+        .vl-watermark {
+            margin-top: 22px; font-size: 13px; font-weight: 800;
+            letter-spacing: 0.18em; color: var(--muted-2);
+        }
+        @media (max-width: 560px) {
+            .vl-modal { padding: 28px 20px 22px; }
+            .vl-title { font-size: 22px; }
+        }
     </style>
 </head>
 <body>
@@ -626,6 +728,48 @@
                     <button type="button" class="vs-btn-primary" id="vsReselect">이 설정으로 다시 선정</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- ── AI 영상 선택 로딩 모달 (화면 3) ── Auto 선정 진행 중 단독 표시 (닫기 없음) ── -->
+    <div class="vl-overlay" id="vlOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vlTitle">
+        <div class="vl-modal" role="document">
+            <div class="vl-spinner" aria-hidden="true"></div>
+            <h2 class="vl-title" id="vlTitle">AI 영상 선택 진행 중</h2>
+            <p class="vl-sub">최대 5분 정도 소요됩니다. 창을 닫지 마세요.</p>
+
+            <div class="vl-progress-box">
+                <div class="vl-progress-meta">
+                    <span>진행률 <strong id="vlPercent">0%</strong></span>
+                    <span>예상 남은 시간 <strong id="vlRemain">약 5분</strong></span>
+                </div>
+                <div class="vl-progress-track"><div class="vl-progress-fill" id="vlFill"></div></div>
+            </div>
+
+            <div class="vl-steps">
+                <div class="vl-step" data-step="1">
+                    <span class="vl-step-num">1</span>
+                    <span class="vl-step-label">YouTube 후보 영상 수집</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+                <div class="vl-step" data-step="2">
+                    <span class="vl-step-num">2</span>
+                    <span class="vl-step-label">AI 영상 선정 + 다양성 평가</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+                <div class="vl-step" data-step="3">
+                    <span class="vl-step-num">3</span>
+                    <span class="vl-step-label">댓글 수집 및 감성 분석</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+            </div>
+
+            <div class="vl-tip-box">
+                <span class="vl-tip-label">TIP</span>
+                <div class="vl-tip-text" id="vlTipText"></div>
+            </div>
+
+            <div class="vl-watermark">MOABOM</div>
         </div>
     </div>
 
@@ -837,25 +981,167 @@
             if (e.key === 'Escape' && vsOverlay.classList.contains('show')) closeSelectionModal();
         });
 
-        // 선택 진행: Auto → select-videos 실행 후 상세 이동 / Custom → 상세로 이동(상세의 기존 Custom 흐름으로 이어감)
-        async function vsProceed(productId, btn) {
+        // ── AI 영상 선택 로딩 모달 (화면 3) — Auto 선정 진행 중 단독 표시 ──
+        //   진행률은 실데이터가 아닌 타이머 추정 애니메이션(95% 캡, 응답 도착 시 100%).
+        const vlOverlay = document.getElementById('vlOverlay');
+        const vlFill = document.getElementById('vlFill');
+        const vlPercent = document.getElementById('vlPercent');
+        const vlRemain = document.getElementById('vlRemain');
+        const VL_ESTIMATE_MS = 300000; // 추정 5분 (애니메이션 기준값)
+        let vlRaf = null;
+        let vlStepTimers = [];
+        let vlFinished = false;
+
+        const VL_TIPS = [
+            "MOABOM은 '모아서 봄' — 흩어진 리뷰를 한 곳에 모아 보여드려요.",
+            "여러 리뷰어의 평가를 교차 검증해 한쪽으로 치우치지 않은 결론을 만들어요.",
+            "댓글 속 실사용자 의견까지 분석해 영상에 안 나온 장단점을 찾아내요.",
+            "리뷰어별 성향(엄격·관대)을 보정해 더 공정한 점수를 계산해요.",
+            "조회수가 아니라 리뷰 품질과 채널 다양성으로 영상을 골라요.",
+        ];
+        let vlTipIdx = 0;
+        let vlTipTimer = null;
+        function vlStartTips() {
+            const el = document.getElementById('vlTipText');
+            vlTipIdx = 0;
+            el.classList.remove('vl-tip-out');
+            el.textContent = VL_TIPS[0];
+            clearInterval(vlTipTimer);
+            vlTipTimer = setInterval(() => {
+                vlTipIdx = (vlTipIdx + 1) % VL_TIPS.length;
+                el.classList.add('vl-tip-out');
+                setTimeout(() => {
+                    el.textContent = VL_TIPS[vlTipIdx];
+                    el.classList.remove('vl-tip-out');
+                }, 300);
+            }, 5000);
+        }
+        function vlStopTips() { clearInterval(vlTipTimer); vlTipTimer = null; }
+
+        function vlSetStep(el, state) {
+            const num = el.querySelector('.vl-step-num');
+            const badge = el.querySelector('.vl-step-badge');
+            el.classList.remove('active', 'done');
+            if (state === 'active') {
+                el.classList.add('active');
+                num.innerHTML = '<span class="vl-num-spin"></span>';
+                badge.textContent = '진행 중';
+            } else if (state === 'done') {
+                el.classList.add('done');
+                num.textContent = '✓';
+                badge.textContent = '완료';
+            } else {
+                num.textContent = el.dataset.step;
+                badge.textContent = '대기 중';
+            }
+        }
+
+        function showLoadingModal() {
+            vlFinished = false;
+            const steps = vlOverlay.querySelectorAll('.vl-step');
+            steps.forEach((s, i) => vlSetStep(s, i === 0 ? 'active' : 'wait'));
+            vlFill.style.width = '0%';
+            vlPercent.textContent = '0%';
+            vlRemain.textContent = '약 5분';
+            vlOverlay.classList.add('show');
+            vlOverlay.setAttribute('aria-hidden', 'false');
+            vlStartTips();
+
+            const startTs = performance.now();
+            const tau = VL_ESTIMATE_MS / 2.5; // 90~95% 부근에서 자연히 감속
+            function frame(now) {
+                if (vlFinished) return;
+                const elapsed = now - startTs;
+                const pct = 95 * (1 - Math.exp(-elapsed / tau)); // 95% 캡
+                vlFill.style.width = pct.toFixed(1) + '%';
+                vlPercent.textContent = Math.round(pct) + '%';
+                const remainMs = VL_ESTIMATE_MS - elapsed;
+                if (remainMs > 60000) {
+                    vlRemain.textContent = '약 ' + Math.ceil(remainMs / 60000) + '분';
+                } else if (remainMs > 0) {
+                    vlRemain.textContent = '약 1분';
+                } else {
+                    vlRemain.textContent = '마무리 중';
+                }
+                vlRaf = requestAnimationFrame(frame);
+            }
+            vlRaf = requestAnimationFrame(frame);
+
+            vlStepTimers.forEach(clearTimeout);
+            vlStepTimers = [];
+            const stepDur = VL_ESTIMATE_MS / steps.length;
+            for (let i = 1; i < steps.length; i++) {
+                vlStepTimers.push(setTimeout(() => {
+                    if (vlFinished) return;
+                    vlSetStep(steps[i - 1], 'done');
+                    vlSetStep(steps[i], 'active');
+                }, stepDur * i));
+            }
+        }
+
+        function vlStopTimers() {
+            vlFinished = true;
+            if (vlRaf) cancelAnimationFrame(vlRaf);
+            vlRaf = null;
+            vlStepTimers.forEach(clearTimeout);
+            vlStepTimers = [];
+            vlStopTips();
+        }
+
+        function hideLoadingModal() {
+            vlStopTimers();
+            vlOverlay.classList.remove('show');
+            vlOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        // 응답 도착 → 100% 채우고 잠깐 보여준 뒤 resolve (이후 상세 이동)
+        function finishLoadingModal() {
+            return new Promise((resolve) => {
+                vlStopTimers();
+                vlOverlay.querySelectorAll('.vl-step').forEach(s => vlSetStep(s, 'done'));
+                vlFill.style.width = '100%';
+                vlPercent.textContent = '100%';
+                vlRemain.textContent = '완료';
+                setTimeout(resolve, 450);
+            });
+        }
+
+        // 선택 진행: Auto → 로딩 모달 표시 + select-videos 후 상세 이동 /
+        //           Custom → 로딩 없이 즉시 상세 이동(상세의 기존 Custom 흐름으로 이어감)
+        async function vsProceed(productId) {
             const mode = document.querySelector('input[name="vsMode"]:checked').value;
             if (mode === 'custom') {
                 window.location.href = '/products/' + productId;
                 return;
             }
-            if (btn) btn.textContent = 'AI 영상 선택 중... (최대 5분)';
             const k = parseInt(vsKSlider.value, 10);
             const pool = parseInt(vsPoolSlider.value, 10);
-            const selRes = await fetch('/products/' + productId + '/select-videos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mode: 'auto', k: k, candidate_pool_size: pool }),
-            });
-            if (!selRes.ok) {
-                alert('영상 선정 중 오류가 발생했습니다. 상세 페이지에서 다시 시도할 수 있습니다.');
+            // 설정 모달 닫고 로딩 모달 단독 표시 (순차 전환)
+            vsOverlay.classList.remove('show');
+            vsOverlay.setAttribute('aria-hidden', 'true');
+            showLoadingModal();
+            try {
+                const selRes = await fetch('/products/' + productId + '/select-videos', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ mode: 'auto', k: k, candidate_pool_size: pool }),
+                });
+                if (!selRes.ok) {
+                    // 현행 보존: alert 후 상세 이동. 단 로딩 모달은 닫아 갇힘 방지.
+                    hideLoadingModal();
+                    alert('영상 선정 중 오류가 발생했습니다. 상세 페이지에서 다시 시도할 수 있습니다.');
+                    window.location.href = '/products/' + productId;
+                    return;
+                }
+                await finishLoadingModal();
+                window.location.href = '/products/' + productId;
+            } catch (err) {
+                // 네트워크 오류 등: 로딩 모달 닫고 설정 모달 복귀 후 기존 catch(alert) 흐름으로
+                hideLoadingModal();
+                vsOverlay.classList.add('show');
+                vsOverlay.setAttribute('aria-hidden', 'false');
+                throw err;
             }
-            window.location.href = '/products/' + productId;
         }
 
         vsStart.addEventListener('click', async () => {
@@ -885,8 +1171,8 @@
                     vsStart.textContent = original;
                     return;
                 }
-                // ②③ 신규 제품 → 바로 진행 (이후 페이지 이동)
-                await vsProceed(product.product_id, vsStart);
+                // ②③ 신규 제품 → 바로 진행 (Auto는 로딩 모달, 이후 페이지 이동)
+                await vsProceed(product.product_id);
             } catch (error) {
                 alert('Error: ' + error);
                 vsStart.textContent = original;
@@ -909,7 +1195,7 @@
             document.getElementById('vsGoReport').disabled = true;
             const original = vsReselect.textContent;
             try {
-                await vsProceed(vsPending.productId, vsReselect);
+                await vsProceed(vsPending.productId);
             } catch (error) {
                 alert('Error: ' + error);
                 vsReselect.textContent = original;
