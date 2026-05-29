@@ -1267,12 +1267,13 @@
         .p5-btn-primary:hover { background: #000; }
 
         /* ===== 화면 5: 선정 영상 목록 페이지 (스크린1 블루 팔레트) ===== */
-        .svl-topbar { text-align: center; padding: 8px 0 18px; }
+        .svl-topbar { text-align: center; padding: 18px 0 26px; }
         .svl-wordmark {
-            margin: 0; font-size: 34px; font-weight: 800; letter-spacing: 0.04em;
-            color: #121833;
+            margin: 0; font-size: 56px; font-weight: 800; letter-spacing: 0.04em;
+            color: #121833; line-height: 1.05;
         }
-        .svl-divider { height: 1px; background: #e7eaf1; margin: 0 0 26px; border: 0; }
+        .svl-divider { height: 1px; background: #e7eaf1; margin: 0 0 34px; border: 0; }
+        @media (max-width: 560px) { .svl-wordmark { font-size: 40px; } }
 
         /* 제품 요약 카드 */
         .svl-summary {
@@ -1301,24 +1302,26 @@
         .svl-pcount { margin: 0; font-size: 14.5px; color: #8b90a0; }
         .svl-summary-action {
             flex: none; display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+            margin-right: 40px;
         }
         .svl-insight-btn {
-            display: flex; align-items: center; gap: 14px;
+            display: flex; align-items: center; gap: 16px;
             background: #3a6df0; color: #fff; border: none; cursor: pointer;
-            padding: 22px 40px; border-radius: 18px; font-family: inherit;
-            box-shadow: 0 8px 22px rgba(58, 109, 240, 0.28);
+            padding: 28px 52px; border-radius: 20px; font-family: inherit;
+            box-shadow: 0 10px 26px rgba(58, 109, 240, 0.3);
             transition: background 0.15s ease, transform 0.1s ease;
         }
         .svl-insight-btn:hover { background: #2c5be0; transform: translateY(-1px); }
         .svl-insight-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .svl-insight-ico {
-            flex: none; width: 42px; height: 42px; border-radius: 50%;
+            flex: none; width: 50px; height: 50px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.18); display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
         }
-        .svl-insight-txt { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; line-height: 1.2; }
-        .svl-insight-main { font-size: 20px; font-weight: 800; }
-        .svl-insight-sub { font-size: 12.5px; font-weight: 500; color: rgba(255, 255, 255, 0.82); }
+        .svl-insight-ico svg { width: 26px; height: 26px; display: block; }
+        .svl-insight-txt { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; line-height: 1.2; }
+        .svl-insight-main { font-size: 23px; font-weight: 800; }
+        .svl-insight-sub { font-size: 13.5px; font-weight: 500; color: rgba(255, 255, 255, 0.82); }
+        @media (max-width: 760px) { .svl-summary-action { margin-right: 0; } }
         .svl-summary-action .integrated-insight-msg { font-size: 13px; color: #8b90a0; text-align: center; }
 
         /* 선정 영상 목록 */
@@ -1352,8 +1355,12 @@
             font-size: 12px; font-weight: 700; color: #fff;
             background: rgba(18, 24, 51, 0.82); padding: 2px 8px; border-radius: 8px;
         }
-        .svl-meta { flex: 1; min-width: 0; display: flex; gap: 30px; flex-wrap: wrap; }
-        .svl-col { display: flex; flex-direction: column; gap: 4px; min-width: 90px; }
+        .svl-meta { flex: 1; min-width: 0; display: flex; gap: 12px; flex-wrap: wrap; }
+        .svl-col {
+            display: flex; flex-direction: column; gap: 5px; min-width: 124px;
+            background: #f5f7fb; border: 1px solid #e7eaf1; border-radius: 14px;
+            padding: 11px 16px;
+        }
         .svl-col-label { font-size: 12.5px; color: #abafbe; font-weight: 600; }
         .svl-col-value { font-size: 15px; color: #1c2340; font-weight: 700; }
         .svl-analyze {
@@ -1429,7 +1436,7 @@
                             class="integrated-insight-btn svl-insight-btn"
                             type="button"
                             onclick="runIntegratedInsight()">
-                        <span class="svl-insight-ico" aria-hidden="true">📊</span>
+                        <span class="svl-insight-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="11" y2="9"/></svg></span>
                         <span class="svl-insight-txt">
                             <span class="svl-insight-main">종합 인사이트 확인</span>
                             <span class="svl-insight-sub">{{ videos|length }}개 영상 종합 분석</span>
