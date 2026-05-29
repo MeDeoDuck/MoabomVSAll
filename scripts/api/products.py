@@ -3,6 +3,7 @@ Product-related API routes
 """
 import asyncio
 import os
+from datetime import datetime
 from time import perf_counter
 
 from fastapi import BackgroundTasks, HTTPException, Request
@@ -59,6 +60,78 @@ def _infer_category_from_name(name: str) -> str:
     return ""
 
 
+def _format_updated_label(last_report_at) -> str:
+    """last_report_at(최신 보고서 생성 시각) → "업데이트 N일 전" 표시 문자열.
+
+    UI 일관성 위해 표시 문자열 생성은 서버 한 곳에서만 수행한다(템플릿/JS
+    중복 계산 금지). TIMESTAMP 컬럼은 naive datetime 으로 들어오므로
+    datetime.now() (naive) 와 비교.
+    """
+    if not last_report_at:
+        return ""
+    try:
+        delta = datetime.now() - last_report_at
+        days = delta.days
+    except TypeError:
+        return ""
+    if days <= 0:
+        return "오늘 업데이트"
+    return f"업데이트 {days}일 전"
+
+
+def _build_recommended(limit: int = 12):
+    """추천 리포트 캐러셀 데이터.
+
+    product_integrated_reports 가 존재하는 제품을 최신 보고서순으로 노출.
+    집계(댓글 수·작성자 고유 수·최신 보고서 시각)는 단일 JOIN + GROUP BY 한
+    쿼리로 처리(N+1 금지). pir 누적/videos/comments 카테시안은 COUNT(DISTINCT)
+    로 중복 상쇄. 표시용 "업데이트 N일 전" 문자열도 서버에서 미리 생성.
+    """
+    rows = query_all(
+        """
+        SELECT
+            p.product_id,
+            p.name,
+            p.brand,
+            p.category,
+            p.image_url,
+            COUNT(DISTINCT c.comment_id)        AS comment_count,
+            COUNT(DISTINCT c.author_channel_id) AS author_count,
+            MAX(pir.created_at)                 AS last_report_at
+        FROM tech_products p
+        JOIN product_integrated_reports pir ON pir.product_id = p.product_id
+        LEFT JOIN videos v   ON v.product_id = p.product_id
+        LEFT JOIN comments c ON c.video_id   = v.video_id
+        GROUP BY p.product_id, p.name, p.brand, p.category, p.image_url
+        ORDER BY last_report_at DESC
+        LIMIT %s
+        """,
+        (limit,),
+    )
+
+    recommended = []
+    for r in rows:
+        # 칩: DB category(보통 NULL) + 제품명 키워드 추론. 1~2개, 빈 칩 없음.
+        chips = []
+        cat = (r.get("category") or "").strip()
+        if cat:
+            chips.append(cat)
+        inferred = _infer_category_from_name(r.get("name") or "")
+        if inferred and inferred not in chips:
+            chips.append(inferred)
+
+        recommended.append({
+            "product_id": r["product_id"],
+            "name": r.get("name") or "",
+            "image_url": (r.get("image_url") or "").strip(),
+            "chips": chips,
+            "comment_count": int(r.get("comment_count") or 0),
+            "author_count": int(r.get("author_count") or 0),
+            "updated_label": _format_updated_label(r.get("last_report_at")),
+        })
+    return recommended
+
+
 def register_product_routes(app):
     """Register all product-related routes"""
     
@@ -72,10 +145,12 @@ def register_product_routes(app):
         """List all products."""
         show_product_list = os.getenv("SHOW_PRODUCT_LIST", "0") == "1"
         products = query_all("SELECT * FROM tech_products ORDER BY created_at DESC") if show_product_list else []
+        recommended = _build_recommended()
         return templates.TemplateResponse("products.html", {
             "request": request,
             "products": products,
             "show_product_list": show_product_list,
+            "recommended": recommended,
         })
     
     # ────────────────────────────────────────────────────────────────

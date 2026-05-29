@@ -8,18 +8,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ── Design tokens (화면 1에서 최초 정의 — 이후 모든 화면 재사용) ── */
         :root {
-            --bg: #f7f5fb;
+            /* surface / background */
+            --bg: #eceef3;
+            --shell: #fbfcfe;
             --surface: #ffffff;
-            --border: #e7e2f3;
-            --text: #1f1c2e;
-            --muted: #6b6880;
-            --primary: #6f42c1;
-            --primary-strong: #5a32a3;
-            --primary-soft: #efe9fb;
-            --accent: #f06292;
-            --shadow: 0 4px 16px rgba(111, 66, 193, 0.08);
-            --shadow-strong: 0 10px 32px rgba(111, 66, 193, 0.18);
+            --surface-soft: #f5f7fb;
+
+            /* borders */
+            --border: #e7eaf1;
+            --border-strong: #d8dde8;
+
+            /* text */
+            --text: #1c2340;
+            --text-strong: #121833;
+            --muted: #8b90a0;
+            --muted-2: #abafbe;
+
+            /* primary (blue) */
+            --primary: #3a6df0;
+            --primary-strong: #2c5be0;
+            --primary-soft: #e9f0ff;
+
+            /* chips / badges */
+            --chip-bg: #eaf0fb;
+            --chip-text: #4b5573;
+            --badge-blue-bg: #e6eeff;
+            --badge-blue-text: #3a6df0;
+            --badge-green-bg: #e6f4ea;
+            --badge-green-text: #137333;
+            --badge-amber-bg: #fef3c7;
+            --badge-amber-text: #92400e;
+
+            /* radius */
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 999px;
+
+            /* shadow */
+            --shadow-sm: 0 2px 8px rgba(28, 35, 64, 0.05);
+            --shadow: 0 8px 28px rgba(28, 35, 64, 0.07);
+            --shadow-lg: 0 16px 40px rgba(28, 35, 64, 0.12);
         }
 
         * { box-sizing: border-box; }
@@ -31,257 +63,370 @@
             line-height: 1.55;
             -webkit-font-smoothing: antialiased;
         }
+        a { color: inherit; text-decoration: none; }
 
-        .page { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+        .page { max-width: 1240px; margin: 0 auto; padding: 40px 28px 72px; }
 
-        /* ── Top bar ────────────────────────────────────── */
-        .topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-        .logo {
-            width: 36px; height: 36px; border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white; display: grid; place-items: center;
-            font-weight: 800; font-size: 18px;
-            box-shadow: var(--shadow);
-        }
-        .brand { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-        .brand .sub { font-weight: 500; color: var(--muted); margin-left: 6px; font-size: 14px; }
-
-        /* ── Hero ───────────────────────────────────────── */
-        .hero {
-            background: linear-gradient(140deg, #ffffff 0%, #f3edff 60%, #fde8ef 100%);
+        /* ── Hero shell (좌 브랜드 / 우 검색·추천 2단) ── */
+        .hero-shell {
+            background: var(--shell);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 44px 40px;
+            border-radius: var(--radius-xl);
             box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
+            padding: 56px 60px;
         }
-        .hero::after {
-            content: ""; position: absolute; right: -60px; top: -60px;
-            width: 220px; height: 220px; border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(240, 98, 146, 0.18), transparent 70%);
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+            gap: 56px;
+            align-items: start;
         }
-        .hero h1 {
-            font-size: 34px; font-weight: 800; margin: 0 0 12px;
-            letter-spacing: -0.02em; line-height: 1.2;
-        }
-        .hero h1 em {
-            font-style: normal;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .hero p.lead { font-size: 16px; color: var(--muted); margin: 0 0 24px; max-width: 640px; }
 
-        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+        /* ── 좌: 브랜드 ── */
+        .brand-col { padding-top: 8px; }
+        .wordmark {
+            font-size: 88px; font-weight: 800; letter-spacing: -0.03em;
+            color: var(--text-strong); line-height: 1; margin: 0 0 28px;
+        }
+        .tagline { font-size: 24px; font-weight: 700; color: var(--text-strong); margin: 0 0 14px; letter-spacing: -0.01em; }
+        .tagline b { font-weight: 800; }
+        .subcopy { font-size: 16px; color: var(--muted); margin: 0 0 40px; }
+
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .pillar {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(6px);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            padding: 22px 18px;
+            box-shadow: var(--shadow-sm);
         }
-        .pillar .icon { font-size: 20px; margin-bottom: 6px; }
-        .pillar .t { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
-        .pillar .d { font-size: 13px; color: var(--muted); line-height: 1.5; }
+        .pillar .icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: var(--primary-soft); color: var(--primary);
+            display: grid; place-items: center; margin-bottom: 16px;
+        }
+        .pillar .t { font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--text-strong); }
+        .pillar .d { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
-        /* ── Section card ──────────────────────────────── */
-        .section { margin-top: 32px; }
+        /* ── 우: 검색 + 추천 ── */
+        .search-col { min-width: 0; }
+        .search-wrap { position: relative; }
+
+        .searchbar {
+            display: flex; align-items: center; gap: 14px;
+            height: 60px; padding: 0 20px;
+            background: var(--surface);
+            border: 1.5px solid var(--border-strong);
+            border-radius: 16px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .search-wrap.focused .searchbar {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-soft);
+        }
+        .searchbar .search-ico { color: var(--primary); display: grid; place-items: center; flex: none; }
+        .searchbar input[type="text"] {
+            flex: 1; min-width: 0; height: 100%;
+            border: none; outline: none; background: transparent;
+            font-size: 18px; font-family: inherit; font-weight: 500; color: var(--text);
+        }
+        .searchbar input[type="text"]::placeholder { color: var(--muted-2); font-weight: 400; }
+        .search-clear {
+            flex: none; width: 28px; height: 28px; padding: 0;
+            border: none; background: transparent; color: var(--muted-2);
+            cursor: pointer; display: grid; place-items: center; border-radius: 50%;
+            transition: color 0.12s, background 0.12s;
+        }
+        .search-clear:hover { color: var(--muted); background: var(--surface-soft); }
+        .search-clear[hidden] { display: none; }
+
+        /* submit 버튼: 목업에 없으므로 시각적으로만 숨김 (기능·연결점 100% 유지) */
+        .submit-hidden {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+        }
+
+        /* ── 자동완성 드롭다운 (추천 영역 위 오버레이) ── */
+        .suggest-panel {
+            display: none;
+            position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+            z-index: 30;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            padding: 10px;
+        }
+        .suggest-panel.open { display: block; }
+        .suggest-state { font-size: 14px; color: var(--muted); padding: 14px 16px; }
+        .suggest-list { display: flex; flex-direction: column; gap: 2px; }
+        .suggest-card {
+            display: flex; align-items: center; gap: 14px;
+            width: 100%; text-align: left;
+            border: none; border-radius: 12px;
+            padding: 14px 16px; background: transparent;
+            font-family: inherit; font-size: 17px; color: var(--text);
+            cursor: pointer; transition: background 0.12s;
+        }
+        .suggest-card:hover, .suggest-card.sc-first { background: var(--primary-soft); }
+        .suggest-card .sc-ico { color: var(--muted-2); display: grid; place-items: center; flex: none; }
+        .suggest-card.sc-first .sc-ico { color: var(--primary); }
+        .suggest-card .sc-name { flex: 1; min-width: 0; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .suggest-card .sc-badges { flex: none; display: flex; gap: 6px; align-items: center; }
+        .sc-badge {
+            display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill);
+            font-size: 13px; font-weight: 700; line-height: 1.2;
+        }
+        .sc-badge.recommend { background: var(--badge-blue-bg); color: var(--badge-blue-text); }
+        .sc-badge.has-report { background: var(--badge-green-bg); color: var(--badge-green-text); }
+        .sc-badge.serper { background: var(--badge-amber-bg); color: var(--badge-amber-text); }
+
+        /* ── 추천 리포트 캐러셀 ── */
+        .reco { margin-top: 28px; }
+        .reco-head {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 17px; font-weight: 700; color: var(--text-strong); margin-bottom: 16px;
+        }
+        .reco-head .star { color: var(--primary); display: grid; place-items: center; }
+        .reco-viewport-wrap { position: relative; }
+        .reco-viewport {
+            overflow-x: auto; overflow-y: hidden;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .reco-viewport::-webkit-scrollbar { display: none; }
+        .reco-track { display: flex; gap: 18px; padding: 4px 4px 8px; }
+        .reco-card {
+            flex: 0 0 252px; scroll-snap-align: start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            display: flex; flex-direction: column; gap: 14px;
+            transition: transform 0.1s, box-shadow 0.15s, border-color 0.15s;
+        }
+        .reco-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+        .reco-top { display: flex; gap: 14px; align-items: flex-start; }
+        .reco-thumb {
+            flex: none; width: 64px; height: 64px; border-radius: 12px; overflow: hidden;
+            background: var(--surface-soft);
+        }
+        .reco-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .reco-thumb-ph {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--primary-soft), #dbe6ff);
+            display: grid; place-items: center;
+            color: var(--primary); font-weight: 800; font-size: 26px; letter-spacing: -0.02em;
+        }
+        .reco-head-text { min-width: 0; display: flex; flex-direction: column; gap: 6px; padding-top: 2px; }
+        .reco-badge {
+            align-self: flex-start;
+            display: inline-flex; align-items: center; gap: 5px;
+            background: var(--badge-blue-bg); color: var(--badge-blue-text);
+            font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-pill);
+        }
+        .reco-title { font-size: 16px; font-weight: 700; color: var(--text-strong); line-height: 1.35; }
+        .reco-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+            background: var(--chip-bg); color: var(--chip-text);
+            font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: var(--radius-pill);
+        }
+        .reco-metrics {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            font-size: 13px; color: var(--muted); margin-top: auto;
+        }
+        .reco-metrics .metric { display: inline-flex; align-items: center; gap: 6px; }
+        .reco-metrics .metric svg { color: var(--muted-2); }
+        .reco-metrics .metric-date { color: var(--muted); }
+
+        .reco-next {
+            position: absolute; top: 50%; right: -14px; transform: translateY(-50%);
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--surface); border: 1px solid var(--border);
+            box-shadow: var(--shadow); color: var(--text);
+            cursor: pointer; display: grid; place-items: center; z-index: 5;
+            transition: box-shadow 0.15s, transform 0.1s;
+        }
+        .reco-next:hover { box-shadow: var(--shadow-lg); }
+        .reco-next[hidden] { display: none; }
+
+        .reco-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+        .reco-dots[hidden] { display: none; }
+        .reco-dot {
+            width: 9px; height: 9px; border-radius: 50%; padding: 0; border: none;
+            background: #cfd4e0; cursor: pointer; transition: background 0.15s, width 0.15s;
+        }
+        .reco-dot.active { background: var(--primary); width: 22px; border-radius: var(--radius-pill); }
+        .reco-hint {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--primary);
+        }
+        .reco-hint[hidden] { display: none; }
+        .reco-hint svg { color: var(--primary); }
+
+        /* ── 등록된 제품 목록 (SHOW_PRODUCT_LIST=1 일 때만 — 목업 외) ── */
+        .section { margin-top: 40px; }
         .section h2 { font-size: 20px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em; }
         .section h2 .count { color: var(--muted); font-weight: 500; margin-left: 6px; font-size: 16px; }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: var(--shadow);
-        }
-
-        /* ── Form ──────────────────────────────────────── */
-        .form-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
-        .form-row label.field { flex: 1; min-width: 240px; }
-        .form-row .field-label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
-        .form-row input[type="text"] {
-            width: 100%; height: 48px; padding: 0 16px;
-            border: 1px solid var(--border); border-radius: 12px;
-            font-size: 15px; font-family: inherit; color: var(--text);
-            background: #fafafd; transition: border-color 0.15s, background 0.15s;
-        }
-        .form-row input[type="text"]:focus {
-            outline: none; border-color: var(--primary); background: #fff;
-            box-shadow: 0 0 0 3px var(--primary-soft);
-        }
-        .btn-primary {
-            height: 48px; padding: 0 24px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-            color: white; border: none; border-radius: 12px;
-            font-size: 15px; font-weight: 600; font-family: inherit;
-            cursor: pointer; transition: transform 0.1s, box-shadow 0.15s;
-            box-shadow: var(--shadow);
-        }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-strong); }
-        .btn-primary:active { transform: translateY(0); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
-        .form-hint { font-size: 13px; color: var(--muted); margin-top: 12px; }
-
-        /* ── Product grid ──────────────────────────────── */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
         .product-card {
-            position: relative;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px 20px;
-            text-decoration: none; color: inherit;
-            display: block;
+            position: relative; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 18px 20px; display: block;
             transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
         }
-        .product-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-strong);
-        }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
         .product-card .name {
-            font-size: 16px; font-weight: 700; color: var(--text);
-            margin-bottom: 6px;
-            padding-right: 24px;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-            overflow: hidden; text-overflow: ellipsis;
+            font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; padding-right: 24px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
         }
         .product-card .arrow { font-size: 14px; color: var(--primary); font-weight: 600; }
         .card-delete {
-            position: absolute; top: 8px; right: 8px;
-            width: 24px; height: 24px; padding: 0;
-            border: none; border-radius: 50%;
-            background: transparent; color: var(--muted);
-            font-size: 18px; font-weight: 700; line-height: 1;
-            cursor: pointer; opacity: 0.4;
-            display: grid; place-items: center;
-            transition: opacity 0.15s, background 0.15s, color 0.15s;
+            position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; padding: 0;
+            border: none; border-radius: 50%; background: transparent; color: var(--muted);
+            font-size: 18px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0.4;
+            display: grid; place-items: center; transition: opacity 0.15s, background 0.15s, color 0.15s;
         }
         .product-card:hover .card-delete { opacity: 1; }
         .card-delete:hover { background: var(--primary-soft); color: var(--primary-strong); }
-
         .empty {
             background: var(--surface); border: 1px dashed var(--border);
-            border-radius: 14px; padding: 32px; text-align: center; color: var(--muted);
+            border-radius: var(--radius-md); padding: 32px; text-align: center; color: var(--muted);
         }
 
-        /* ── Suggest panel (검색 후보 자동 제안) ──────────── */
-        .search-grid {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 20px;
-            align-items: start;
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero-shell { padding: 36px 28px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .wordmark { font-size: 64px; }
         }
-        .suggest-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px;
-            min-height: 220px;
-            box-shadow: var(--shadow);
-        }
-        .suggest-panel .suggest-title {
-            font-size: 13px; font-weight: 700; color: var(--muted);
-            margin: 0 0 12px; letter-spacing: 0.02em;
-        }
-        .suggest-panel .suggest-state {
-            font-size: 13px; color: var(--muted); padding: 8px 4px;
-        }
-        .suggest-list { display: flex; flex-direction: column; gap: 8px; }
-        .suggest-card {
-            display: block; width: 100%; text-align: left;
-            border: 1px solid var(--border); border-radius: 10px;
-            padding: 10px 12px; background: #fafafd;
-            font-family: inherit; font-size: 14px; color: var(--text);
-            cursor: pointer; transition: border-color 0.12s, background 0.12s, transform 0.08s;
-        }
-        .suggest-card:hover {
-            border-color: var(--primary);
-            background: var(--primary-soft);
-        }
-        .suggest-card:active { transform: translateY(1px); }
-        .suggest-card .sc-name { font-weight: 600; }
-        .suggest-card .sc-meta {
-            font-size: 12px; color: var(--muted); margin-top: 4px;
-            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-        }
-        .suggest-card .sc-badge {
-            display: inline-block; padding: 1px 6px; border-radius: 6px;
-            font-size: 11px; font-weight: 600;
-        }
-        .sc-badge.has-report { background: #e6f4ea; color: #137333; }
-        .sc-badge.serper { background: #fef3c7; color: #92400e; }
-
-        /* ── Responsive ────────────────────────────────── */
-        @media (max-width: 720px) {
-            .page { padding: 20px 16px 60px; }
-            .hero { padding: 32px 24px; border-radius: 16px; }
-            .hero h1 { font-size: 26px; }
+        @media (max-width: 560px) {
+            .page { padding: 24px 16px 56px; }
+            .wordmark { font-size: 48px; }
             .pillars { grid-template-columns: 1fr; }
-            .form-row { flex-direction: column; }
-            .btn-primary { width: 100%; }
-            .search-grid { grid-template-columns: 1fr; }
+            .reco-card { flex-basis: 80%; }
         }
     </style>
 </head>
 <body>
     <div class="page">
-        <!-- Top bar -->
-        <div class="topbar">
-            <div class="logo">M</div>
-            <div class="brand">모아봄<span class="sub">MOABOM</span></div>
-        </div>
-
-        <!-- Hero -->
-        <section class="hero">
-            <h1>유튜브 테크 리뷰를 <em>한 번에 모아봄</em></h1>
-            <p class="lead">
-                다수의 리뷰 영상 자막과 댓글을 자동 수집·분석하고, 리뷰어 성향(엄격/관대)까지 보정한
-                <strong>제품 단위 종합 보고서</strong>를 제공합니다. 특정 채널·리뷰어 편향에 휘둘리지 않는 객관적 구매 판단을 도와드려요.
-            </p>
-            <div class="pillars">
-                <div class="pillar">
-                    <div class="icon">🎯</div>
-                    <div class="t">자율 영상 선정</div>
-                    <div class="d">LangGraph Agent 가 후보 풀에서 다양성·관련도를 균형 있게 선정</div>
-                </div>
-                <div class="pillar">
-                    <div class="icon">⚖️</div>
-                    <div class="t">편향 보정 분석</div>
-                    <div class="d">리뷰어 평가 성향을 측정하고 보정해 균형 잡힌 종합 평가 산출</div>
-                </div>
-                <div class="pillar">
-                    <div class="icon">📑</div>
-                    <div class="t">3종 종합 보고서</div>
-                    <div class="d">자막 기반 인사이트 · 댓글 감성 반응 · 통합 분석을 한 페이지에서</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Add product -->
-        <section class="section">
-            <h2>제품 추가</h2>
-            <div class="search-grid">
-                <div class="card">
-                    <form id="productForm" autocomplete="off">
-                        <div class="form-row">
-                            <label class="field" for="name">
-                                <span class="field-label">분석할 제품명</span>
-                                <input type="text" id="name" name="name" placeholder="예: 갤럭시 S25, 아이폰 17, 에어팟 4" required>
-                            </label>
-                            <input type="hidden" id="brand" name="brand">
-                            <button type="submit" class="btn-primary">분석 시작 →</button>
+        <section class="hero-shell">
+            <div class="hero-grid">
+                <!-- 좌: 브랜드 -->
+                <div class="brand-col">
+                    <h1 class="wordmark">MOABOM</h1>
+                    <p class="tagline">흩어진 테크 리뷰를 한 번에 모아보는 <b>AI 리포트</b></p>
+                    <p class="subcopy">유튜브 자막·댓글을 분석해 제품별 핵심 의견을 빠르게 확인하세요.</p>
+                    <div class="pillars">
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                            </div>
+                            <div class="t">리뷰 요약</div>
+                            <div class="d">방대한 리뷰 평가 핵심만 간단히 정리해 드려요.</div>
                         </div>
-                        <p class="form-hint">제품명을 입력하면 우측에 정확 제품 후보를 띄워드립니다. 후보를 클릭하면 바로 분석으로 넘어가요.</p>
-                    </form>
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            </div>
+                            <div class="t">장단점 비교</div>
+                            <div class="d">여러 제품을 한눈에 비교하고 장단점을 쉽게 파악해요.</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .8 1.6V17h6.4v-.7c0-.6.3-1.2.8-1.6A7 7 0 0 0 12 2z"/></svg>
+                            </div>
+                            <div class="t">구매 인사이트</div>
+                            <div class="d">실사용자 의견과 트렌드로 현명한 구매를 도와드려요.</div>
+                        </div>
+                    </div>
                 </div>
-                <aside class="suggest-panel" id="suggestPanel" aria-live="polite">
-                    <p class="suggest-title">검색 후보</p>
-                    <div class="suggest-state" id="suggestState">두 글자 이상 입력하면 후보가 표시됩니다.</div>
-                    <div class="suggest-list" id="suggestList"></div>
-                </aside>
+
+                <!-- 우: 검색 + 추천 -->
+                <div class="search-col">
+                    <div class="search-wrap" id="searchWrap">
+                        <form id="productForm" autocomplete="off">
+                            <div class="searchbar">
+                                <span class="search-ico">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </span>
+                                <input type="text" id="name" name="name" placeholder="제품명을 검색해보세요 (예: 아이폰 15, 갤럭시 S25)" required>
+                                <button type="button" class="search-clear" id="searchClear" aria-label="검색어 지우기" hidden>
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                                </button>
+                            </div>
+                            <input type="hidden" id="brand" name="brand">
+                            <button type="submit" class="submit-hidden">분석 시작 →</button>
+                        </form>
+
+                        <!-- 자동완성 드롭다운 (추천 영역 위 오버레이) -->
+                        <div class="suggest-panel" id="suggestPanel" aria-live="polite">
+                            <div class="suggest-state" id="suggestState">두 글자 이상 입력하면 후보가 표시됩니다.</div>
+                            <div class="suggest-list" id="suggestList"></div>
+                        </div>
+                    </div>
+
+                    {% if recommended %}
+                    <div class="reco">
+                        <div class="reco-head">
+                            <span class="star"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                            추천 리포트
+                        </div>
+                        <div class="reco-viewport-wrap">
+                            <div class="reco-viewport" id="recoViewport">
+                                <div class="reco-track" id="recoTrack">
+                                    {% for r in recommended %}
+                                    <a class="reco-card" href="/products/{{ r.product_id }}">
+                                        <div class="reco-top">
+                                            <div class="reco-thumb">
+                                                {% if r.image_url %}
+                                                <img src="{{ r.image_url }}" alt="{{ r.name }}">
+                                                {% else %}
+                                                <div class="reco-thumb-ph">M</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="reco-head-text">
+                                                {% if loop.first %}
+                                                <span class="reco-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 추천 리포트</span>
+                                                {% endif %}
+                                                <div class="reco-title">{{ r.name }}<br>종합 리포트</div>
+                                            </div>
+                                        </div>
+                                        {% if r.chips %}
+                                        <div class="reco-chips">
+                                            {% for c in r.chips %}<span class="chip">{{ c }}</span>{% endfor %}
+                                        </div>
+                                        {% endif %}
+                                        <div class="reco-metrics">
+                                            <span class="metric">
+                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                                {{ '{:,}'.format(r.author_count) }}
+                                            </span>
+                                            <span class="metric">
+                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                                {{ '{:,}'.format(r.comment_count) }}
+                                            </span>
+                                            {% if r.updated_label %}
+                                            <span class="metric metric-date">{{ r.updated_label }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <button type="button" class="reco-next" id="recoNext" aria-label="다음 리포트" hidden>
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                            </button>
+                        </div>
+                        <div class="reco-dots" id="recoDots" hidden></div>
+                        <div class="reco-hint" id="recoHint" hidden>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                            좌우로 슬라이드해 더 많은 리포트를 확인하세요
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </section>
 
@@ -312,9 +457,16 @@
         const brandInput = document.getElementById('brand');
         const stateEl = document.getElementById('suggestState');
         const listEl = document.getElementById('suggestList');
+        const searchWrap = document.getElementById('searchWrap');
+        const suggestPanel = document.getElementById('suggestPanel');
+        const searchClear = document.getElementById('searchClear');
         let suggestController = null;
         let suggestDebounce = null;
         window.__lastSuggestSource = null;
+
+        function openSuggest() { suggestPanel.classList.add('open'); }
+        function closeSuggest() { suggestPanel.classList.remove('open'); }
+        function toggleClear() { searchClear.hidden = nameInput.value.length === 0; }
 
         function renderSuggestState(msg) {
             stateEl.textContent = msg;
@@ -329,44 +481,50 @@
                 return;
             }
             stateEl.style.display = 'none';
-            for (const it of items) {
+            items.forEach((it, idx) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'suggest-card';
+                btn.className = 'suggest-card' + (idx === 0 ? ' sc-first' : '');
                 btn.dataset.name = it.name || '';
                 btn.dataset.brand = it.brand || '';
                 btn.dataset.existingReport = it.has_report ? '1' : '';
                 btn.dataset.productId = it.product_id || '';
 
-                const nameRow = document.createElement('div');
+                const ico = document.createElement('span');
+                ico.className = 'sc-ico';
+                ico.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+                btn.appendChild(ico);
+
+                const nameRow = document.createElement('span');
                 nameRow.className = 'sc-name';
                 nameRow.textContent = it.name;
                 btn.appendChild(nameRow);
 
-                const meta = document.createElement('div');
-                meta.className = 'sc-meta';
-                if (it.brand) {
-                    const b = document.createElement('span');
-                    b.textContent = it.brand;
-                    meta.appendChild(b);
+                const badges = document.createElement('span');
+                badges.className = 'sc-badges';
+                if (idx === 0) {
+                    const rec = document.createElement('span');
+                    rec.className = 'sc-badge recommend';
+                    rec.textContent = '추천';
+                    badges.appendChild(rec);
                 }
                 if (it.has_report) {
                     const tag = document.createElement('span');
                     tag.className = 'sc-badge has-report';
                     tag.textContent = '보고서 있음';
-                    meta.appendChild(tag);
+                    badges.appendChild(tag);
                 }
                 if (it.source === 'serper') {
                     const tag = document.createElement('span');
                     tag.className = 'sc-badge serper';
                     tag.textContent = 'web';
-                    meta.appendChild(tag);
+                    badges.appendChild(tag);
                 }
-                btn.appendChild(meta);
+                btn.appendChild(badges);
 
                 btn.addEventListener('click', () => onSuggestPick(it));
                 listEl.appendChild(btn);
-            }
+            });
         }
 
         async function fetchSuggest(q) {
@@ -393,7 +551,14 @@
         nameInput.addEventListener('input', () => {
             const q = nameInput.value.trim();
             brandInput.value = '';
+            toggleClear();
             clearTimeout(suggestDebounce);
+            if (q.length === 0) {
+                if (suggestController) suggestController.abort();
+                closeSuggest();
+                return;
+            }
+            openSuggest();
             if (q.length < 2) {
                 if (suggestController) suggestController.abort();
                 renderSuggestState('두 글자 이상 입력하면 후보가 표시됩니다.');
@@ -403,9 +568,31 @@
             suggestDebounce = setTimeout(() => fetchSuggest(q), 350);
         });
 
+        nameInput.addEventListener('focus', () => {
+            searchWrap.classList.add('focused');
+            if (nameInput.value.trim().length >= 1) openSuggest();
+        });
+        nameInput.addEventListener('blur', () => searchWrap.classList.remove('focused'));
+
+        searchClear.addEventListener('click', () => {
+            nameInput.value = '';
+            brandInput.value = '';
+            toggleClear();
+            closeSuggest();
+            if (suggestController) suggestController.abort();
+            nameInput.focus();
+        });
+
+        // 검색 영역 밖 클릭 시 드롭다운 닫기
+        document.addEventListener('click', (e) => {
+            if (!searchWrap.contains(e.target)) closeSuggest();
+        });
+
         function onSuggestPick(item) {
             nameInput.value = item.name;
             brandInput.value = item.brand || '';
+            toggleClear();
+            closeSuggest();
             // 자동 submit — 기존 분석된 제품이면 POST 응답의 existing_report 가
             // truthy → 보고서로 즉시 이동. 신규면 product_detail 로 이동해
             // 영상 선정 에이전트가 시작된다(기존 동작 유지).
@@ -446,6 +633,83 @@
             }
         });
 
+        // ── 추천 리포트 캐러셀 ───────────────────────────────────────
+        (function initRecoCarousel() {
+            const viewport = document.getElementById('recoViewport');
+            const track = document.getElementById('recoTrack');
+            const nextBtn = document.getElementById('recoNext');
+            const dotsEl = document.getElementById('recoDots');
+            const hintEl = document.getElementById('recoHint');
+            if (!viewport || !track) return;
+
+            function step() {
+                const card = track.querySelector('.reco-card');
+                if (!card) return 0;
+                const styles = getComputedStyle(track);
+                const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+                return card.offsetWidth + gap;
+            }
+
+            function stepCount() {
+                const s = step();
+                if (s <= 0) return 1;
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+                if (maxScroll <= 1) return 1;
+                return Math.round(maxScroll / s) + 1;
+            }
+
+            function activeIndex() {
+                const s = step();
+                if (s <= 0) return 0;
+                return Math.round(viewport.scrollLeft / s);
+            }
+
+            function renderDots() {
+                const count = stepCount();
+                const multi = count > 1;
+                nextBtn.hidden = !multi;
+                dotsEl.hidden = !multi;
+                hintEl.hidden = !multi;
+                dotsEl.innerHTML = '';
+                if (!multi) return;
+                const active = activeIndex();
+                for (let i = 0; i < count; i++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'reco-dot' + (i === active ? ' active' : '');
+                    dot.setAttribute('aria-label', (i + 1) + '번째 페이지');
+                    dot.addEventListener('click', () => {
+                        viewport.scrollTo({ left: i * step(), behavior: 'smooth' });
+                    });
+                    dotsEl.appendChild(dot);
+                }
+            }
+
+            function updateActiveDot() {
+                const active = activeIndex();
+                dotsEl.querySelectorAll('.reco-dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === active);
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+                let target = viewport.scrollLeft + step();
+                if (target > maxScroll - 2) target = 0; // 끝에서 처음으로 순환
+                viewport.scrollTo({ left: target, behavior: 'smooth' });
+            });
+
+            let scrollRaf = null;
+            viewport.addEventListener('scroll', () => {
+                if (scrollRaf) cancelAnimationFrame(scrollRaf);
+                scrollRaf = requestAnimationFrame(updateActiveDot);
+            });
+
+            window.addEventListener('resize', renderDots);
+            renderDots();
+        })();
+
+        // ── 제품 삭제 (SHOW_PRODUCT_LIST=1) ──────────────────────────
         document.querySelectorAll('.card-delete').forEach((btn) => {
             btn.addEventListener('click', async (e) => {
                 e.preventDefault();
