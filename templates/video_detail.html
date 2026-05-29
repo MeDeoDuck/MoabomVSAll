@@ -1690,16 +1690,6 @@
             background: #3a6df0; color: #fff; border-color: #3a6df0;
             box-shadow: 0 8px 20px rgba(58,109,240,0.28);
         }
-        .vd-report-head {
-            display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 40px 0 18px;
-        }
-        .vd-report-doc {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: #e9f0ff; color: #3a6df0; display: grid; place-items: center;
-        }
-        .vd-report-doc svg { width: 28px; height: 28px; }
-        .vd-report-title { font-size: 26px; font-weight: 800; color: #1a2340; }
-
         /* FOUC 방지: 기본 통합 분석만 노출 (JS vdShowReport 가 최종 확정) */
         #reportPanels [data-report-panel="transcript"],
         #reportPanels [data-report-panel="comment"] { display: none; }
@@ -1889,11 +1879,6 @@
                 <span class="vd-tab-emoji">📊</span><span>통합 분석</span>
             </button>
         </div>
-        <div class="vd-report-head">
-            <span class="vd-report-doc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></span>
-            <span class="vd-report-title">보고서</span>
-        </div>
-
         <div id="reportPanels">
         <!-- Transcript Report -->
         <section class="section" data-report-panel="transcript">
@@ -3685,7 +3670,8 @@
         function vdShowReport(kind) {
             const panels = document.querySelectorAll('#reportPanels [data-report-panel]');
             panels.forEach(function (p) {
-                p.style.display = (p.getAttribute('data-report-panel') === kind) ? '' : 'none';
+                // 활성 패널은 명시적 'block' 으로 — FOUC 방지 CSS(transcript/comment의 display:none)를 인라인으로 덮어쓰기 위함.
+                p.style.display = (p.getAttribute('data-report-panel') === kind) ? 'block' : 'none';
             });
             const tabs = document.querySelectorAll('.vd-report-tabs .vd-tab');
             tabs.forEach(function (t) {
