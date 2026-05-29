@@ -1532,42 +1532,263 @@
         @media (max-width: 480px) {
             .cm-issues { grid-template-columns: repeat(2, 1fr); }
         }
+        /* ════════════════════════════════════════════════════════════
+           화면7 리디자인 (블루 목업) — vd-* 스코프, 기존 보라 :root 와 분리
+           블루 토큰: #3a6df0 / #2c5be0 / #e9f0ff (화면 1·5·6 과 통일)
+           ════════════════════════════════════════════════════════════ */
+        .vd-topbar { text-align: center; }
+        .vd-topbar a { text-decoration: none; }
+        .vd-wordmark {
+            display: inline-block; font-size: 30px; font-weight: 800;
+            letter-spacing: 0.04em; color: #1a2340; margin: 8px 0 16px;
+        }
+        .vd-divider { border: none; border-top: 1px solid #e7eaf1; margin: 0 0 24px; }
+
+        .vd-header { margin-bottom: 18px; }
+        .vd-title {
+            font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+            line-height: 1.4; color: #121833; margin: 0 0 10px;
+        }
+        .vd-header-meta {
+            display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+            font-size: 13px; color: #8b90a0;
+        }
+        .vd-header-meta a {
+            display: inline-flex; align-items: center; gap: 4px;
+            text-decoration: none; padding: 4px 12px;
+            background: #ffe9eb; color: #c8252f; border-radius: 999px; font-weight: 600;
+        }
+        .vd-header-meta a:hover { background: #ffd7da; }
+
+        /* 영상카드 + 통계 2×2 */
+        .vd-top-grid {
+            display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+            gap: 18px; margin-bottom: 22px; align-items: stretch;
+        }
+        .vd-video-card {
+            background: #ffffff; border: 1px solid #e7eaf1; border-radius: 18px;
+            padding: 16px; box-shadow: 0 4px 16px rgba(58,109,240,0.06);
+        }
+        .vd-thumb-wrap { position: relative; border-radius: 12px; overflow: hidden; }
+        .vd-thumb {
+            display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+            background: #eef1f7;
+        }
+        .vd-thumb-empty { display: grid; place-items: center; font-size: 40px; color: #b6bccb; }
+        .vd-dur-badge {
+            position: absolute; right: 10px; bottom: 10px;
+            background: rgba(15,20,40,0.82); color: #fff;
+            font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+        .vd-channel-row { display: flex; align-items: center; gap: 12px; margin-top: 14px; }
+        .vd-channel-avatar {
+            width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+            background: #3a6df0; color: #fff; display: grid; place-items: center;
+            font-weight: 800; font-size: 14px;
+        }
+        .vd-channel-meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+        .vd-channel-name {
+            font-size: 15px; font-weight: 700; color: #1a2340;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .vd-channel-sub { font-size: 13px; color: #8b90a0; font-weight: 500; }
+
+        .vd-stats-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .vd-stat {
+            background: #ffffff; border: 1px solid #e7eaf1; border-radius: 16px;
+            padding: 18px 20px; display: flex; flex-direction: column; gap: 8px;
+            box-shadow: 0 4px 16px rgba(58,109,240,0.06);
+        }
+        .vd-stat-ico {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: #e9f0ff; color: #3a6df0; display: grid; place-items: center;
+        }
+        .vd-stat-ico svg { width: 19px; height: 19px; }
+        .vd-stat-label { font-size: 13px; color: #8b90a0; font-weight: 600; }
+        .vd-stat-value { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: #121833; }
+
+        /* 댓글 반응(도넛) + 핵심 댓글 — #cmdDist 두 자식을 2개 카드로 표시 */
+        .vd-analysis-section { margin-top: 8px; }
+        .vd-analysis-section .cmd-dist-grid {
+            grid-template-columns: minmax(240px, 340px) 1fr;
+            gap: 18px; background: transparent; border: none; padding: 0;
+        }
+        .vd-analysis-section .cmd-donut-wrap {
+            background: #ffffff; border: 1px solid #e7eaf1; border-radius: 18px;
+            padding: 22px 18px; box-shadow: 0 4px 16px rgba(58,109,240,0.06);
+            justify-content: flex-start;
+        }
+        .vd-analysis-section .cmd-donut-wrap::before {
+            content: '댓글 반응'; align-self: flex-start;
+            font-size: 16px; font-weight: 800; color: #121833; margin-bottom: 6px;
+        }
+        .vd-analysis-section .cmd-donut-legend { gap: 6px; margin-top: 6px; }
+        .vd-analysis-section .cmd-legend-item {
+            flex-direction: column; gap: 3px; flex: 1; padding: 6px 4px;
+        }
+        .vd-analysis-section .cmd-legend-item:hover { background: #e9f0ff; }
+        .vd-analysis-section .cmd-legend-count { font-size: 14px; color: #1a2340; font-weight: 700; }
+
+        .vd-analysis-section .cmd-key-comments {
+            background: #ffffff; border: 1px solid #e7eaf1; border-radius: 18px;
+            padding: 20px 20px 16px; box-shadow: 0 4px 16px rgba(58,109,240,0.06); gap: 12px;
+        }
+        .vd-analysis-section .cmd-key-title {
+            font-size: 16px; font-weight: 800; color: #121833; letter-spacing: 0; margin-bottom: 4px;
+        }
+        .vd-analysis-section .cmd-key-card {
+            position: relative; flex-direction: column;
+            padding: 14px 40px 14px 52px;
+            background: #f7f9fc; border: 1px solid #eef1f7; border-radius: 12px;
+        }
+        .vd-analysis-section .cmd-key-card::before {
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            width: 28px; height: 28px; border-radius: 50%;
+            display: grid; place-items: center; font-size: 14px; font-weight: 800; color: #fff;
+        }
+        .vd-analysis-section .cmd-key-card::after {
+            content: '›'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            color: #c2c8d6; font-size: 22px; font-weight: 700; line-height: 1;
+        }
+        .vd-analysis-section .cmd-key-positive::before { content: '✓'; background: #20c997; }
+        .vd-analysis-section .cmd-key-negative::before { content: '✕'; background: #e35d6a; }
+        .vd-analysis-section .cmd-key-neutral::before  { content: '·'; background: #b8b3c4; font-size: 22px; }
+        .vd-analysis-section .cmd-key-text { font-size: 14px; color: #2a3142; font-weight: 500; }
+        .vd-analysis-section .cmd-key-meta { display: none; }
+
+        .vd-keypage {
+            display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 6px;
+        }
+        .vd-keypage-btn {
+            width: 30px; height: 30px; border-radius: 8px;
+            display: grid; place-items: center; text-decoration: none;
+            border: 1px solid #e7eaf1; background: #fff; color: #3a6df0;
+            font-size: 16px; font-weight: 700;
+        }
+        .vd-keypage-btn:hover { background: #e9f0ff; }
+        .vd-keypage-btn.disabled { color: #c8cdd9; background: #f5f6f9; cursor: default; }
+        .vd-keypage-current { font-size: 14px; font-weight: 700; color: #1a2340; font-variant-numeric: tabular-nums; }
+
+        /* 3버튼 탭 + 보고서 헤더 */
+        .vd-report-tabs {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0 8px;
+        }
+        .vd-tab {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 16px 18px; border-radius: 14px; cursor: pointer;
+            border: 1px solid #e7eaf1; background: #fff; color: #4a5168;
+            font-family: inherit; font-size: 15px; font-weight: 700;
+            transition: background 0.15s, color 0.15s, border-color 0.15s, box-shadow 0.15s;
+        }
+        .vd-tab:hover { border-color: #c7d4f7; background: #f5f8ff; }
+        .vd-tab .vd-tab-ico {
+            font-size: 11px; font-weight: 800; letter-spacing: 0.02em;
+            border: 1.5px solid currentColor; border-radius: 4px; padding: 1px 4px;
+        }
+        .vd-tab-active, .vd-tab-active:hover {
+            background: #3a6df0; color: #fff; border-color: #3a6df0;
+            box-shadow: 0 8px 20px rgba(58,109,240,0.28);
+        }
+        /* FOUC 방지: 기본 통합 분석만 노출 (JS vdShowReport 가 최종 확정) */
+        #reportPanels [data-report-panel="transcript"],
+        #reportPanels [data-report-panel="comment"] { display: none; }
+
+        @media (max-width: 720px) {
+            .vd-top-grid { grid-template-columns: 1fr; }
+            .vd-report-tabs { grid-template-columns: 1fr; }
+            .vd-analysis-section .cmd-dist-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+    {#- 화면7: 한글 수량 단위(만/억) · 영상 길이(mm:ss) 표시 포맷 매크로 (product_detail.html 과 동일) -#}
+    {%- macro fmt_kcount(n, unit) -%}
+        {%- if n is none -%}
+        {%- elif n >= 100000000 -%}{{ "%.1f"|format(n / 100000000) }}억{{ unit }}
+        {%- elif n >= 10000 -%}{{ n // 10000 }}{%- if (n % 10000) // 1000 -%}.{{ (n % 10000) // 1000 }}{%- endif -%}만{{ unit }}
+        {%- else -%}{{ "{:,}".format(n) }}{{ unit }}
+        {%- endif -%}
+    {%- endmacro -%}
+    {%- macro fmt_dur(s) -%}
+        {%- if s is not none and s > 0 -%}
+            {%- if s >= 3600 -%}{{ s // 3600 }}:{{ "%02d"|format((s % 3600) // 60) }}:{{ "%02d"|format(s % 60) }}
+            {%- else -%}{{ s // 60 }}:{{ "%02d"|format(s % 60) }}{%- endif -%}
+        {%- endif -%}
+    {%- endmacro -%}
     <div class="page">
-        <!-- Top bar -->
-        <div class="topbar">
-            <a href="/products">
-                <div class="logo">M</div>
-                <div class="brand">모아봄<span class="sub">MOABOM</span></div>
-            </a>
+        <!-- Top bar (화면7: 중앙 MOABOM 워드마크 + 구분선, 화면5와 통일) -->
+        <div class="vd-topbar">
+            <a href="/products"><span class="vd-wordmark">MOABOM</span></a>
         </div>
+        <hr class="vd-divider">
 
         <div class="back-link">
             <a href="/products/{{ product_id }}">← 제품 페이지로</a>
         </div>
 
-        <!-- Header -->
-        <div class="header-card">
-            <h1>{{ video.title }}</h1>
-            <div class="meta">
+        <!-- Header (영상 제목·유튜브 링크·게시일 — 데이터 보존) -->
+        <div class="vd-header">
+            <h1 class="vd-title">{{ video.title }}</h1>
+            <div class="vd-header-meta">
                 <a href="https://www.youtube.com/watch?v={{ video.video_id }}" target="_blank" rel="noopener">▶ 유튜브에서 보기</a>
                 <span>📅 {{ video.published_at }}</span>
             </div>
         </div>
 
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat-box"><div class="label">조회수</div><div class="value">{{ video.view_count }}</div></div>
-            <div class="stat-box"><div class="label">좋아요</div><div class="value">{{ video.like_count }}</div></div>
-            <div class="stat-box"><div class="label">댓글</div><div class="value">{{ video.comment_count }}</div></div>
-            <div class="stat-box"><div class="label">제품 관련 댓글</div><div class="value">{{ product_related_count }}</div></div>
+        <!-- 영상 카드 + 통계 2×2 그리드 -->
+        <div class="vd-top-grid">
+            <!-- 좌: 썸네일 + 길이 배지 + 채널 정보 -->
+            <div class="vd-video-card">
+                <div class="vd-thumb-wrap">
+                    {% if video.thumbnail_url %}
+                        <img class="vd-thumb" src="{{ video.thumbnail_url }}" alt="{{ video.title }}" loading="lazy">
+                    {% else %}
+                        <div class="vd-thumb vd-thumb-empty">🎬</div>
+                    {% endif %}
+                    {% set _dur = fmt_dur(video.duration_seconds) %}
+                    {% if _dur %}<span class="vd-dur-badge">{{ _dur }}</span>{% endif %}
+                </div>
+                <div class="vd-channel-row">
+                    <span class="vd-channel-avatar">{{ (video.channel_name or '?')[:2]|upper }}</span>
+                    <div class="vd-channel-meta">
+                        <span class="vd-channel-name">{{ video.channel_name or '채널 정보 없음' }}</span>
+                        {% if video.channel_subscriber_count is not none %}
+                            <span class="vd-channel-sub">구독자 {{ fmt_kcount(video.channel_subscriber_count, '명') }}</span>
+                        {% else %}
+                            <span class="vd-channel-sub">구독자 정보 없음</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 우: 통계 2×2 (조회수=view_count / 좋아요=like_count / 댓글=comment_count(원본) / 제품 관련 댓글=product_related_count(분석)) -->
+            <div class="vd-stats-2x2">
+                <div class="vd-stat">
+                    <span class="vd-stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                    <span class="vd-stat-label">조회수</span>
+                    <span class="vd-stat-value">{{ fmt_kcount(video.view_count, '') or '—' }}</span>
+                </div>
+                <div class="vd-stat">
+                    <span class="vd-stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg></span>
+                    <span class="vd-stat-label">좋아요</span>
+                    <span class="vd-stat-value">{{ fmt_kcount(video.like_count, '') or '—' }}</span>
+                </div>
+                <div class="vd-stat">
+                    <span class="vd-stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>
+                    <span class="vd-stat-label">댓글</span>
+                    <span class="vd-stat-value">{{ fmt_kcount(video.comment_count, '') or '—' }}</span>
+                </div>
+                <div class="vd-stat">
+                    <span class="vd-stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 9h8M8 13h5"/></svg></span>
+                    <span class="vd-stat-label">제품 관련 댓글</span>
+                    <span class="vd-stat-value">{{ fmt_kcount(product_related_count, '') or '0' }}</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Sentiment summary — donut + key-comment cards -->
-        <section class="section">
-            <h2>댓글 감성 분포 <span class="cmd-section-sub">— 분석 댓글 {{ analyzed_comment_count }}건</span></h2>
+        <!-- 댓글 반응(도넛) + 핵심 댓글 — cmdRender 가 #cmdDist 안에 .cmd-donut-wrap + .cmd-key-comments 두 카드로 렌더 -->
+        <section class="section vd-analysis-section">
             {% if (sentiment_positive + sentiment_neutral + sentiment_negative) > 0 %}
                 <script type="application/json" id="cmdData">{
                     "pos": {{ sentiment_positive }},
@@ -1575,6 +1796,8 @@
                     "neg": {{ sentiment_negative }},
                     "total_analyzed": {{ analyzed_comment_count }},
                     "current_sentiment": {{ (current_sentiment or '')|tojson }},
+                    "current_page": {{ current_page }},
+                    "total_pages": {{ total_pages }},
                     "sample": [
                         {% for c in comments %}{
                             "text": {{ (c.text_raw or '')|tojson }},
@@ -1644,8 +1867,21 @@
             {% endif %}
         </section>
 
+        <!-- 보고서 영역: 3버튼(자막/댓글/통합) 토글 + "보고서" 헤더 -->
+        <div class="vd-report-tabs" role="tablist">
+            <button type="button" class="vd-tab" data-report="transcript" onclick="vdShowReport('transcript')">
+                <span class="vd-tab-ico">CC</span><span>자막 기반 분석</span>
+            </button>
+            <button type="button" class="vd-tab" data-report="comment" onclick="vdShowReport('comment')">
+                <span class="vd-tab-emoji">💬</span><span>댓글 기반 분석</span>
+            </button>
+            <button type="button" class="vd-tab vd-tab-active" data-report="integrated" onclick="vdShowReport('integrated')">
+                <span class="vd-tab-emoji">📊</span><span>통합 분석</span>
+            </button>
+        </div>
+        <div id="reportPanels">
         <!-- Transcript Report -->
-        <section class="section">
+        <section class="section" data-report-panel="transcript">
             <h2>📝 자막 기반 분석</h2>
             {% if transcript_row %}
                 <div class="report-meta">
@@ -1663,7 +1899,7 @@
         </section>
 
         <!-- Comment Report (보고서 ② — 댓글 기반 소비자 여론, v2 JSON) -->
-        <section class="section">
+        <section class="section" data-report-panel="comment">
             <h2>💬 보고서 ② — 댓글 기반 소비자 여론</h2>
             <div class="report-meta">
                 <span>👥 영상 1개 단위 · 사람들이 뭐라고 하는가</span>
@@ -1682,7 +1918,7 @@
         </section>
 
         <!-- Integrated Report (보고서 ③ — 리뷰어 vs 소비자 비교, v2 JSON) -->
-        <section class="section">
+        <section class="section" data-report-panel="integrated">
             <h2>🔗 보고서 ③ — 리뷰어 vs 소비자 비교</h2>
             <div class="report-meta">
                 <span>⚖ 영상 1개 단위 · 리뷰어 말, 믿을 수 있나</span>
@@ -1699,6 +1935,7 @@
                 <div class="empty-report">통합 비교 보고서를 사용할 수 없습니다. 리뷰어와 소비자가 공통으로 언급한 항목이 없거나, 보고서 ①·② 둘 중 하나가 생성 실패한 경우입니다.</div>
             {% endif %}
         </section>
+        </div> <!-- /#reportPanels -->
     </div>
 
     <script>
@@ -3383,6 +3620,66 @@
                     }
                 }
             }
+        });
+
+        /* ───────────────────────────────────────────────────────────
+           화면7: 핵심 댓글 페이지네이션 (요구 3)
+           - cmdRender 가 #cmdDist 안에 .cmd-key-comments 를 그린 뒤,
+             그 하단에 ‹ N / M › 페이지 링크를 가산(append)한다.
+           - 핵심 댓글은 현재 페이지 sample(=서버 페이지네이션된 comments)
+             에서 추출되므로 ?page=N 이동 시 자동으로 갱신된다.
+           - sentiment 필터를 함께 실어 감성 필터 상태를 페이지 넘김에도 유지.
+           - cmdRender / _cmdPickKeyComments 등 보존 함수는 손대지 않음 (가산만).
+           ─────────────────────────────────────────────────────────── */
+        function vdRenderKeyPagination() {
+            try {
+                const host = document.querySelector('#cmdDist .cmd-key-comments');
+                if (!host) return;
+                const el = document.getElementById('cmdData');
+                if (!el) return;
+                let data;
+                try { data = JSON.parse(el.textContent); } catch (e) { return; }
+                const page = Number(data.current_page) || 1;
+                const pages = Number(data.total_pages) || 1;
+                if (pages <= 1) return;
+                const sentiment = data.current_sentiment || '';
+                const sQS = sentiment ? ('&sentiment=' + encodeURIComponent(sentiment)) : '';
+                function link(targetPage, label, disabled) {
+                    if (disabled) return '<span class="vd-keypage-btn disabled">' + label + '</span>';
+                    return '<a class="vd-keypage-btn" href="?page=' + targetPage + sQS + '">' + label + '</a>';
+                }
+                const nav = document.createElement('div');
+                nav.className = 'vd-keypage';
+                nav.innerHTML =
+                    link(page - 1, '‹', page <= 1) +
+                    '<span class="vd-keypage-current">' + page + ' / ' + pages + '</span>' +
+                    link(page + 1, '›', page >= pages);
+                host.appendChild(nav);
+            } catch (e) {
+                console.warn('[vd] key pagination render failed', e);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', vdRenderKeyPagination);
+
+        /* ───────────────────────────────────────────────────────────
+           화면7: 3버튼 보고서 교체 (자막/댓글/통합)
+           - 3개 보고서 섹션은 이미 DOMContentLoaded 에서 전부 렌더됨.
+           - 추가 fetch 없이 display 만 토글한다 (마크업 제거 금지).
+           - 기본 활성: 통합 분석.
+           ─────────────────────────────────────────────────────────── */
+        function vdShowReport(kind) {
+            const panels = document.querySelectorAll('#reportPanels [data-report-panel]');
+            panels.forEach(function (p) {
+                // 활성 패널은 명시적 'block' 으로 — FOUC 방지 CSS(transcript/comment의 display:none)를 인라인으로 덮어쓰기 위함.
+                p.style.display = (p.getAttribute('data-report-panel') === kind) ? 'block' : 'none';
+            });
+            const tabs = document.querySelectorAll('.vd-report-tabs .vd-tab');
+            tabs.forEach(function (t) {
+                t.classList.toggle('vd-tab-active', t.getAttribute('data-report') === kind);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            vdShowReport('integrated');
         });
     </script>
 </body>
