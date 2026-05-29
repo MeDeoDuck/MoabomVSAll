@@ -1362,12 +1362,15 @@
         }
         .svl-meta { flex: 1; min-width: 0; display: flex; gap: 12px; flex-wrap: wrap; }
         .svl-col {
-            display: flex; flex-direction: column; gap: 5px; min-width: 124px;
+            display: flex; flex-direction: column; gap: 6px; min-width: 134px;
             background: #f5f7fb; border: 1px solid #e7eaf1; border-radius: 14px;
             padding: 11px 16px;
         }
-        .svl-col-label { font-size: 12.5px; color: #abafbe; font-weight: 600; }
-        .svl-col-value { font-size: 15px; color: #1c2340; font-weight: 700; }
+        .svl-col-head { display: flex; align-items: center; gap: 6px; }
+        .svl-col-ico { display: inline-flex; flex: none; color: #3a6df0; }
+        .svl-col-ico svg { width: 15px; height: 15px; display: block; }
+        .svl-col-label { font-size: 12.5px; color: #8b90a0; font-weight: 600; }
+        .svl-col-value { font-size: 16px; color: #121833; font-weight: 800; letter-spacing: -0.1px; }
         .svl-analyze {
             flex: none; background: #3a6df0; color: #fff; font-size: 14.5px; font-weight: 700;
             padding: 11px 22px; border-radius: 999px;
@@ -1448,7 +1451,7 @@
                         </span>
                     </button>
                 {% endif %}
-                <span id="integratedInsightStatus" class="integrated-insight-msg"></span>
+                <span id="integratedInsightStatus" class="integrated-insight-msg">{% if integrated_report_done %}✓ 완료 ({{ integrated_report_video_count }}개 영상 기반){% elif videos and videos|length >= 2 %}버튼을 눌러 종합 보고서를 생성하세요{% endif %}</span>
             </div>
         </div>
 
@@ -1504,19 +1507,28 @@
                                 <div class="svl-meta">
                                     {% if video.channel_name %}
                                         <div class="svl-col">
-                                            <span class="svl-col-label">채널명</span>
+                                            <span class="svl-col-head">
+                                                <span class="svl-col-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                                <span class="svl-col-label">채널명</span>
+                                            </span>
                                             <span class="svl-col-value">{{ video.channel_name }}</span>
                                         </div>
                                     {% endif %}
                                     {% if video.channel_subscriber_count %}
                                         <div class="svl-col">
-                                            <span class="svl-col-label">구독자수</span>
+                                            <span class="svl-col-head">
+                                                <span class="svl-col-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                                                <span class="svl-col-label">구독자수</span>
+                                            </span>
                                             <span class="svl-col-value">구독자 {{ fmt_kcount(video.channel_subscriber_count, '명')|trim }}</span>
                                         </div>
                                     {% endif %}
                                     {% if video.view_count is not none %}
                                         <div class="svl-col">
-                                            <span class="svl-col-label">조회수</span>
+                                            <span class="svl-col-head">
+                                                <span class="svl-col-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+                                                <span class="svl-col-label">조회수</span>
+                                            </span>
                                             <span class="svl-col-value">조회수 {{ fmt_kcount(video.view_count, '회')|trim }}</span>
                                         </div>
                                     {% endif %}

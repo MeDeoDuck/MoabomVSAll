@@ -272,11 +272,23 @@ def register_product_routes(app):
             "SELECT * FROM videos WHERE product_id = %s ORDER BY view_count DESC",
             (product_id,)
         )
-        
+
+        # 종합 인사이트 '완료' 상태 표시용 — 최신 종합 보고서 1건(단일 쿼리).
+        #   row 존재 = 생성 완료, source_video_count = 분석 영상 N. 없으면 미생성.
+        latest_pir = query_one(
+            "SELECT source_video_count FROM product_integrated_reports "
+            "WHERE product_id = %s ORDER BY id DESC LIMIT 1",
+            (product_id,),
+        )
+
         return templates.TemplateResponse("product_detail.html", {
             "request": request,
             "product": product,
             "videos": videos,
+            "integrated_report_done": latest_pir is not None,
+            "integrated_report_video_count": (
+                latest_pir["source_video_count"] if latest_pir else None
+            ),
         })
 
     @app.post("/products/{product_id}/image")
