@@ -1308,12 +1308,11 @@
             if (reasons.length) {
                 const chips = reasons.map(r => '<span class="sl-chip">' + slEscapeHtml(r) + '</span>').join('');
                 reasonRows += '<div class="sl-reason-row">'
-                    + '<span class="sl-reason-label">선정 이유</span>'
                     + '<div class="sl-reason-chips">' + chips + '</div></div>';
             }
             if (v.rationale_short) {
                 reasonRows += '<div class="sl-reason-row">'
-                    + '<span class="sl-reason-label">선정된 이유</span>'
+                    + '<span class="sl-reason-label">선정 이유</span>'
                     + '<span class="sl-reason-text">' + slEscapeHtml(v.rationale_short) + '</span></div>';
             }
 
