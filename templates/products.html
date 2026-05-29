@@ -1373,8 +1373,9 @@
                 }
                 const product = await createRes.json();
                 vsPending.productId = product.product_id;
-                // 이미 보고서가 있으면 사용자가 직접 선택 (보고서 보기 vs 재선정)
-                if (product.existing_report) {
+                // 선정 영상(videos>0)과 종합 보고서가 둘 다 있을 때만 '기존 보고서 보기'
+                // 노출. 영상 0개 제품은 빈 페이지로 빠지지 않도록 곧바로 신규 선정 흐름.
+                if (product.existing_report && (product.video_count || 0) > 0) {
                     vsStart.hidden = true;
                     vsChoice.hidden = false;
                     vsStart.textContent = original;

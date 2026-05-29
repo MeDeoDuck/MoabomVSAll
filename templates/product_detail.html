@@ -2378,11 +2378,9 @@
             const alreadyRendered = panel && panel.dataset.rendered === 'true';
             if (alreadyRendered && window._p5Summary) {
                 _enterInsightMode();
-                p5ShowSummary({ useCache: true }).then(() => {
-                    _p5RevealPanelOnClose();
-                }).catch(() => {
-                    _p5RevealPanelOnClose();
-                });
+                // 재진입: 이미 렌더된 패널을 즉시 노출 후 캐시로 팝업 채움(빈 화면 없음).
+                _p5RevealPanelOnClose();
+                p5ShowSummary({ useCache: true }).catch(() => {});
                 return;
             }
             // ───────────────────────────────────────────────────────
@@ -2464,11 +2462,14 @@
             //   영상 재선정(/select-videos 응답 처리부) 에서 'false' 로 무효화.
             if (panel) panel.dataset.rendered = 'true';
             _enterInsightMode();
-            p5ShowSummary().then(() => {
-                _p5RevealPanelOnClose();
-            }).catch((e) => {
+            // 빈 화면 제거(이슈 3-A): 본문 보고서 패널을 1차 결과 직후 *즉시* 노출.
+            //   body.innerHTML 은 위에서 이번 결과로 이미 교체됐으므로 잔상(이전 내용)
+            //   없이 새 보고서가 뜬다. 이전엔 패널 노출을 /popup-summary(2차 fetch)
+            //   완료에 묶어, 로딩 모달이 닫힌 뒤 5~10초 빈 화면이 생겼다.
+            _p5RevealPanelOnClose();
+            // 최종 판정 팝업은 백그라운드로 채운다 — 본문 노출을 막지 않음.
+            p5ShowSummary().catch((e) => {
                 console.warn('[P5] popup skipped:', e);
-                _p5RevealPanelOnClose();
             });
         }
 

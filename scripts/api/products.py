@@ -244,8 +244,20 @@ def register_product_routes(app):
             """,
             (product_id,),
         )
+        # 빈 페이지 방지: '기존 보고서 보기' 게이트는 목적지(/products/{id})가 실제
+        # 렌더하는 videos 테이블의 카운트와 종합 보고서 존재를 *둘 다* 만족할 때만
+        # truthy. 종합 보고서 row 만 남고 videos 가 0개인 제품이 빈 페이지로 빠지던
+        # 문제 차단. videos 카운트는 단일 쿼리(N+1 없음).
+        video_count_row = query_one(
+            "SELECT COUNT(*) AS cnt FROM videos WHERE product_id = %s",
+            (product_id,),
+        )
+        video_count = int(video_count_row["cnt"]) if video_count_row else 0
         product = dict(product) if product else {}
-        product["existing_report"] = latest_report["id"] if latest_report else None
+        product["video_count"] = video_count
+        product["existing_report"] = (
+            latest_report["id"] if (latest_report and video_count > 0) else None
+        )
         return product
     
     @app.get("/products/{product_id}", response_class=HTMLResponse)
