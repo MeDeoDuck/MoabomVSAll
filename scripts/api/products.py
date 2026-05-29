@@ -86,23 +86,51 @@ def _build_recommended(limit: int = 12):
     집계(댓글 수·작성자 고유 수·최신 보고서 시각)는 단일 JOIN + GROUP BY 한
     쿼리로 처리(N+1 금지). pir 누적/videos/comments 카테시안은 COUNT(DISTINCT)
     로 중복 상쇄. 표시용 "업데이트 N일 전" 문자열도 서버에서 미리 생성.
+
+    중복 제거: 같은 제품이 과거 dedupe 이전 INSERT 로 여러 product_id 행으로
+    존재할 수 있어, (name, brand) 기준 DISTINCT ON 으로 제품당 최신 보고서를
+    가진 1행만 남긴다(여전히 단일 쿼리 — N+1 없음). 내부 per_product 는
+    product_id 단위 집계, 바깥에서 최신순 정렬 + 12개 상한.
     """
     rows = query_all(
         """
         SELECT
-            p.product_id,
-            p.name,
-            p.brand,
-            p.category,
-            p.image_url,
-            COUNT(DISTINCT c.comment_id)        AS comment_count,
-            COUNT(DISTINCT c.author_channel_id) AS author_count,
-            MAX(pir.created_at)                 AS last_report_at
-        FROM tech_products p
-        JOIN product_integrated_reports pir ON pir.product_id = p.product_id
-        LEFT JOIN videos v   ON v.product_id = p.product_id
-        LEFT JOIN comments c ON c.video_id   = v.video_id
-        GROUP BY p.product_id, p.name, p.brand, p.category, p.image_url
+            product_id, name, brand, category, image_url,
+            comment_count, author_count, last_report_at
+        FROM (
+            SELECT DISTINCT ON (
+                LOWER(TRIM(per_product.name)),
+                COALESCE(LOWER(TRIM(per_product.brand)), '')
+            )
+                per_product.product_id,
+                per_product.name,
+                per_product.brand,
+                per_product.category,
+                per_product.image_url,
+                per_product.comment_count,
+                per_product.author_count,
+                per_product.last_report_at
+            FROM (
+                SELECT
+                    p.product_id,
+                    p.name,
+                    p.brand,
+                    p.category,
+                    p.image_url,
+                    COUNT(DISTINCT c.comment_id)        AS comment_count,
+                    COUNT(DISTINCT c.author_channel_id) AS author_count,
+                    MAX(pir.created_at)                 AS last_report_at
+                FROM tech_products p
+                JOIN product_integrated_reports pir ON pir.product_id = p.product_id
+                LEFT JOIN videos v   ON v.product_id = p.product_id
+                LEFT JOIN comments c ON c.video_id   = v.video_id
+                GROUP BY p.product_id, p.name, p.brand, p.category, p.image_url
+            ) per_product
+            ORDER BY
+                LOWER(TRIM(per_product.name)),
+                COALESCE(LOWER(TRIM(per_product.brand)), ''),
+                per_product.last_report_at DESC
+        ) deduped
         ORDER BY last_report_at DESC
         LIMIT %s
         """,

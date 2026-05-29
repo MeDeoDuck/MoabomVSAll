@@ -87,6 +87,9 @@
         .wordmark {
             font-size: 88px; font-weight: 800; letter-spacing: -0.03em;
             color: var(--text-strong); line-height: 1; margin: 0 0 28px;
+            /* 음수 letter-spacing 이 첫 글자 앞에도 적용되며 생기는 좌측 쏠림을
+               같은 크기만큼 보정 → 아래 카드/카피 좌측 시작선과 정렬 */
+            margin-left: 0.03em;
         }
         .tagline { font-size: 24px; font-weight: 700; color: var(--text-strong); margin: 0 0 14px; letter-spacing: -0.01em; }
         .tagline b { font-weight: 800; }
