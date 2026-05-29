@@ -309,6 +309,123 @@
             .pillars { grid-template-columns: 1fr; }
             .reco-card { flex-basis: 80%; }
         }
+
+        /* ── 영상 선택 설정 모달 (화면 2) ───────────────────────────── */
+        .vs-overlay {
+            position: fixed; inset: 0;
+            background: rgba(18, 24, 51, 0.55);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 24px; z-index: 1000;
+        }
+        .vs-overlay.show { display: flex; }
+        .vs-modal {
+            position: relative;
+            width: 100%; max-width: 520px;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 34px 34px 30px;
+            animation: vsPop 0.22s ease;
+        }
+        @keyframes vsPop {
+            from { opacity: 0; transform: translateY(12px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .vs-close {
+            position: absolute; top: 20px; right: 20px;
+            width: 38px; height: 38px;
+            border: none; background: var(--surface-soft);
+            border-radius: var(--radius-pill);
+            color: var(--muted); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s, color 0.15s;
+        }
+        .vs-close:hover { background: var(--border); color: var(--text); }
+        .vs-title {
+            margin: 0; font-size: 24px; font-weight: 800;
+            letter-spacing: -0.02em; color: var(--text-strong);
+        }
+        .vs-sub { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+        .vs-product {
+            margin: 18px 0 24px; padding: 13px 16px;
+            background: var(--primary-soft); border-radius: var(--radius-md);
+            font-size: 15px; font-weight: 700; color: var(--primary-strong);
+            display: flex; align-items: center; gap: 9px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .vs-product svg { flex: none; }
+        .vs-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+        .vs-mode-card {
+            position: relative; display: block; cursor: pointer;
+            border: 1.5px solid var(--border-strong); border-radius: var(--radius-md);
+            padding: 16px 16px 15px;
+            transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+        }
+        .vs-mode-card input { position: absolute; opacity: 0; pointer-events: none; }
+        .vs-mode-card .vsm-title { font-size: 15px; font-weight: 700; color: var(--text); }
+        .vs-mode-card .vsm-desc { margin-top: 5px; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+        .vs-mode-card:hover { border-color: var(--primary); }
+        .vs-mode-card:has(input:checked) {
+            border-color: var(--primary); background: var(--primary-soft);
+            box-shadow: 0 0 0 3px rgba(58, 109, 240, 0.12);
+        }
+        .vs-mode-card:has(input:checked) .vsm-title { color: var(--primary-strong); }
+        .vs-slider-group { display: flex; flex-direction: column; gap: 22px; margin-bottom: 30px; }
+        .vs-slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 11px; }
+        .vs-slider-head .lbl { font-size: 14.5px; font-weight: 600; color: var(--text); }
+        .vs-slider-head .val {
+            font-size: 15px; font-weight: 800; color: var(--primary-strong);
+            background: var(--primary-soft); padding: 2px 13px; border-radius: var(--radius-pill);
+        }
+        .vs-range {
+            width: 100%; -webkit-appearance: none; appearance: none;
+            height: 6px; border-radius: var(--radius-pill);
+            background: var(--border-strong); outline: none; cursor: pointer;
+        }
+        .vs-range::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--primary); border: 3px solid #fff;
+            box-shadow: var(--shadow-sm); cursor: pointer;
+        }
+        .vs-range::-moz-range-thumb {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--primary); border: 3px solid #fff;
+            box-shadow: var(--shadow-sm); cursor: pointer;
+        }
+        .vs-range-scale { display: flex; justify-content: space-between; margin-top: 7px; font-size: 12px; color: var(--muted-2); }
+        .vs-start {
+            width: 100%; padding: 16px; border: none; border-radius: var(--radius-md);
+            background: var(--primary); color: #fff; font-size: 16px; font-weight: 700;
+            font-family: inherit; cursor: pointer; transition: background 0.15s;
+        }
+        .vs-start:hover { background: var(--primary-strong); }
+        .vs-start:disabled { background: var(--muted-2); cursor: not-allowed; }
+        /* 이미 보고서가 있는 제품: 보고서 보기 vs 재선정 선택 */
+        .vs-choice-note {
+            font-size: 13.5px; color: var(--muted); line-height: 1.5;
+            background: var(--surface-soft); border-radius: var(--radius-md);
+            padding: 12px 14px; margin-bottom: 14px;
+        }
+        .vs-choice-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .vs-btn-ghost, .vs-btn-primary {
+            padding: 15px 12px; border-radius: var(--radius-md);
+            font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .vs-btn-ghost { border: 1.5px solid var(--border-strong); background: var(--surface); color: var(--text); }
+        .vs-btn-ghost:hover { border-color: var(--primary); color: var(--primary-strong); }
+        .vs-btn-primary { border: none; background: var(--primary); color: #fff; }
+        .vs-btn-primary:hover { background: var(--primary-strong); }
+        .vs-btn-ghost:disabled, .vs-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        @media (max-width: 560px) {
+            .vs-modal { padding: 26px 20px 22px; }
+            .vs-mode { grid-template-columns: 1fr; }
+            .vs-choice-btns { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -452,6 +569,64 @@
             <div class="empty"{% if products %} hidden{% endif %}>아직 등록된 제품이 없습니다. 위에서 첫 제품을 추가해보세요.</div>
         </section>
         {% endif %}
+    </div>
+
+    <!-- ── 영상 선택 설정 모달 (화면 2) ── 검색/드롭다운 선택 시 표시 ── -->
+    <div class="vs-overlay" id="vsOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsTitle">
+        <div class="vs-modal" role="document">
+            <button type="button" class="vs-close" id="vsClose" aria-label="닫기">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h2 class="vs-title" id="vsTitle">영상 선택 설정</h2>
+            <p class="vs-sub">분석에 사용할 유튜브 리뷰 영상을 어떻게 고를지 설정하세요.</p>
+
+            <div class="vs-product" id="vsProductName">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span id="vsProductLabel"></span>
+            </div>
+
+            <div class="vs-mode">
+                <label class="vs-mode-card">
+                    <input type="radio" name="vsMode" value="auto" checked>
+                    <div class="vsm-title">Auto · AI 자동 선택</div>
+                    <div class="vsm-desc">AI가 후보를 평가해 가장 적합한 영상을 자동으로 골라요.</div>
+                </label>
+                <label class="vs-mode-card">
+                    <input type="radio" name="vsMode" value="custom">
+                    <div class="vsm-title">Custom · 직접 선택</div>
+                    <div class="vsm-desc">후보 목록에서 분석할 영상을 직접 골라요.</div>
+                </label>
+            </div>
+
+            <div class="vs-slider-group">
+                <div class="vs-slider-row">
+                    <div class="vs-slider-head">
+                        <span class="lbl">선택할 영상 수</span>
+                        <span class="val" id="vsKValue">5</span>
+                    </div>
+                    <input type="range" class="vs-range" id="vsKSlider" min="3" max="10" value="5">
+                    <div class="vs-range-scale"><span>3</span><span>10</span></div>
+                </div>
+                <div class="vs-slider-row">
+                    <div class="vs-slider-head">
+                        <span class="lbl">후보 풀 크기</span>
+                        <span class="val" id="vsPoolValue">30</span>
+                    </div>
+                    <input type="range" class="vs-range" id="vsPoolSlider" min="25" max="50" value="30">
+                    <div class="vs-range-scale"><span>25</span><span>50</span></div>
+                </div>
+            </div>
+
+            <button type="button" class="vs-start" id="vsStart">영상 선택 시작</button>
+            <!-- 이미 분석된 제품일 때만 노출: 보고서 보기 vs 재선정 -->
+            <div id="vsChoice" hidden>
+                <div class="vs-choice-note">이미 분석된 제품이에요. 기존 보고서를 바로 보거나, 현재 설정으로 영상을 다시 선정할 수 있어요.</div>
+                <div class="vs-choice-btns">
+                    <button type="button" class="vs-btn-ghost" id="vsGoReport">기존 보고서 보기</button>
+                    <button type="button" class="vs-btn-primary" id="vsReselect">이 설정으로 다시 선정</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -602,37 +777,146 @@
             document.getElementById('productForm').requestSubmit();
         }
 
-        // ── 폼 submit ───────────────────────────────────────────────
-        document.getElementById('productForm').addEventListener('submit', async (e) => {
+        // ── 폼 submit → 영상 선택 설정 모달 표시 ──────────────────────
+        //   기존엔 여기서 곧바로 POST /products 후 상세로 이동했지만,
+        //   이제 제품 생성/선정은 모달의 "영상 선택 시작"으로 타이밍만 재배치.
+        //   연결점(#productForm, #name, #brand, suggest)은 전부 보존.
+        document.getElementById('productForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const original = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = '생성 중...';
+            const name = nameInput.value.trim();
+            if (!name) return;
+            openSelectionModal(name, brandInput.value.trim());
+        });
 
-            const data = {
-                name: nameInput.value.trim(),
-                brand: brandInput.value.trim(),
-            };
-            if (!data.name) { submitBtn.disabled = false; submitBtn.textContent = original; return; }
+        // ── 영상 선택 설정 모달 로직 ──────────────────────────────────
+        const vsOverlay = document.getElementById('vsOverlay');
+        const vsStart = document.getElementById('vsStart');
+        const vsChoice = document.getElementById('vsChoice');
+        const vsReselect = document.getElementById('vsReselect');
+        const vsKSlider = document.getElementById('vsKSlider');
+        const vsPoolSlider = document.getElementById('vsPoolSlider');
+        const vsKValue = document.getElementById('vsKValue');
+        const vsPoolValue = document.getElementById('vsPoolValue');
+        const vsProductLabel = document.getElementById('vsProductLabel');
+        let vsSubmitting = false;
+        const vsPending = { name: '', brand: '', productId: null };
 
+        function vsResetFooter() {
+            vsStart.hidden = false;
+            vsStart.disabled = false;
+            vsStart.textContent = '영상 선택 시작';
+            vsChoice.hidden = true;
+            vsReselect.disabled = false;
+            vsReselect.textContent = '이 설정으로 다시 선정';
+            document.getElementById('vsGoReport').disabled = false;
+        }
+
+        function openSelectionModal(name, brand) {
+            vsPending.name = name;
+            vsPending.brand = brand;
+            vsPending.productId = null;
+            vsProductLabel.textContent = name;
+            vsResetFooter();
+            closeSuggest();
+            vsOverlay.classList.add('show');
+            vsOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeSelectionModal() {
+            if (vsSubmitting) return; // 진행 중에는 닫기 금지
+            vsOverlay.classList.remove('show');
+            vsOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        vsKSlider.addEventListener('input', () => { vsKValue.textContent = vsKSlider.value; });
+        vsPoolSlider.addEventListener('input', () => { vsPoolValue.textContent = vsPoolSlider.value; });
+
+        document.getElementById('vsClose').addEventListener('click', closeSelectionModal);
+        vsOverlay.addEventListener('click', (e) => { if (e.target === vsOverlay) closeSelectionModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && vsOverlay.classList.contains('show')) closeSelectionModal();
+        });
+
+        // 선택 진행: Auto → select-videos 실행 후 상세 이동 / Custom → 상세로 이동(상세의 기존 Custom 흐름으로 이어감)
+        async function vsProceed(productId, btn) {
+            const mode = document.querySelector('input[name="vsMode"]:checked').value;
+            if (mode === 'custom') {
+                window.location.href = '/products/' + productId;
+                return;
+            }
+            if (btn) btn.textContent = 'AI 영상 선택 중... (최대 5분)';
+            const k = parseInt(vsKSlider.value, 10);
+            const pool = parseInt(vsPoolSlider.value, 10);
+            const selRes = await fetch('/products/' + productId + '/select-videos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mode: 'auto', k: k, candidate_pool_size: pool }),
+            });
+            if (!selRes.ok) {
+                alert('영상 선정 중 오류가 발생했습니다. 상세 페이지에서 다시 시도할 수 있습니다.');
+            }
+            window.location.href = '/products/' + productId;
+        }
+
+        vsStart.addEventListener('click', async () => {
+            if (vsSubmitting) return;
+            vsSubmitting = true;
+            vsStart.disabled = true;
+            const original = vsStart.textContent;
+            vsStart.textContent = '확인 중...';
             try {
-                const response = await fetch('/products', {
+                // ① 제품 생성 (기존 POST /products 그대로)
+                const createRes = await fetch('/products', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify({ name: vsPending.name, brand: vsPending.brand }),
                 });
-                if (!response.ok) {
+                if (!createRes.ok) {
                     alert('제품 생성 중 오류가 발생했습니다.');
-                    submitBtn.disabled = false; submitBtn.textContent = original;
+                    vsStart.textContent = original;
                     return;
                 }
-                const product = await response.json();
-                // existing_report 가 있으면 같은 product_detail 경로로 이동(보고서 자동 로드는 페이지가 담당).
-                window.location.href = '/products/' + product.product_id;
+                const product = await createRes.json();
+                vsPending.productId = product.product_id;
+                // 이미 보고서가 있으면 사용자가 직접 선택 (보고서 보기 vs 재선정)
+                if (product.existing_report) {
+                    vsStart.hidden = true;
+                    vsChoice.hidden = false;
+                    vsStart.textContent = original;
+                    return;
+                }
+                // ②③ 신규 제품 → 바로 진행 (이후 페이지 이동)
+                await vsProceed(product.product_id, vsStart);
             } catch (error) {
                 alert('Error: ' + error);
-                submitBtn.disabled = false; submitBtn.textContent = original;
+                vsStart.textContent = original;
+            } finally {
+                vsSubmitting = false;
+                vsStart.disabled = false;
+            }
+        });
+
+        // 이미 보고서 있는 제품: 기존 보고서로 이동
+        document.getElementById('vsGoReport').addEventListener('click', () => {
+            if (vsPending.productId) window.location.href = '/products/' + vsPending.productId;
+        });
+
+        // 이미 보고서 있는 제품: 현재 설정으로 다시 선정
+        vsReselect.addEventListener('click', async () => {
+            if (vsSubmitting || !vsPending.productId) return;
+            vsSubmitting = true;
+            vsReselect.disabled = true;
+            document.getElementById('vsGoReport').disabled = true;
+            const original = vsReselect.textContent;
+            try {
+                await vsProceed(vsPending.productId, vsReselect);
+            } catch (error) {
+                alert('Error: ' + error);
+                vsReselect.textContent = original;
+            } finally {
+                vsSubmitting = false;
+                vsReselect.disabled = false;
+                document.getElementById('vsGoReport').disabled = false;
             }
         });
 
