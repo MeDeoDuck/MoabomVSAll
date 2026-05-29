@@ -8,18 +8,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ── Design tokens (화면 1에서 최초 정의 — 이후 모든 화면 재사용) ── */
         :root {
-            --bg: #f7f5fb;
+            /* surface / background */
+            --bg: #eceef3;
+            --shell: #fbfcfe;
             --surface: #ffffff;
-            --border: #e7e2f3;
-            --text: #1f1c2e;
-            --muted: #6b6880;
-            --primary: #6f42c1;
-            --primary-strong: #5a32a3;
-            --primary-soft: #efe9fb;
-            --accent: #f06292;
-            --shadow: 0 4px 16px rgba(111, 66, 193, 0.08);
-            --shadow-strong: 0 10px 32px rgba(111, 66, 193, 0.18);
+            --surface-soft: #f5f7fb;
+
+            /* borders */
+            --border: #e7eaf1;
+            --border-strong: #d8dde8;
+
+            /* text */
+            --text: #1c2340;
+            --text-strong: #121833;
+            --muted: #8b90a0;
+            --muted-2: #abafbe;
+
+            /* primary (blue) */
+            --primary: #3a6df0;
+            --primary-strong: #2c5be0;
+            --primary-soft: #e9f0ff;
+
+            /* chips / badges */
+            --chip-bg: #eaf0fb;
+            --chip-text: #4b5573;
+            --badge-blue-bg: #e6eeff;
+            --badge-blue-text: #3a6df0;
+            --badge-green-bg: #e6f4ea;
+            --badge-green-text: #137333;
+            --badge-amber-bg: #fef3c7;
+            --badge-amber-text: #92400e;
+
+            /* radius */
+            --radius-xl: 28px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 999px;
+
+            /* shadow */
+            --shadow-sm: 0 2px 8px rgba(28, 35, 64, 0.05);
+            --shadow: 0 8px 28px rgba(28, 35, 64, 0.07);
+            --shadow-lg: 0 16px 40px rgba(28, 35, 64, 0.12);
         }
 
         * { box-sizing: border-box; }
@@ -31,257 +63,690 @@
             line-height: 1.55;
             -webkit-font-smoothing: antialiased;
         }
+        a { color: inherit; text-decoration: none; }
 
-        .page { max-width: 1080px; margin: 0 auto; padding: 32px 24px 80px; }
+        .page { max-width: 1240px; margin: 0 auto; padding: 40px 28px 72px; }
 
-        /* ── Top bar ────────────────────────────────────── */
-        .topbar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-        .logo {
-            width: 36px; height: 36px; border-radius: 10px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: white; display: grid; place-items: center;
-            font-weight: 800; font-size: 18px;
-            box-shadow: var(--shadow);
-        }
-        .brand { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
-        .brand .sub { font-weight: 500; color: var(--muted); margin-left: 6px; font-size: 14px; }
-
-        /* ── Hero ───────────────────────────────────────── */
-        .hero {
-            background: linear-gradient(140deg, #ffffff 0%, #f3edff 60%, #fde8ef 100%);
+        /* ── Hero shell (좌 브랜드 / 우 검색·추천 2단) ── */
+        .hero-shell {
+            background: var(--shell);
             border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 44px 40px;
+            border-radius: var(--radius-xl);
             box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
+            padding: 56px 60px;
         }
-        .hero::after {
-            content: ""; position: absolute; right: -60px; top: -60px;
-            width: 220px; height: 220px; border-radius: 50%;
-            background: radial-gradient(circle at center, rgba(240, 98, 146, 0.18), transparent 70%);
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+            gap: 56px;
+            align-items: start;
         }
-        .hero h1 {
-            font-size: 34px; font-weight: 800; margin: 0 0 12px;
-            letter-spacing: -0.02em; line-height: 1.2;
-        }
-        .hero h1 em {
-            font-style: normal;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-        }
-        .hero p.lead { font-size: 16px; color: var(--muted); margin: 0 0 24px; max-width: 640px; }
 
-        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
+        /* ── 좌: 브랜드 ── */
+        .brand-col { padding-top: 8px; }
+        .wordmark {
+            font-size: 88px; font-weight: 800; letter-spacing: -0.03em;
+            color: var(--text-strong); line-height: 1; margin: 0 0 28px;
+            /* 음수 letter-spacing 이 첫 글자 앞에도 적용되며 생기는 좌측 쏠림을
+               같은 크기만큼 보정 → 아래 카드/카피 좌측 시작선과 정렬 */
+            margin-left: 0.03em;
+        }
+        .tagline { font-size: 24px; font-weight: 700; color: var(--text-strong); margin: 0 0 14px; letter-spacing: -0.01em; }
+        .tagline b { font-weight: 800; }
+        .subcopy { font-size: 16px; color: var(--muted); margin: 0 0 40px; }
+
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .pillar {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(6px);
+            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px 18px;
+            border-radius: var(--radius-md);
+            padding: 22px 18px;
+            box-shadow: var(--shadow-sm);
         }
-        .pillar .icon { font-size: 20px; margin-bottom: 6px; }
-        .pillar .t { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
-        .pillar .d { font-size: 13px; color: var(--muted); line-height: 1.5; }
+        .pillar .icon {
+            width: 48px; height: 48px; border-radius: 14px;
+            background: var(--primary-soft); color: var(--primary);
+            display: grid; place-items: center; margin-bottom: 16px;
+        }
+        .pillar .t { font-weight: 700; font-size: 15px; margin-bottom: 8px; color: var(--text-strong); }
+        .pillar .d { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
-        /* ── Section card ──────────────────────────────── */
-        .section { margin-top: 32px; }
+        /* ── 우: 검색 + 추천 ── */
+        .search-col { min-width: 0; }
+        .search-wrap { position: relative; }
+
+        .searchbar {
+            display: flex; align-items: center; gap: 14px;
+            height: 60px; padding: 0 20px;
+            background: var(--surface);
+            border: 1.5px solid var(--border-strong);
+            border-radius: 16px;
+            transition: border-color 0.15s, box-shadow 0.15s;
+        }
+        .search-wrap.focused .searchbar {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-soft);
+        }
+        .searchbar .search-ico { color: var(--primary); display: grid; place-items: center; flex: none; }
+        .searchbar input[type="text"] {
+            flex: 1; min-width: 0; height: 100%;
+            border: none; outline: none; background: transparent;
+            font-size: 18px; font-family: inherit; font-weight: 500; color: var(--text);
+        }
+        .searchbar input[type="text"]::placeholder { color: var(--muted-2); font-weight: 400; }
+        .search-clear {
+            flex: none; width: 28px; height: 28px; padding: 0;
+            border: none; background: transparent; color: var(--muted-2);
+            cursor: pointer; display: grid; place-items: center; border-radius: 50%;
+            transition: color 0.12s, background 0.12s;
+        }
+        .search-clear:hover { color: var(--muted); background: var(--surface-soft); }
+        .search-clear[hidden] { display: none; }
+
+        /* submit 버튼: 목업에 없으므로 시각적으로만 숨김 (기능·연결점 100% 유지) */
+        .submit-hidden {
+            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+        }
+
+        /* ── 자동완성 드롭다운 (추천 영역 위 오버레이) ── */
+        .suggest-panel {
+            display: none;
+            position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+            z-index: 30;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            box-shadow: var(--shadow-lg);
+            padding: 10px;
+        }
+        .suggest-panel.open { display: block; }
+        .suggest-state { font-size: 14px; color: var(--muted); padding: 14px 16px; }
+        .suggest-list { display: flex; flex-direction: column; gap: 2px; }
+        .suggest-card {
+            display: flex; align-items: center; gap: 14px;
+            width: 100%; text-align: left;
+            border: none; border-radius: 12px;
+            padding: 14px 16px; background: transparent;
+            font-family: inherit; font-size: 17px; color: var(--text);
+            cursor: pointer; transition: background 0.12s;
+        }
+        .suggest-card:hover, .suggest-card.sc-first { background: var(--primary-soft); }
+        .suggest-card .sc-ico { color: var(--muted-2); display: grid; place-items: center; flex: none; }
+        .suggest-card.sc-first .sc-ico { color: var(--primary); }
+        .suggest-card .sc-name { flex: 1; min-width: 0; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .suggest-card .sc-badges { flex: none; display: flex; gap: 6px; align-items: center; }
+        .sc-badge {
+            display: inline-block; padding: 4px 12px; border-radius: var(--radius-pill);
+            font-size: 13px; font-weight: 700; line-height: 1.2;
+        }
+        .sc-badge.recommend { background: var(--badge-blue-bg); color: var(--badge-blue-text); }
+        .sc-badge.has-report { background: var(--badge-green-bg); color: var(--badge-green-text); }
+        .sc-badge.serper { background: var(--badge-amber-bg); color: var(--badge-amber-text); }
+
+        /* ── 추천 리포트 캐러셀 ── */
+        .reco { margin-top: 28px; }
+        .reco-head {
+            display: flex; align-items: center; gap: 8px;
+            font-size: 17px; font-weight: 700; color: var(--text-strong); margin-bottom: 16px;
+        }
+        .reco-head .star { color: var(--primary); display: grid; place-items: center; }
+        .reco-viewport-wrap { position: relative; }
+        .reco-viewport {
+            overflow-x: auto; overflow-y: hidden;
+            scroll-snap-type: x proximity;
+            scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .reco-viewport::-webkit-scrollbar { display: none; }
+        .reco-track { display: flex; gap: 18px; padding: 4px 4px 8px; }
+        .reco-card {
+            flex: 0 0 252px; scroll-snap-align: start;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            padding: 20px;
+            display: flex; flex-direction: column; gap: 14px;
+            transition: transform 0.1s, box-shadow 0.15s, border-color 0.15s;
+        }
+        .reco-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+        .reco-top { display: flex; gap: 14px; align-items: flex-start; }
+        .reco-thumb {
+            flex: none; width: 64px; height: 64px; border-radius: 12px; overflow: hidden;
+            background: var(--surface-soft);
+        }
+        .reco-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .reco-thumb-ph {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--primary-soft), #dbe6ff);
+            display: grid; place-items: center;
+            color: var(--primary); font-weight: 800; font-size: 26px; letter-spacing: -0.02em;
+        }
+        .reco-head-text { min-width: 0; display: flex; flex-direction: column; gap: 6px; padding-top: 2px; }
+        .reco-badge {
+            align-self: flex-start;
+            display: inline-flex; align-items: center; gap: 5px;
+            background: var(--badge-blue-bg); color: var(--badge-blue-text);
+            font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: var(--radius-pill);
+        }
+        .reco-title { font-size: 16px; font-weight: 700; color: var(--text-strong); line-height: 1.35; }
+        .reco-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+        .chip {
+            background: var(--chip-bg); color: var(--chip-text);
+            font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: var(--radius-pill);
+        }
+        .reco-metrics {
+            display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+            font-size: 13px; color: var(--muted); margin-top: auto;
+        }
+        .reco-metrics .metric { display: inline-flex; align-items: center; gap: 6px; }
+        .reco-metrics .metric svg { color: var(--muted-2); }
+        .reco-metrics .metric-date { color: var(--muted); }
+
+        .reco-next {
+            position: absolute; top: 50%; right: -14px; transform: translateY(-50%);
+            width: 40px; height: 40px; border-radius: 50%;
+            background: var(--surface); border: 1px solid var(--border);
+            box-shadow: var(--shadow); color: var(--text);
+            cursor: pointer; display: grid; place-items: center; z-index: 5;
+            transition: box-shadow 0.15s, transform 0.1s;
+        }
+        .reco-next:hover { box-shadow: var(--shadow-lg); }
+        .reco-next[hidden] { display: none; }
+
+        .reco-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+        .reco-dots[hidden] { display: none; }
+        .reco-dot {
+            width: 9px; height: 9px; border-radius: 50%; padding: 0; border: none;
+            background: #cfd4e0; cursor: pointer; transition: background 0.15s, width 0.15s;
+        }
+        .reco-dot.active { background: var(--primary); width: 22px; border-radius: var(--radius-pill); }
+        .reco-hint {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+            margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--primary);
+        }
+        .reco-hint[hidden] { display: none; }
+        .reco-hint svg { color: var(--primary); }
+
+        /* ── 등록된 제품 목록 (SHOW_PRODUCT_LIST=1 일 때만 — 목업 외) ── */
+        .section { margin-top: 40px; }
         .section h2 { font-size: 20px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em; }
         .section h2 .count { color: var(--muted); font-weight: 500; margin-left: 6px; font-size: 16px; }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: var(--shadow);
-        }
-
-        /* ── Form ──────────────────────────────────────── */
-        .form-row { display: flex; gap: 12px; align-items: stretch; flex-wrap: wrap; }
-        .form-row label.field { flex: 1; min-width: 240px; }
-        .form-row .field-label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
-        .form-row input[type="text"] {
-            width: 100%; height: 48px; padding: 0 16px;
-            border: 1px solid var(--border); border-radius: 12px;
-            font-size: 15px; font-family: inherit; color: var(--text);
-            background: #fafafd; transition: border-color 0.15s, background 0.15s;
-        }
-        .form-row input[type="text"]:focus {
-            outline: none; border-color: var(--primary); background: #fff;
-            box-shadow: 0 0 0 3px var(--primary-soft);
-        }
-        .btn-primary {
-            height: 48px; padding: 0 24px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-            color: white; border: none; border-radius: 12px;
-            font-size: 15px; font-weight: 600; font-family: inherit;
-            cursor: pointer; transition: transform 0.1s, box-shadow 0.15s;
-            box-shadow: var(--shadow);
-        }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-strong); }
-        .btn-primary:active { transform: translateY(0); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
-        .form-hint { font-size: 13px; color: var(--muted); margin-top: 12px; }
-
-        /* ── Product grid ──────────────────────────────── */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
         .product-card {
-            position: relative;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 18px 20px;
-            text-decoration: none; color: inherit;
-            display: block;
+            position: relative; background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-md); padding: 18px 20px; display: block;
             transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
         }
-        .product-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-strong);
-        }
+        .product-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow); }
         .product-card .name {
-            font-size: 16px; font-weight: 700; color: var(--text);
-            margin-bottom: 6px;
-            padding-right: 24px;
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-            overflow: hidden; text-overflow: ellipsis;
+            font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; padding-right: 24px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
         }
         .product-card .arrow { font-size: 14px; color: var(--primary); font-weight: 600; }
         .card-delete {
-            position: absolute; top: 8px; right: 8px;
-            width: 24px; height: 24px; padding: 0;
-            border: none; border-radius: 50%;
-            background: transparent; color: var(--muted);
-            font-size: 18px; font-weight: 700; line-height: 1;
-            cursor: pointer; opacity: 0.4;
-            display: grid; place-items: center;
-            transition: opacity 0.15s, background 0.15s, color 0.15s;
+            position: absolute; top: 8px; right: 8px; width: 24px; height: 24px; padding: 0;
+            border: none; border-radius: 50%; background: transparent; color: var(--muted);
+            font-size: 18px; font-weight: 700; line-height: 1; cursor: pointer; opacity: 0.4;
+            display: grid; place-items: center; transition: opacity 0.15s, background 0.15s, color 0.15s;
         }
         .product-card:hover .card-delete { opacity: 1; }
         .card-delete:hover { background: var(--primary-soft); color: var(--primary-strong); }
-
         .empty {
             background: var(--surface); border: 1px dashed var(--border);
-            border-radius: 14px; padding: 32px; text-align: center; color: var(--muted);
+            border-radius: var(--radius-md); padding: 32px; text-align: center; color: var(--muted);
         }
 
-        /* ── Suggest panel (검색 후보 자동 제안) ──────────── */
-        .search-grid {
-            display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 20px;
-            align-items: start;
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .hero-shell { padding: 36px 28px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .wordmark { font-size: 64px; }
         }
-        .suggest-panel {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 16px;
-            min-height: 220px;
-            box-shadow: var(--shadow);
-        }
-        .suggest-panel .suggest-title {
-            font-size: 13px; font-weight: 700; color: var(--muted);
-            margin: 0 0 12px; letter-spacing: 0.02em;
-        }
-        .suggest-panel .suggest-state {
-            font-size: 13px; color: var(--muted); padding: 8px 4px;
-        }
-        .suggest-list { display: flex; flex-direction: column; gap: 8px; }
-        .suggest-card {
-            display: block; width: 100%; text-align: left;
-            border: 1px solid var(--border); border-radius: 10px;
-            padding: 10px 12px; background: #fafafd;
-            font-family: inherit; font-size: 14px; color: var(--text);
-            cursor: pointer; transition: border-color 0.12s, background 0.12s, transform 0.08s;
-        }
-        .suggest-card:hover {
-            border-color: var(--primary);
-            background: var(--primary-soft);
-        }
-        .suggest-card:active { transform: translateY(1px); }
-        .suggest-card .sc-name { font-weight: 600; }
-        .suggest-card .sc-meta {
-            font-size: 12px; color: var(--muted); margin-top: 4px;
-            display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
-        }
-        .suggest-card .sc-badge {
-            display: inline-block; padding: 1px 6px; border-radius: 6px;
-            font-size: 11px; font-weight: 600;
-        }
-        .sc-badge.has-report { background: #e6f4ea; color: #137333; }
-        .sc-badge.serper { background: #fef3c7; color: #92400e; }
-
-        /* ── Responsive ────────────────────────────────── */
-        @media (max-width: 720px) {
-            .page { padding: 20px 16px 60px; }
-            .hero { padding: 32px 24px; border-radius: 16px; }
-            .hero h1 { font-size: 26px; }
+        @media (max-width: 560px) {
+            .page { padding: 24px 16px 56px; }
+            .wordmark { font-size: 48px; }
             .pillars { grid-template-columns: 1fr; }
-            .form-row { flex-direction: column; }
-            .btn-primary { width: 100%; }
-            .search-grid { grid-template-columns: 1fr; }
+            .reco-card { flex-basis: 80%; }
+        }
+
+        /* ── 영상 선택 설정 모달 (화면 2) ───────────────────────────── */
+        .vs-overlay {
+            position: fixed; inset: 0;
+            background: rgba(18, 24, 51, 0.55);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 24px; z-index: 1000;
+        }
+        .vs-overlay.show { display: flex; }
+        .vs-modal {
+            position: relative;
+            width: 100%; max-width: 520px;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 34px 34px 30px;
+            animation: vsPop 0.22s ease;
+        }
+        @keyframes vsPop {
+            from { opacity: 0; transform: translateY(12px) scale(0.985); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .vs-close {
+            position: absolute; top: 20px; right: 20px;
+            width: 38px; height: 38px;
+            border: none; background: var(--surface-soft);
+            border-radius: var(--radius-pill);
+            color: var(--muted); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s, color 0.15s;
+        }
+        .vs-close:hover { background: var(--border); color: var(--text); }
+        .vs-title {
+            margin: 0; font-size: 24px; font-weight: 800;
+            letter-spacing: -0.02em; color: var(--text-strong);
+        }
+        .vs-sub { margin: 8px 0 0; font-size: 14px; color: var(--muted); }
+        .vs-product {
+            margin: 18px 0 24px; padding: 13px 16px;
+            background: var(--primary-soft); border-radius: var(--radius-md);
+            font-size: 15px; font-weight: 700; color: var(--primary-strong);
+            display: flex; align-items: center; gap: 9px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .vs-product svg { flex: none; }
+        .vs-mode { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+        .vs-mode-card {
+            position: relative; display: block; cursor: pointer;
+            border: 1.5px solid var(--border-strong); border-radius: var(--radius-md);
+            padding: 16px 16px 15px;
+            transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+        }
+        .vs-mode-card input { position: absolute; opacity: 0; pointer-events: none; }
+        .vs-mode-card .vsm-title { font-size: 15px; font-weight: 700; color: var(--text); }
+        .vs-mode-card .vsm-desc { margin-top: 5px; font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+        .vs-mode-card:hover { border-color: var(--primary); }
+        .vs-mode-card:has(input:checked) {
+            border-color: var(--primary); background: var(--primary-soft);
+            box-shadow: 0 0 0 3px rgba(58, 109, 240, 0.12);
+        }
+        .vs-mode-card:has(input:checked) .vsm-title { color: var(--primary-strong); }
+        .vs-slider-group { display: flex; flex-direction: column; gap: 22px; margin-bottom: 30px; }
+        .vs-slider-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 11px; }
+        .vs-slider-head .lbl { font-size: 14.5px; font-weight: 600; color: var(--text); }
+        .vs-slider-head .val {
+            font-size: 15px; font-weight: 800; color: var(--primary-strong);
+            background: var(--primary-soft); padding: 2px 13px; border-radius: var(--radius-pill);
+        }
+        .vs-range {
+            width: 100%; -webkit-appearance: none; appearance: none;
+            height: 6px; border-radius: var(--radius-pill);
+            background: var(--border-strong); outline: none; cursor: pointer;
+        }
+        .vs-range::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--primary); border: 3px solid #fff;
+            box-shadow: var(--shadow-sm); cursor: pointer;
+        }
+        .vs-range::-moz-range-thumb {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: var(--primary); border: 3px solid #fff;
+            box-shadow: var(--shadow-sm); cursor: pointer;
+        }
+        .vs-range-scale { display: flex; justify-content: space-between; margin-top: 7px; font-size: 12px; color: var(--muted-2); }
+        .vs-start {
+            width: 100%; padding: 16px; border: none; border-radius: var(--radius-md);
+            background: var(--primary); color: #fff; font-size: 16px; font-weight: 700;
+            font-family: inherit; cursor: pointer; transition: background 0.15s;
+        }
+        .vs-start:hover { background: var(--primary-strong); }
+        .vs-start:disabled { background: var(--muted-2); cursor: not-allowed; }
+        /* 이미 보고서가 있는 제품: 보고서 보기 vs 재선정 선택 */
+        .vs-choice-note {
+            font-size: 13.5px; color: var(--muted); line-height: 1.5;
+            background: var(--surface-soft); border-radius: var(--radius-md);
+            padding: 12px 14px; margin-bottom: 14px;
+        }
+        .vs-choice-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .vs-btn-ghost, .vs-btn-primary {
+            padding: 15px 12px; border-radius: var(--radius-md);
+            font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .vs-btn-ghost { border: 1.5px solid var(--border-strong); background: var(--surface); color: var(--text); }
+        .vs-btn-ghost:hover { border-color: var(--primary); color: var(--primary-strong); }
+        .vs-btn-primary { border: none; background: var(--primary); color: #fff; }
+        .vs-btn-primary:hover { background: var(--primary-strong); }
+        .vs-btn-ghost:disabled, .vs-btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        @media (max-width: 560px) {
+            .vs-modal { padding: 26px 20px 22px; }
+            .vs-mode { grid-template-columns: 1fr; }
+            .vs-choice-btns { grid-template-columns: 1fr; }
+        }
+
+        /* ── AI 영상 선택 로딩 모달 (화면 3) ───────────────────────────── */
+        .vl-overlay {
+            position: fixed; inset: 0;
+            background: rgba(18, 24, 51, 0.55);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+            display: none;
+            align-items: center; justify-content: center;
+            padding: 24px; z-index: 1100;
+        }
+        .vl-overlay.show { display: flex; }
+        .vl-modal {
+            width: 100%; max-width: 540px;
+            background: var(--surface);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 38px 34px 26px;
+            text-align: center;
+            animation: vsPop 0.22s ease;
+        }
+        .vl-spinner {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 5px solid var(--primary-soft);
+            border-top-color: var(--primary);
+            animation: vlSpin 0.9s linear infinite;
+            margin: 0 auto 22px;
+        }
+        @keyframes vlSpin { to { transform: rotate(360deg); } }
+        .vl-title {
+            margin: 0; font-size: 26px; font-weight: 800;
+            letter-spacing: -0.02em; color: var(--text-strong);
+        }
+        .vl-sub { margin: 8px 0 24px; font-size: 14px; color: var(--muted); }
+        .vl-progress-box {
+            background: var(--surface-soft); border-radius: var(--radius-md);
+            padding: 16px 18px; margin-bottom: 18px;
+        }
+        .vl-progress-meta {
+            display: flex; justify-content: space-between; align-items: baseline;
+            font-size: 14px; color: var(--muted); margin-bottom: 12px;
+        }
+        .vl-progress-meta strong { color: var(--primary-strong); font-weight: 800; }
+        .vl-progress-track {
+            height: 8px; border-radius: var(--radius-pill);
+            background: var(--border-strong); overflow: hidden;
+        }
+        .vl-progress-fill {
+            height: 100%; width: 0%; border-radius: var(--radius-pill);
+            background: linear-gradient(90deg, var(--primary), var(--primary-strong));
+            transition: width 0.3s ease;
+        }
+        .vl-steps { display: flex; flex-direction: column; gap: 10px; }
+        .vl-step {
+            display: flex; align-items: center; gap: 13px; text-align: left;
+            padding: 13px 16px; border-radius: var(--radius-md);
+            background: var(--surface-soft); border: 1px solid var(--border);
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .vl-step.active { background: var(--primary-soft); border-color: transparent; }
+        .vl-step-num {
+            flex: none; width: 34px; height: 34px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 15px;
+            background: var(--muted-2); color: #fff;
+            transition: background 0.2s;
+        }
+        .vl-step.active .vl-step-num { background: var(--primary); }
+        .vl-step.done .vl-step-num { background: var(--badge-green-text); }
+        .vl-num-spin {
+            display: inline-block; width: 15px; height: 15px; border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.45); border-top-color: #fff;
+            animation: vlSpin 0.8s linear infinite;
+        }
+        .vl-step-label { font-size: 15px; font-weight: 600; color: var(--text); }
+        .vl-step.active .vl-step-label { color: var(--primary-strong); font-weight: 700; }
+        .vl-step-badge {
+            margin-left: auto; flex: none; font-size: 12.5px; font-weight: 600;
+            padding: 4px 11px; border-radius: var(--radius-pill);
+            background: var(--surface); color: var(--muted-2); border: 1px solid var(--border);
+        }
+        .vl-step.active .vl-step-badge { background: var(--primary); color: #fff; border-color: transparent; }
+        .vl-step.done .vl-step-badge { background: var(--badge-green-bg); color: var(--badge-green-text); border-color: transparent; }
+        .vl-tip-box {
+            display: flex; align-items: center; gap: 12px; text-align: left;
+            background: var(--primary-soft); border-radius: var(--radius-md);
+            padding: 13px 16px; margin-top: 18px;
+        }
+        .vl-tip-label {
+            flex: none; font-size: 12px; font-weight: 800; color: #fff;
+            background: var(--primary); padding: 3px 12px; border-radius: var(--radius-pill);
+        }
+        .vl-tip-text { font-size: 13.5px; color: var(--chip-text); line-height: 1.45; transition: opacity 0.3s ease; }
+        .vl-tip-text.vl-tip-out { opacity: 0; }
+        .vl-watermark {
+            margin-top: 22px; font-size: 13px; font-weight: 800;
+            letter-spacing: 0.18em; color: var(--muted-2);
+        }
+        @media (max-width: 560px) {
+            .vl-modal { padding: 28px 20px 22px; }
+            .vl-title { font-size: 22px; }
+        }
+
+        /* ===== 화면 4: 선정 영상 목록 팝업 ===== */
+        .sl-overlay {
+            position: fixed; inset: 0; z-index: 1300;
+            display: none; align-items: center; justify-content: center;
+            background: rgba(18, 24, 51, 0.55); backdrop-filter: blur(3px);
+            padding: 24px;
+        }
+        .sl-overlay.show { display: flex; }
+        .sl-modal {
+            width: 100%; max-width: 560px; max-height: 88vh;
+            display: flex; flex-direction: column;
+            background: var(--shell); border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg); overflow: hidden;
+        }
+        .sl-head {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 24px 26px 18px; border-bottom: 1px solid var(--border);
+        }
+        .sl-head-text { flex: 1; }
+        .sl-title { font-size: 21px; font-weight: 800; color: var(--text-strong); margin: 0; }
+        .sl-subtitle { font-size: 13.5px; color: var(--muted); margin: 5px 0 0; line-height: 1.45; }
+        .sl-close {
+            flex: none; width: 34px; height: 34px; border-radius: var(--radius-pill);
+            border: 1px solid var(--border); background: var(--surface);
+            color: var(--muted); font-size: 18px; line-height: 1; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        .sl-close:hover { background: var(--surface-soft); color: var(--text); }
+        .sl-list {
+            flex: 1; overflow-y: auto; padding: 18px 26px 8px;
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .sl-card {
+            display: flex; gap: 14px; padding: 14px;
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+        .sl-thumb-wrap {
+            flex: none; position: relative; width: 132px; height: 78px;
+            border-radius: var(--radius-md); overflow: hidden;
+            background: var(--surface-soft);
+        }
+        .sl-thumb { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .sl-thumb-ph {
+            width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+            color: var(--muted-2); font-size: 22px;
+        }
+        .sl-duration {
+            position: absolute; right: 6px; bottom: 6px;
+            font-size: 11px; font-weight: 700; color: #fff;
+            background: rgba(18, 24, 51, 0.82); padding: 2px 7px;
+            border-radius: var(--radius-sm); letter-spacing: 0.02em;
+        }
+        .sl-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+        .sl-rank-row { display: flex; align-items: center; gap: 8px; }
+        .sl-rank {
+            flex: none; font-size: 12px; font-weight: 800; color: var(--primary-strong);
+            background: var(--primary-soft); padding: 2px 9px; border-radius: var(--radius-pill);
+        }
+        .sl-vtitle {
+            font-size: 14.5px; font-weight: 700; color: var(--text-strong);
+            line-height: 1.35; margin: 0;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .sl-channel { font-size: 12.5px; color: var(--muted); }
+        .sl-reasons { display: flex; flex-direction: column; gap: 6px; margin-top: 2px; }
+        .sl-reason-row { display: flex; gap: 8px; align-items: baseline; }
+        .sl-reason-label {
+            flex: none; font-size: 11px; font-weight: 700; color: var(--chip-text);
+            background: var(--chip-bg); padding: 2px 8px; border-radius: var(--radius-pill);
+        }
+        .sl-reason-text { font-size: 12.5px; color: var(--text); line-height: 1.4; }
+        .sl-reason-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+        .sl-chip {
+            font-size: 11.5px; color: var(--chip-text); background: var(--chip-bg);
+            padding: 2px 9px; border-radius: var(--radius-pill);
+        }
+        .sl-foot {
+            display: flex; align-items: center; justify-content: space-between; gap: 14px;
+            padding: 16px 26px 22px; border-top: 1px solid var(--border);
+        }
+        .sl-count { font-size: 13px; color: var(--muted); }
+        .sl-count b { color: var(--text-strong); font-weight: 800; }
+        .sl-done {
+            flex: none; border: none; cursor: pointer;
+            background: var(--primary); color: #fff; font-size: 15px; font-weight: 700;
+            padding: 12px 26px; border-radius: var(--radius-pill);
+            transition: background 0.15s ease;
+        }
+        .sl-done:hover { background: var(--primary-strong); }
+        @media (max-width: 560px) {
+            .sl-card { flex-direction: column; }
+            .sl-thumb-wrap { width: 100%; height: 168px; }
+            .sl-foot { flex-direction: column; align-items: stretch; }
+            .sl-done { width: 100%; }
         }
     </style>
 </head>
 <body>
     <div class="page">
-        <!-- Top bar -->
-        <div class="topbar">
-            <div class="logo">M</div>
-            <div class="brand">모아봄<span class="sub">MOABOM</span></div>
-        </div>
-
-        <!-- Hero -->
-        <section class="hero">
-            <h1>유튜브 테크 리뷰를 <em>한 번에 모아봄</em></h1>
-            <p class="lead">
-                다수의 리뷰 영상 자막과 댓글을 자동 수집·분석하고, 리뷰어 성향(엄격/관대)까지 보정한
-                <strong>제품 단위 종합 보고서</strong>를 제공합니다. 특정 채널·리뷰어 편향에 휘둘리지 않는 객관적 구매 판단을 도와드려요.
-            </p>
-            <div class="pillars">
-                <div class="pillar">
-                    <div class="icon">🎯</div>
-                    <div class="t">자율 영상 선정</div>
-                    <div class="d">LangGraph Agent 가 후보 풀에서 다양성·관련도를 균형 있게 선정</div>
-                </div>
-                <div class="pillar">
-                    <div class="icon">⚖️</div>
-                    <div class="t">편향 보정 분석</div>
-                    <div class="d">리뷰어 평가 성향을 측정하고 보정해 균형 잡힌 종합 평가 산출</div>
-                </div>
-                <div class="pillar">
-                    <div class="icon">📑</div>
-                    <div class="t">3종 종합 보고서</div>
-                    <div class="d">자막 기반 인사이트 · 댓글 감성 반응 · 통합 분석을 한 페이지에서</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Add product -->
-        <section class="section">
-            <h2>제품 추가</h2>
-            <div class="search-grid">
-                <div class="card">
-                    <form id="productForm" autocomplete="off">
-                        <div class="form-row">
-                            <label class="field" for="name">
-                                <span class="field-label">분석할 제품명</span>
-                                <input type="text" id="name" name="name" placeholder="예: 갤럭시 S25, 아이폰 17, 에어팟 4" required>
-                            </label>
-                            <input type="hidden" id="brand" name="brand">
-                            <button type="submit" class="btn-primary">분석 시작 →</button>
+        <section class="hero-shell">
+            <div class="hero-grid">
+                <!-- 좌: 브랜드 -->
+                <div class="brand-col">
+                    <h1 class="wordmark">MOABOM</h1>
+                    <p class="tagline">흩어진 테크 리뷰를 한 번에 모아보는 <b>AI 리포트</b></p>
+                    <p class="subcopy">유튜브 자막·댓글을 분석해 제품별 핵심 의견을 빠르게 확인하세요.</p>
+                    <div class="pillars">
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                            </div>
+                            <div class="t">리뷰 요약</div>
+                            <div class="d">방대한 리뷰 평가 핵심만 간단히 정리해 드려요.</div>
                         </div>
-                        <p class="form-hint">제품명을 입력하면 우측에 정확 제품 후보를 띄워드립니다. 후보를 클릭하면 바로 분석으로 넘어가요.</p>
-                    </form>
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                            </div>
+                            <div class="t">장단점 비교</div>
+                            <div class="d">여러 제품을 한눈에 비교하고 장단점을 쉽게 파악해요.</div>
+                        </div>
+                        <div class="pillar">
+                            <div class="icon">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.5.4.8 1 .8 1.6V17h6.4v-.7c0-.6.3-1.2.8-1.6A7 7 0 0 0 12 2z"/></svg>
+                            </div>
+                            <div class="t">구매 인사이트</div>
+                            <div class="d">실사용자 의견과 트렌드로 현명한 구매를 도와드려요.</div>
+                        </div>
+                    </div>
                 </div>
-                <aside class="suggest-panel" id="suggestPanel" aria-live="polite">
-                    <p class="suggest-title">검색 후보</p>
-                    <div class="suggest-state" id="suggestState">두 글자 이상 입력하면 후보가 표시됩니다.</div>
-                    <div class="suggest-list" id="suggestList"></div>
-                </aside>
+
+                <!-- 우: 검색 + 추천 -->
+                <div class="search-col">
+                    <div class="search-wrap" id="searchWrap">
+                        <form id="productForm" autocomplete="off">
+                            <div class="searchbar">
+                                <span class="search-ico">
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                </span>
+                                <input type="text" id="name" name="name" placeholder="제품명을 검색해보세요 (예: 아이폰 15, 갤럭시 S25)" required>
+                                <button type="button" class="search-clear" id="searchClear" aria-label="검색어 지우기" hidden>
+                                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+                                </button>
+                            </div>
+                            <input type="hidden" id="brand" name="brand">
+                            <button type="submit" class="submit-hidden">분석 시작 →</button>
+                        </form>
+
+                        <!-- 자동완성 드롭다운 (추천 영역 위 오버레이) -->
+                        <div class="suggest-panel" id="suggestPanel" aria-live="polite">
+                            <div class="suggest-state" id="suggestState">두 글자 이상 입력하면 후보가 표시됩니다.</div>
+                            <div class="suggest-list" id="suggestList"></div>
+                        </div>
+                    </div>
+
+                    {% if recommended %}
+                    <div class="reco">
+                        <div class="reco-head">
+                            <span class="star"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+                            추천 리포트
+                        </div>
+                        <div class="reco-viewport-wrap">
+                            <div class="reco-viewport" id="recoViewport">
+                                <div class="reco-track" id="recoTrack">
+                                    {% for r in recommended %}
+                                    <a class="reco-card" href="/products/{{ r.product_id }}">
+                                        <div class="reco-top">
+                                            <div class="reco-thumb">
+                                                {% if r.image_url %}
+                                                <img src="{{ r.image_url }}" alt="{{ r.name }}">
+                                                {% else %}
+                                                <div class="reco-thumb-ph">M</div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="reco-head-text">
+                                                {% if loop.first %}
+                                                <span class="reco-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> 추천 리포트</span>
+                                                {% endif %}
+                                                <div class="reco-title">{{ r.name }}<br>종합 리포트</div>
+                                            </div>
+                                        </div>
+                                        {% if r.chips %}
+                                        <div class="reco-chips">
+                                            {% for c in r.chips %}<span class="chip">{{ c }}</span>{% endfor %}
+                                        </div>
+                                        {% endif %}
+                                        <div class="reco-metrics">
+                                            <span class="metric">
+                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                                {{ '{:,}'.format(r.author_count) }}
+                                            </span>
+                                            <span class="metric">
+                                                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                                {{ '{:,}'.format(r.comment_count) }}
+                                            </span>
+                                            {% if r.updated_label %}
+                                            <span class="metric metric-date">{{ r.updated_label }}</span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <button type="button" class="reco-next" id="recoNext" aria-label="다음 리포트" hidden>
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                            </button>
+                        </div>
+                        <div class="reco-dots" id="recoDots" hidden></div>
+                        <div class="reco-hint" id="recoHint" hidden>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                            좌우로 슬라이드해 더 많은 리포트를 확인하세요
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </section>
 
@@ -306,15 +771,140 @@
         {% endif %}
     </div>
 
+    <!-- ── 영상 선택 설정 모달 (화면 2) ── 검색/드롭다운 선택 시 표시 ── -->
+    <div class="vs-overlay" id="vsOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vsTitle">
+        <div class="vs-modal" role="document">
+            <button type="button" class="vs-close" id="vsClose" aria-label="닫기">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <h2 class="vs-title" id="vsTitle">영상 선택 설정</h2>
+            <p class="vs-sub">분석에 사용할 유튜브 리뷰 영상을 어떻게 고를지 설정하세요.</p>
+
+            <div class="vs-product" id="vsProductName">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span id="vsProductLabel"></span>
+            </div>
+
+            <div class="vs-mode">
+                <label class="vs-mode-card">
+                    <input type="radio" name="vsMode" value="auto" checked>
+                    <div class="vsm-title">Auto · AI 자동 선택</div>
+                    <div class="vsm-desc">AI가 후보를 평가해 가장 적합한 영상을 자동으로 골라요.</div>
+                </label>
+                <label class="vs-mode-card">
+                    <input type="radio" name="vsMode" value="custom">
+                    <div class="vsm-title">Custom · 직접 선택</div>
+                    <div class="vsm-desc">후보 목록에서 분석할 영상을 직접 골라요.</div>
+                </label>
+            </div>
+
+            <div class="vs-slider-group">
+                <div class="vs-slider-row">
+                    <div class="vs-slider-head">
+                        <span class="lbl">선택할 영상 수</span>
+                        <span class="val" id="vsKValue">5</span>
+                    </div>
+                    <input type="range" class="vs-range" id="vsKSlider" min="3" max="10" value="5">
+                    <div class="vs-range-scale"><span>3</span><span>10</span></div>
+                </div>
+                <div class="vs-slider-row">
+                    <div class="vs-slider-head">
+                        <span class="lbl">후보 풀 크기</span>
+                        <span class="val" id="vsPoolValue">30</span>
+                    </div>
+                    <input type="range" class="vs-range" id="vsPoolSlider" min="25" max="50" value="30">
+                    <div class="vs-range-scale"><span>25</span><span>50</span></div>
+                </div>
+            </div>
+
+            <button type="button" class="vs-start" id="vsStart">영상 선택 시작</button>
+            <!-- 이미 분석된 제품일 때만 노출: 보고서 보기 vs 재선정 -->
+            <div id="vsChoice" hidden>
+                <div class="vs-choice-note">이미 분석된 제품이에요. 기존 보고서를 바로 보거나, 현재 설정으로 영상을 다시 선정할 수 있어요.</div>
+                <div class="vs-choice-btns">
+                    <button type="button" class="vs-btn-ghost" id="vsGoReport">기존 보고서 보기</button>
+                    <button type="button" class="vs-btn-primary" id="vsReselect">이 설정으로 다시 선정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── AI 영상 선택 로딩 모달 (화면 3) ── Auto 선정 진행 중 단독 표시 (닫기 없음) ── -->
+    <div class="vl-overlay" id="vlOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="vlTitle">
+        <div class="vl-modal" role="document">
+            <div class="vl-spinner" aria-hidden="true"></div>
+            <h2 class="vl-title" id="vlTitle">AI 영상 선택 진행 중</h2>
+            <p class="vl-sub">최대 5분 정도 소요됩니다. 창을 닫지 마세요.</p>
+
+            <div class="vl-progress-box">
+                <div class="vl-progress-meta">
+                    <span>진행률 <strong id="vlPercent">0%</strong></span>
+                    <span>예상 남은 시간 <strong id="vlRemain">약 5분</strong></span>
+                </div>
+                <div class="vl-progress-track"><div class="vl-progress-fill" id="vlFill"></div></div>
+            </div>
+
+            <div class="vl-steps">
+                <div class="vl-step" data-step="1">
+                    <span class="vl-step-num">1</span>
+                    <span class="vl-step-label">YouTube 후보 영상 수집</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+                <div class="vl-step" data-step="2">
+                    <span class="vl-step-num">2</span>
+                    <span class="vl-step-label">AI 영상 선정 + 다양성 평가</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+                <div class="vl-step" data-step="3">
+                    <span class="vl-step-num">3</span>
+                    <span class="vl-step-label">댓글 수집 및 감성 분석</span>
+                    <span class="vl-step-badge">대기 중</span>
+                </div>
+            </div>
+
+            <div class="vl-tip-box">
+                <span class="vl-tip-label">TIP</span>
+                <div class="vl-tip-text" id="vlTipText"></div>
+            </div>
+
+            <div class="vl-watermark">MOABOM</div>
+        </div>
+    </div>
+
+    <!-- ── 선정 영상 목록 팝업 (화면 4) ── 로딩 완료 후 표시, 선정 완료 시 상세로 이동 ── -->
+    <div class="sl-overlay" id="slOverlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="slTitle">
+        <div class="sl-modal" role="document">
+            <div class="sl-head">
+                <div class="sl-head-text">
+                    <h2 class="sl-title" id="slTitle">선정 영상 목록</h2>
+                    <p class="sl-subtitle">AI가 분석에 활용할 리뷰 영상을 선정했어요. 확인 후 진행하세요.</p>
+                </div>
+                <button type="button" class="sl-close" id="slClose" aria-label="닫기">&times;</button>
+            </div>
+            <div class="sl-list" id="slList"></div>
+            <div class="sl-foot">
+                <span class="sl-count" id="slCount"></span>
+                <button type="button" class="sl-done" id="slDone">선정 완료</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ── 검색 후보 자동 제안 ─────────────────────────────────────
         const nameInput = document.getElementById('name');
         const brandInput = document.getElementById('brand');
         const stateEl = document.getElementById('suggestState');
         const listEl = document.getElementById('suggestList');
+        const searchWrap = document.getElementById('searchWrap');
+        const suggestPanel = document.getElementById('suggestPanel');
+        const searchClear = document.getElementById('searchClear');
         let suggestController = null;
         let suggestDebounce = null;
         window.__lastSuggestSource = null;
+
+        function openSuggest() { suggestPanel.classList.add('open'); }
+        function closeSuggest() { suggestPanel.classList.remove('open'); }
+        function toggleClear() { searchClear.hidden = nameInput.value.length === 0; }
 
         function renderSuggestState(msg) {
             stateEl.textContent = msg;
@@ -329,44 +919,50 @@
                 return;
             }
             stateEl.style.display = 'none';
-            for (const it of items) {
+            items.forEach((it, idx) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
-                btn.className = 'suggest-card';
+                btn.className = 'suggest-card' + (idx === 0 ? ' sc-first' : '');
                 btn.dataset.name = it.name || '';
                 btn.dataset.brand = it.brand || '';
                 btn.dataset.existingReport = it.has_report ? '1' : '';
                 btn.dataset.productId = it.product_id || '';
 
-                const nameRow = document.createElement('div');
+                const ico = document.createElement('span');
+                ico.className = 'sc-ico';
+                ico.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+                btn.appendChild(ico);
+
+                const nameRow = document.createElement('span');
                 nameRow.className = 'sc-name';
                 nameRow.textContent = it.name;
                 btn.appendChild(nameRow);
 
-                const meta = document.createElement('div');
-                meta.className = 'sc-meta';
-                if (it.brand) {
-                    const b = document.createElement('span');
-                    b.textContent = it.brand;
-                    meta.appendChild(b);
+                const badges = document.createElement('span');
+                badges.className = 'sc-badges';
+                if (idx === 0) {
+                    const rec = document.createElement('span');
+                    rec.className = 'sc-badge recommend';
+                    rec.textContent = '추천';
+                    badges.appendChild(rec);
                 }
                 if (it.has_report) {
                     const tag = document.createElement('span');
                     tag.className = 'sc-badge has-report';
                     tag.textContent = '보고서 있음';
-                    meta.appendChild(tag);
+                    badges.appendChild(tag);
                 }
                 if (it.source === 'serper') {
                     const tag = document.createElement('span');
                     tag.className = 'sc-badge serper';
                     tag.textContent = 'web';
-                    meta.appendChild(tag);
+                    badges.appendChild(tag);
                 }
-                btn.appendChild(meta);
+                btn.appendChild(badges);
 
                 btn.addEventListener('click', () => onSuggestPick(it));
                 listEl.appendChild(btn);
-            }
+            });
         }
 
         async function fetchSuggest(q) {
@@ -393,7 +989,14 @@
         nameInput.addEventListener('input', () => {
             const q = nameInput.value.trim();
             brandInput.value = '';
+            toggleClear();
             clearTimeout(suggestDebounce);
+            if (q.length === 0) {
+                if (suggestController) suggestController.abort();
+                closeSuggest();
+                return;
+            }
+            openSuggest();
             if (q.length < 2) {
                 if (suggestController) suggestController.abort();
                 renderSuggestState('두 글자 이상 입력하면 후보가 표시됩니다.');
@@ -403,49 +1006,493 @@
             suggestDebounce = setTimeout(() => fetchSuggest(q), 350);
         });
 
+        nameInput.addEventListener('focus', () => {
+            searchWrap.classList.add('focused');
+            if (nameInput.value.trim().length >= 1) openSuggest();
+        });
+        nameInput.addEventListener('blur', () => searchWrap.classList.remove('focused'));
+
+        searchClear.addEventListener('click', () => {
+            nameInput.value = '';
+            brandInput.value = '';
+            toggleClear();
+            closeSuggest();
+            if (suggestController) suggestController.abort();
+            nameInput.focus();
+        });
+
+        // 검색 영역 밖 클릭 시 드롭다운 닫기
+        document.addEventListener('click', (e) => {
+            if (!searchWrap.contains(e.target)) closeSuggest();
+        });
+
         function onSuggestPick(item) {
             nameInput.value = item.name;
             brandInput.value = item.brand || '';
+            toggleClear();
+            closeSuggest();
             // 자동 submit — 기존 분석된 제품이면 POST 응답의 existing_report 가
             // truthy → 보고서로 즉시 이동. 신규면 product_detail 로 이동해
             // 영상 선정 에이전트가 시작된다(기존 동작 유지).
             document.getElementById('productForm').requestSubmit();
         }
 
-        // ── 폼 submit ───────────────────────────────────────────────
-        document.getElementById('productForm').addEventListener('submit', async (e) => {
+        // ── 폼 submit → 영상 선택 설정 모달 표시 ──────────────────────
+        //   기존엔 여기서 곧바로 POST /products 후 상세로 이동했지만,
+        //   이제 제품 생성/선정은 모달의 "영상 선택 시작"으로 타이밍만 재배치.
+        //   연결점(#productForm, #name, #brand, suggest)은 전부 보존.
+        document.getElementById('productForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const submitBtn = e.target.querySelector('button[type="submit"]');
-            const original = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = '생성 중...';
+            const name = nameInput.value.trim();
+            if (!name) return;
+            openSelectionModal(name, brandInput.value.trim());
+        });
 
-            const data = {
-                name: nameInput.value.trim(),
-                brand: brandInput.value.trim(),
-            };
-            if (!data.name) { submitBtn.disabled = false; submitBtn.textContent = original; return; }
+        // ── 영상 선택 설정 모달 로직 ──────────────────────────────────
+        const vsOverlay = document.getElementById('vsOverlay');
+        const vsStart = document.getElementById('vsStart');
+        const vsChoice = document.getElementById('vsChoice');
+        const vsReselect = document.getElementById('vsReselect');
+        const vsKSlider = document.getElementById('vsKSlider');
+        const vsPoolSlider = document.getElementById('vsPoolSlider');
+        const vsKValue = document.getElementById('vsKValue');
+        const vsPoolValue = document.getElementById('vsPoolValue');
+        const vsProductLabel = document.getElementById('vsProductLabel');
+        let vsSubmitting = false;
+        const vsPending = { name: '', brand: '', productId: null };
 
+        function vsResetFooter() {
+            vsStart.hidden = false;
+            vsStart.disabled = false;
+            vsStart.textContent = '영상 선택 시작';
+            vsChoice.hidden = true;
+            vsReselect.disabled = false;
+            vsReselect.textContent = '이 설정으로 다시 선정';
+            document.getElementById('vsGoReport').disabled = false;
+        }
+
+        function openSelectionModal(name, brand) {
+            vsPending.name = name;
+            vsPending.brand = brand;
+            vsPending.productId = null;
+            vsProductLabel.textContent = name;
+            vsResetFooter();
+            closeSuggest();
+            vsOverlay.classList.add('show');
+            vsOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeSelectionModal() {
+            if (vsSubmitting) return; // 진행 중에는 닫기 금지
+            vsOverlay.classList.remove('show');
+            vsOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        vsKSlider.addEventListener('input', () => { vsKValue.textContent = vsKSlider.value; });
+        vsPoolSlider.addEventListener('input', () => { vsPoolValue.textContent = vsPoolSlider.value; });
+
+        document.getElementById('vsClose').addEventListener('click', closeSelectionModal);
+        vsOverlay.addEventListener('click', (e) => { if (e.target === vsOverlay) closeSelectionModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && vsOverlay.classList.contains('show')) closeSelectionModal();
+        });
+
+        // ── AI 영상 선택 로딩 모달 (화면 3) — Auto 선정 진행 중 단독 표시 ──
+        //   진행률은 실데이터가 아닌 타이머 추정 애니메이션(95% 캡, 응답 도착 시 100%).
+        const vlOverlay = document.getElementById('vlOverlay');
+        const vlFill = document.getElementById('vlFill');
+        const vlPercent = document.getElementById('vlPercent');
+        const vlRemain = document.getElementById('vlRemain');
+        const VL_ESTIMATE_MS = 300000; // 추정 5분 (애니메이션 기준값)
+        let vlRaf = null;
+        let vlStepTimers = [];
+        let vlFinished = false;
+
+        const VL_TIPS = [
+            "MOABOM은 '모아서 봄' — 흩어진 리뷰를 한 곳에 모아 보여드려요.",
+            "여러 리뷰어의 평가를 교차 검증해 한쪽으로 치우치지 않은 결론을 만들어요.",
+            "댓글 속 실사용자 의견까지 분석해 영상에 안 나온 장단점을 찾아내요.",
+            "리뷰어별 성향(엄격·관대)을 보정해 더 공정한 점수를 계산해요.",
+            "조회수가 아니라 리뷰 품질과 채널 다양성으로 영상을 골라요.",
+        ];
+        let vlTipIdx = 0;
+        let vlTipTimer = null;
+        function vlStartTips() {
+            const el = document.getElementById('vlTipText');
+            vlTipIdx = 0;
+            el.classList.remove('vl-tip-out');
+            el.textContent = VL_TIPS[0];
+            clearInterval(vlTipTimer);
+            vlTipTimer = setInterval(() => {
+                vlTipIdx = (vlTipIdx + 1) % VL_TIPS.length;
+                el.classList.add('vl-tip-out');
+                setTimeout(() => {
+                    el.textContent = VL_TIPS[vlTipIdx];
+                    el.classList.remove('vl-tip-out');
+                }, 300);
+            }, 5000);
+        }
+        function vlStopTips() { clearInterval(vlTipTimer); vlTipTimer = null; }
+
+        function vlSetStep(el, state) {
+            const num = el.querySelector('.vl-step-num');
+            const badge = el.querySelector('.vl-step-badge');
+            el.classList.remove('active', 'done');
+            if (state === 'active') {
+                el.classList.add('active');
+                num.innerHTML = '<span class="vl-num-spin"></span>';
+                badge.textContent = '진행 중';
+            } else if (state === 'done') {
+                el.classList.add('done');
+                num.textContent = '✓';
+                badge.textContent = '완료';
+            } else {
+                num.textContent = el.dataset.step;
+                badge.textContent = '대기 중';
+            }
+        }
+
+        function showLoadingModal() {
+            vlFinished = false;
+            const steps = vlOverlay.querySelectorAll('.vl-step');
+            steps.forEach((s, i) => vlSetStep(s, i === 0 ? 'active' : 'wait'));
+            vlFill.style.width = '0%';
+            vlPercent.textContent = '0%';
+            vlRemain.textContent = '약 5분';
+            vlOverlay.classList.add('show');
+            vlOverlay.setAttribute('aria-hidden', 'false');
+            vlStartTips();
+
+            const startTs = performance.now();
+            const tau = VL_ESTIMATE_MS / 2.5; // 90~95% 부근에서 자연히 감속
+            function frame(now) {
+                if (vlFinished) return;
+                const elapsed = now - startTs;
+                const pct = 95 * (1 - Math.exp(-elapsed / tau)); // 95% 캡
+                vlFill.style.width = pct.toFixed(1) + '%';
+                vlPercent.textContent = Math.round(pct) + '%';
+                const remainMs = VL_ESTIMATE_MS - elapsed;
+                if (remainMs > 60000) {
+                    vlRemain.textContent = '약 ' + Math.ceil(remainMs / 60000) + '분';
+                } else if (remainMs > 0) {
+                    vlRemain.textContent = '약 1분';
+                } else {
+                    vlRemain.textContent = '마무리 중';
+                }
+                vlRaf = requestAnimationFrame(frame);
+            }
+            vlRaf = requestAnimationFrame(frame);
+
+            vlStepTimers.forEach(clearTimeout);
+            vlStepTimers = [];
+            const stepDur = VL_ESTIMATE_MS / steps.length;
+            for (let i = 1; i < steps.length; i++) {
+                vlStepTimers.push(setTimeout(() => {
+                    if (vlFinished) return;
+                    vlSetStep(steps[i - 1], 'done');
+                    vlSetStep(steps[i], 'active');
+                }, stepDur * i));
+            }
+        }
+
+        function vlStopTimers() {
+            vlFinished = true;
+            if (vlRaf) cancelAnimationFrame(vlRaf);
+            vlRaf = null;
+            vlStepTimers.forEach(clearTimeout);
+            vlStepTimers = [];
+            vlStopTips();
+        }
+
+        function hideLoadingModal() {
+            vlStopTimers();
+            vlOverlay.classList.remove('show');
+            vlOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        // 응답 도착 → 100% 채우고 잠깐 보여준 뒤 resolve (이후 상세 이동)
+        function finishLoadingModal() {
+            return new Promise((resolve) => {
+                vlStopTimers();
+                vlOverlay.querySelectorAll('.vl-step').forEach(s => vlSetStep(s, 'done'));
+                vlFill.style.width = '100%';
+                vlPercent.textContent = '100%';
+                vlRemain.textContent = '완료';
+                setTimeout(resolve, 450);
+            });
+        }
+
+        // 선택 진행: Auto → 로딩 모달 표시 + select-videos 후 상세 이동 /
+        //           Custom → 로딩 없이 즉시 상세 이동(상세의 기존 Custom 흐름으로 이어감)
+        async function vsProceed(productId) {
+            const mode = document.querySelector('input[name="vsMode"]:checked').value;
+            if (mode === 'custom') {
+                window.location.href = '/products/' + productId;
+                return;
+            }
+            const k = parseInt(vsKSlider.value, 10);
+            const pool = parseInt(vsPoolSlider.value, 10);
+            // 설정 모달 닫고 로딩 모달 단독 표시 (순차 전환)
+            vsOverlay.classList.remove('show');
+            vsOverlay.setAttribute('aria-hidden', 'true');
+            showLoadingModal();
             try {
-                const response = await fetch('/products', {
+                const selRes = await fetch('/products/' + productId + '/select-videos', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify({ mode: 'auto', k: k, candidate_pool_size: pool }),
                 });
-                if (!response.ok) {
-                    alert('제품 생성 중 오류가 발생했습니다.');
-                    submitBtn.disabled = false; submitBtn.textContent = original;
+                if (!selRes.ok) {
+                    // 현행 보존: alert 후 상세 이동. 단 로딩 모달은 닫아 갇힘 방지.
+                    hideLoadingModal();
+                    alert('영상 선정 중 오류가 발생했습니다. 상세 페이지에서 다시 시도할 수 있습니다.');
+                    window.location.href = '/products/' + productId;
                     return;
                 }
-                const product = await response.json();
-                // existing_report 가 있으면 같은 product_detail 경로로 이동(보고서 자동 로드는 페이지가 담당).
-                window.location.href = '/products/' + product.product_id;
+                const result = await selRes.json();
+                await finishLoadingModal();
+                hideLoadingModal();
+                // 선정 결과를 팝업으로 표시 (재호출 없이 result 재사용)
+                showSelectedListModal(productId, result);
+            } catch (err) {
+                // 네트워크 오류 등: 로딩 모달 닫고 설정 모달 복귀 후 기존 catch(alert) 흐름으로
+                hideLoadingModal();
+                vsOverlay.classList.add('show');
+                vsOverlay.setAttribute('aria-hidden', 'false');
+                throw err;
+            }
+        }
+
+        // ── 선정 영상 목록 팝업 (화면 4) ──
+        const slOverlay = document.getElementById('slOverlay');
+        const slList = document.getElementById('slList');
+        const slCount = document.getElementById('slCount');
+        const slClose = document.getElementById('slClose');
+        const slDone = document.getElementById('slDone');
+
+        function slEscapeHtml(str) {
+            return String(str == null ? '' : str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        }
+
+        function slFormatDuration(sec) {
+            const s = parseInt(sec, 10);
+            if (!s || s <= 0) return null;
+            const h = Math.floor(s / 3600);
+            const m = Math.floor((s % 3600) / 60);
+            const ss = s % 60;
+            const pad = (n) => String(n).padStart(2, '0');
+            return h > 0 ? (h + ':' + pad(m) + ':' + pad(ss)) : (m + ':' + pad(ss));
+        }
+
+        function slFormatSubscribers(count) {
+            const n = parseInt(count, 10);
+            if (!n || n <= 0) return null;
+            if (n >= 100000000) return '구독자 ' + (Math.round(n / 10000000) / 10) + '억명';
+            if (n >= 10000) return '구독자 ' + (Math.round(n / 1000) / 10) + '만명';
+            if (n >= 1000) return '구독자 ' + (Math.round(n / 100) / 10) + '천명';
+            return '구독자 ' + n.toLocaleString() + '명';
+        }
+
+        function slRenderCard(v) {
+            const dur = slFormatDuration(v.duration_seconds);
+            const subs = slFormatSubscribers(v.channel_subscriber_count);
+            const thumb = v.thumbnail_url
+                ? '<img class="sl-thumb" src="' + slEscapeHtml(v.thumbnail_url) + '" alt="" loading="lazy">'
+                : '<div class="sl-thumb-ph">▶</div>';
+            const durBadge = dur ? '<span class="sl-duration">' + slEscapeHtml(dur) + '</span>' : '';
+
+            const reasons = Array.isArray(v.selection_reasons) ? v.selection_reasons.filter(Boolean) : [];
+            let reasonRows = '';
+            if (reasons.length) {
+                const chips = reasons.map(r => '<span class="sl-chip">' + slEscapeHtml(r) + '</span>').join('');
+                reasonRows += '<div class="sl-reason-row">'
+                    + '<span class="sl-reason-label">선정 이유</span>'
+                    + '<div class="sl-reason-chips">' + chips + '</div></div>';
+            }
+            if (v.rationale_short) {
+                reasonRows += '<div class="sl-reason-row">'
+                    + '<span class="sl-reason-label">선정된 이유</span>'
+                    + '<span class="sl-reason-text">' + slEscapeHtml(v.rationale_short) + '</span></div>';
+            }
+
+            const channelLine = subs
+                ? slEscapeHtml(v.channel_name) + ' · ' + slEscapeHtml(subs)
+                : slEscapeHtml(v.channel_name);
+            const rankBadge = v.rank ? '<span class="sl-rank">#' + slEscapeHtml(v.rank) + '</span>' : '';
+
+            return '<div class="sl-card">'
+                + '<div class="sl-thumb-wrap">' + thumb + durBadge + '</div>'
+                + '<div class="sl-body">'
+                + '<div class="sl-rank-row">' + rankBadge
+                + '<span class="sl-channel">' + channelLine + '</span></div>'
+                + '<p class="sl-vtitle">' + slEscapeHtml(v.title) + '</p>'
+                + (reasonRows ? '<div class="sl-reasons">' + reasonRows + '</div>' : '')
+                + '</div></div>';
+        }
+
+        function closeSelectedListModal() {
+            slOverlay.classList.remove('show');
+            slOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function showSelectedListModal(productId, result) {
+            const selected = (result && Array.isArray(result.selected)) ? result.selected : [];
+            slList.innerHTML = selected.map(slRenderCard).join('');
+            slCount.innerHTML = '총 <b>' + selected.length + '</b>개 영상 선정';
+            slDone.onclick = () => { window.location.href = '/products/' + productId; };
+            slOverlay.classList.add('show');
+            slOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        // X 버튼 / 백드롭 / ESC → 팝업만 닫고 메인 검색 페이지 유지 (선정은 이미 저장됨)
+        slClose.addEventListener('click', closeSelectedListModal);
+        slOverlay.addEventListener('click', (e) => { if (e.target === slOverlay) closeSelectedListModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && slOverlay.classList.contains('show')) closeSelectedListModal();
+        });
+
+        vsStart.addEventListener('click', async () => {
+            if (vsSubmitting) return;
+            vsSubmitting = true;
+            vsStart.disabled = true;
+            const original = vsStart.textContent;
+            vsStart.textContent = '확인 중...';
+            try {
+                // ① 제품 생성 (기존 POST /products 그대로)
+                const createRes = await fetch('/products', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name: vsPending.name, brand: vsPending.brand }),
+                });
+                if (!createRes.ok) {
+                    alert('제품 생성 중 오류가 발생했습니다.');
+                    vsStart.textContent = original;
+                    return;
+                }
+                const product = await createRes.json();
+                vsPending.productId = product.product_id;
+                // 선정 영상(videos>0)과 종합 보고서가 둘 다 있을 때만 '기존 보고서 보기'
+                // 노출. 영상 0개 제품은 빈 페이지로 빠지지 않도록 곧바로 신규 선정 흐름.
+                if (product.existing_report && (product.video_count || 0) > 0) {
+                    vsStart.hidden = true;
+                    vsChoice.hidden = false;
+                    vsStart.textContent = original;
+                    return;
+                }
+                // ②③ 신규 제품 → 바로 진행 (Auto는 로딩 모달, 이후 페이지 이동)
+                await vsProceed(product.product_id);
             } catch (error) {
                 alert('Error: ' + error);
-                submitBtn.disabled = false; submitBtn.textContent = original;
+                vsStart.textContent = original;
+            } finally {
+                vsSubmitting = false;
+                vsStart.disabled = false;
             }
         });
 
+        // 이미 보고서 있는 제품: 기존 보고서로 이동
+        document.getElementById('vsGoReport').addEventListener('click', () => {
+            if (vsPending.productId) window.location.href = '/products/' + vsPending.productId;
+        });
+
+        // 이미 보고서 있는 제품: 현재 설정으로 다시 선정
+        vsReselect.addEventListener('click', async () => {
+            if (vsSubmitting || !vsPending.productId) return;
+            vsSubmitting = true;
+            vsReselect.disabled = true;
+            document.getElementById('vsGoReport').disabled = true;
+            const original = vsReselect.textContent;
+            try {
+                await vsProceed(vsPending.productId);
+            } catch (error) {
+                alert('Error: ' + error);
+                vsReselect.textContent = original;
+            } finally {
+                vsSubmitting = false;
+                vsReselect.disabled = false;
+                document.getElementById('vsGoReport').disabled = false;
+            }
+        });
+
+        // ── 추천 리포트 캐러셀 ───────────────────────────────────────
+        (function initRecoCarousel() {
+            const viewport = document.getElementById('recoViewport');
+            const track = document.getElementById('recoTrack');
+            const nextBtn = document.getElementById('recoNext');
+            const dotsEl = document.getElementById('recoDots');
+            const hintEl = document.getElementById('recoHint');
+            if (!viewport || !track) return;
+
+            function step() {
+                const card = track.querySelector('.reco-card');
+                if (!card) return 0;
+                const styles = getComputedStyle(track);
+                const gap = parseFloat(styles.columnGap || styles.gap || '0') || 0;
+                return card.offsetWidth + gap;
+            }
+
+            function stepCount() {
+                const s = step();
+                if (s <= 0) return 1;
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+                if (maxScroll <= 1) return 1;
+                return Math.round(maxScroll / s) + 1;
+            }
+
+            function activeIndex() {
+                const s = step();
+                if (s <= 0) return 0;
+                return Math.round(viewport.scrollLeft / s);
+            }
+
+            function renderDots() {
+                const count = stepCount();
+                const multi = count > 1;
+                nextBtn.hidden = !multi;
+                dotsEl.hidden = !multi;
+                hintEl.hidden = !multi;
+                dotsEl.innerHTML = '';
+                if (!multi) return;
+                const active = activeIndex();
+                for (let i = 0; i < count; i++) {
+                    const dot = document.createElement('button');
+                    dot.type = 'button';
+                    dot.className = 'reco-dot' + (i === active ? ' active' : '');
+                    dot.setAttribute('aria-label', (i + 1) + '번째 페이지');
+                    dot.addEventListener('click', () => {
+                        viewport.scrollTo({ left: i * step(), behavior: 'smooth' });
+                    });
+                    dotsEl.appendChild(dot);
+                }
+            }
+
+            function updateActiveDot() {
+                const active = activeIndex();
+                dotsEl.querySelectorAll('.reco-dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === active);
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+                let target = viewport.scrollLeft + step();
+                if (target > maxScroll - 2) target = 0; // 끝에서 처음으로 순환
+                viewport.scrollTo({ left: target, behavior: 'smooth' });
+            });
+
+            let scrollRaf = null;
+            viewport.addEventListener('scroll', () => {
+                if (scrollRaf) cancelAnimationFrame(scrollRaf);
+                scrollRaf = requestAnimationFrame(updateActiveDot);
+            });
+
+            window.addEventListener('resize', renderDots);
+            renderDots();
+        })();
+
+        // ── 제품 삭제 (SHOW_PRODUCT_LIST=1) ──────────────────────────
         document.querySelectorAll('.card-delete').forEach((btn) => {
             btn.addEventListener('click', async (e) => {
                 e.preventDefault();

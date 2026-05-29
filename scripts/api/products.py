@@ -3,6 +3,7 @@ Product-related API routes
 """
 import asyncio
 import os
+from datetime import datetime
 from time import perf_counter
 
 from fastapi import BackgroundTasks, HTTPException, Request
@@ -59,6 +60,106 @@ def _infer_category_from_name(name: str) -> str:
     return ""
 
 
+def _format_updated_label(last_report_at) -> str:
+    """last_report_at(최신 보고서 생성 시각) → "업데이트 N일 전" 표시 문자열.
+
+    UI 일관성 위해 표시 문자열 생성은 서버 한 곳에서만 수행한다(템플릿/JS
+    중복 계산 금지). TIMESTAMP 컬럼은 naive datetime 으로 들어오므로
+    datetime.now() (naive) 와 비교.
+    """
+    if not last_report_at:
+        return ""
+    try:
+        delta = datetime.now() - last_report_at
+        days = delta.days
+    except TypeError:
+        return ""
+    if days <= 0:
+        return "오늘 업데이트"
+    return f"업데이트 {days}일 전"
+
+
+def _build_recommended(limit: int = 12):
+    """추천 리포트 캐러셀 데이터.
+
+    product_integrated_reports 가 존재하는 제품을 최신 보고서순으로 노출.
+    집계(댓글 수·작성자 고유 수·최신 보고서 시각)는 단일 JOIN + GROUP BY 한
+    쿼리로 처리(N+1 금지). pir 누적/videos/comments 카테시안은 COUNT(DISTINCT)
+    로 중복 상쇄. 표시용 "업데이트 N일 전" 문자열도 서버에서 미리 생성.
+
+    중복 제거: 같은 제품이 과거 dedupe 이전 INSERT 로 여러 product_id 행으로
+    존재할 수 있어, (name, brand) 기준 DISTINCT ON 으로 제품당 최신 보고서를
+    가진 1행만 남긴다(여전히 단일 쿼리 — N+1 없음). 내부 per_product 는
+    product_id 단위 집계, 바깥에서 최신순 정렬 + 12개 상한.
+    """
+    rows = query_all(
+        """
+        SELECT
+            product_id, name, brand, category, image_url,
+            comment_count, author_count, last_report_at
+        FROM (
+            SELECT DISTINCT ON (
+                LOWER(TRIM(per_product.name)),
+                COALESCE(LOWER(TRIM(per_product.brand)), '')
+            )
+                per_product.product_id,
+                per_product.name,
+                per_product.brand,
+                per_product.category,
+                per_product.image_url,
+                per_product.comment_count,
+                per_product.author_count,
+                per_product.last_report_at
+            FROM (
+                SELECT
+                    p.product_id,
+                    p.name,
+                    p.brand,
+                    p.category,
+                    p.image_url,
+                    COUNT(DISTINCT c.comment_id)        AS comment_count,
+                    COUNT(DISTINCT c.author_channel_id) AS author_count,
+                    MAX(pir.created_at)                 AS last_report_at
+                FROM tech_products p
+                JOIN product_integrated_reports pir ON pir.product_id = p.product_id
+                LEFT JOIN videos v   ON v.product_id = p.product_id
+                LEFT JOIN comments c ON c.video_id   = v.video_id
+                GROUP BY p.product_id, p.name, p.brand, p.category, p.image_url
+            ) per_product
+            ORDER BY
+                LOWER(TRIM(per_product.name)),
+                COALESCE(LOWER(TRIM(per_product.brand)), ''),
+                per_product.last_report_at DESC
+        ) deduped
+        ORDER BY last_report_at DESC
+        LIMIT %s
+        """,
+        (limit,),
+    )
+
+    recommended = []
+    for r in rows:
+        # 칩: DB category(보통 NULL) + 제품명 키워드 추론. 1~2개, 빈 칩 없음.
+        chips = []
+        cat = (r.get("category") or "").strip()
+        if cat:
+            chips.append(cat)
+        inferred = _infer_category_from_name(r.get("name") or "")
+        if inferred and inferred not in chips:
+            chips.append(inferred)
+
+        recommended.append({
+            "product_id": r["product_id"],
+            "name": r.get("name") or "",
+            "image_url": (r.get("image_url") or "").strip(),
+            "chips": chips,
+            "comment_count": int(r.get("comment_count") or 0),
+            "author_count": int(r.get("author_count") or 0),
+            "updated_label": _format_updated_label(r.get("last_report_at")),
+        })
+    return recommended
+
+
 def register_product_routes(app):
     """Register all product-related routes"""
     
@@ -72,10 +173,12 @@ def register_product_routes(app):
         """List all products."""
         show_product_list = os.getenv("SHOW_PRODUCT_LIST", "0") == "1"
         products = query_all("SELECT * FROM tech_products ORDER BY created_at DESC") if show_product_list else []
+        recommended = _build_recommended()
         return templates.TemplateResponse("products.html", {
             "request": request,
             "products": products,
             "show_product_list": show_product_list,
+            "recommended": recommended,
         })
     
     # ────────────────────────────────────────────────────────────────
@@ -141,8 +244,20 @@ def register_product_routes(app):
             """,
             (product_id,),
         )
+        # 빈 페이지 방지: '기존 보고서 보기' 게이트는 목적지(/products/{id})가 실제
+        # 렌더하는 videos 테이블의 카운트와 종합 보고서 존재를 *둘 다* 만족할 때만
+        # truthy. 종합 보고서 row 만 남고 videos 가 0개인 제품이 빈 페이지로 빠지던
+        # 문제 차단. videos 카운트는 단일 쿼리(N+1 없음).
+        video_count_row = query_one(
+            "SELECT COUNT(*) AS cnt FROM videos WHERE product_id = %s",
+            (product_id,),
+        )
+        video_count = int(video_count_row["cnt"]) if video_count_row else 0
         product = dict(product) if product else {}
-        product["existing_report"] = latest_report["id"] if latest_report else None
+        product["video_count"] = video_count
+        product["existing_report"] = (
+            latest_report["id"] if (latest_report and video_count > 0) else None
+        )
         return product
     
     @app.get("/products/{product_id}", response_class=HTMLResponse)
@@ -157,11 +272,23 @@ def register_product_routes(app):
             "SELECT * FROM videos WHERE product_id = %s ORDER BY view_count DESC",
             (product_id,)
         )
-        
+
+        # 종합 인사이트 '완료' 상태 표시용 — 최신 종합 보고서 1건(단일 쿼리).
+        #   row 존재 = 생성 완료, source_video_count = 분석 영상 N. 없으면 미생성.
+        latest_pir = query_one(
+            "SELECT source_video_count FROM product_integrated_reports "
+            "WHERE product_id = %s ORDER BY id DESC LIMIT 1",
+            (product_id,),
+        )
+
         return templates.TemplateResponse("product_detail.html", {
             "request": request,
             "product": product,
             "videos": videos,
+            "integrated_report_done": latest_pir is not None,
+            "integrated_report_video_count": (
+                latest_pir["source_video_count"] if latest_pir else None
+            ),
         })
 
     @app.post("/products/{product_id}/image")

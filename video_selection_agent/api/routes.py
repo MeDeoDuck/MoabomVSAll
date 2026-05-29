@@ -170,6 +170,9 @@ def _process_comments_for_videos(product_name: str, video_ids: Iterable[str]) ->
 
 def _decision_to_response(decision: Any) -> dict:
     score_lookup = getattr(decision, "all_scores", {}) or {}
+    # SelectedVideo 에는 없지만 VideoCandidate 에는 이미 있는 메타데이터를
+    # 응답에만 함께 실어 보내기 위한 룩업 (선정 로직/저장 구조는 불변).
+    candidate_by_id = {c.video_id: c for c in decision.candidates_preview}
 
     def _candidate_payload(c: Any) -> dict:
         base = {
@@ -215,6 +218,16 @@ def _decision_to_response(decision: Any) -> dict:
                 "rationale_short": v.rationale_short,
                 "rationale_full": v.rationale_full,
                 "selection_reasons": v.selection_reasons,
+                # VideoCandidate 에서 그대로 가져온 표시용 메타데이터 (없으면 None).
+                "thumbnail_url": getattr(
+                    candidate_by_id.get(v.video_id), "thumbnail_url", None
+                ),
+                "duration_seconds": getattr(
+                    candidate_by_id.get(v.video_id), "duration_seconds", None
+                ),
+                "channel_subscriber_count": getattr(
+                    candidate_by_id.get(v.video_id), "channel_subscriber_count", None
+                ),
             }
             for v in decision.selected
         ],
