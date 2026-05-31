@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>모아봄 vs 시중 AI — 정량 비교 대시보드</title>
+<style>
+    :root { color-scheme: light; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: #f4f6f8; color: #1f2933;
+      font-family: -apple-system, "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1180px; margin: 0 auto; padding: 32px 28px 64px; }
+    header.page {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 28px; padding-bottom: 18px; border-bottom: 2px solid #1f2933;
+    }
+    header.page h1 { font-size: 24px; margin: 0 0 6px; letter-spacing: -.5px; }
+    header.page p { margin: 0; color: #6b7280; font-size: 13px; }
+    .btn {
+      border: 1px solid #0f9d8a; background: #0f9d8a; color: #fff;
+      padding: 9px 16px; border-radius: 8px; font-size: 13px; cursor: pointer;
+      font-weight: 600;
+    }
+    .btn:hover { filter: brightness(1.05); }
+    section { margin-bottom: 34px; }
+    .section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .section-head h2 { font-size: 16px; margin: 0; }
+    .hint, .tag { font-size: 11px; color: #6b7280; }
+    .tag { background: #e7f6f3; color: #0f9d8a; padding: 2px 8px; border-radius: 20px; font-weight: 600; }
+
+    .card-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .card {
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 12px;
+      padding: 18px 18px 16px; border-top: 3px solid #0f9d8a;
+    }
+    .card-label { font-size: 12px; color: #6b7280; }
+    .card-value { font-size: 30px; font-weight: 700; margin: 6px 0 4px; letter-spacing: -1px; }
+    .card-sub { font-size: 11px; color: #6b7280; }
+
+    .chart-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .chart { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; }
+    .chart-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+    .bar-area { display: flex; align-items: flex-end; justify-content: space-around; height: 180px; gap: 10px; }
+    .bar-col { display: flex; flex-direction: column; align-items: center; flex: 1; height: 100%; justify-content: flex-end; }
+    .bar-value { font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+    .bar-track { width: 46px; height: 130px; display: flex; align-items: flex-end; }
+    .bar-fill { width: 100%; border-radius: 6px 6px 0 0; transition: height .3s; }
+    .bar-fill.bar-emph { box-shadow: 0 0 0 2px #e7f6f3, 0 6px 14px rgba(15,157,138,.25); }
+    .bar-name { font-size: 12px; margin-top: 8px; color: #6b7280; }
+
+    .table-wrap { overflow-x: auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: #f8fafc; color: #6b7280; font-weight: 600; text-align: left;
+      padding: 11px 12px; border-bottom: 1px solid #e5e7eb; white-space: nowrap; font-size: 12px;
+    }
+    tbody td { padding: 11px 12px; border-bottom: 1px solid #f1f3f5; white-space: nowrap; }
+    tbody tr:last-child td { border-bottom: none; }
+    .row-emph { background: #e7f6f3; }
+    .row-emph .t-prod { font-weight: 700; }
+    .t-num { text-align: right; font-variant-numeric: tabular-nums; }
+    .t-center { text-align: center; }
+    .t-note { color: #6b7280; white-space: normal; min-width: 180px; }
+    .t-mono { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 12px; }
+    .badge { padding: 3px 9px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+    .sys-chip { padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; }
+    .mini-tag { font-size: 10px; color: #b45309; background: #fff7e6; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+    .select { padding: 7px 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 13px; background: #fff; }
+    .detail-block[hidden] { display: none; }
+
+    .quote-section { background: #1f2933; color: #fff; border-radius: 14px; padding: 26px 28px; }
+    .quote-section h2 { color: #fff; }
+    .quote-dynamic { font-size: 14px; color: #cfe8e3; margin: 0 0 14px; }
+    .quote-list { margin: 0; padding-left: 20px; }
+    .quote-list li { margin-bottom: 10px; line-height: 1.55; font-size: 15px; }
+    footer { margin-top: 30px; color: #6b7280; font-size: 11px; text-align: center; }
+
+    @media print {
+      body { background: #fff; }
+      .no-print { display: none !important; }
+      .detail-block[hidden] { display: block !important; }
+      section { break-inside: avoid; }
+      .quote-section { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .card, .chart, .bar-fill, .row-emph, .badge, .sys-chip { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="page">
+      <div>
+        <h1>모아봄 vs 시중 AI — 정량 비교 대시보드</h1>
+        <p>제품 리뷰 분석 과업에서의 근거 추적률 · 판정 일관성 · 분석 근거량 비교 &nbsp;·&nbsp; <strong>데이터: 샘플(예시) 데이터</strong></p>
+      </div>
+      <button class="btn no-print" onclick="window.print()">PDF로 저장 / 인쇄</button>
+    </header>
+    
+    <section>
+      <div class="section-head">
+        <h2>요약 <span class="tag">모아봄 기준</span></h2>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-label">평균 근거 추적률</div>
+          <div class="card-value">83.5%</div>
+          <div class="card-sub">핵심 주장 대비 근거 연결 비율</div>
+        </div>
+        <div class="card">
+          <div class="card-label">평균 판정 일관성</div>
+          <div class="card-value">88.9%</div>
+          <div class="card-sub">반복 실행 시 동일 판정 유지율</div>
+        </div>
+        <div class="card">
+          <div class="card-label">총 분석 영상 수</div>
+          <div class="card-value">14</div>
+          <div class="card-sub">수집·분석에 사용한 리뷰 영상</div>
+        </div>
+        <div class="card">
+          <div class="card-label">총 분석 댓글 수</div>
+          <div class="card-value">8,080</div>
+          <div class="card-sub">수집·분석에 사용한 실사용자 댓글</div>
+        </div></div>
+    </section>
+    
+    <section>
+      <div class="section-head"><h2>AI별 평균 비교</h2></div>
+      <div class="chart-grid">
+      <div class="chart">
+        <div class="chart-title">AI별 평균 근거 추적률</div>
+        <div class="bar-area">
+          <div class="bar-col">
+            <div class="bar-value">46.7%</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:46.7%;background:#9aa3af"></div>
+            </div>
+            <div class="bar-name">GPT</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">53.3%</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:53.3%;background:#c4b5d6"></div>
+            </div>
+            <div class="bar-name">Gemini</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">83.5%</div>
+            <div class="bar-track">
+              <div class="bar-fill bar-emph" style="height:83.5%;background:#0f9d8a"></div>
+            </div>
+            <div class="bar-name">모아봄</div>
+          </div></div>
+      </div>
+      <div class="chart">
+        <div class="chart-title">AI별 평균 판정 일관성</div>
+        <div class="bar-area">
+          <div class="bar-col">
+            <div class="bar-value">77.8%</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:77.8%;background:#9aa3af"></div>
+            </div>
+            <div class="bar-name">GPT</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">66.7%</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:66.7%;background:#c4b5d6"></div>
+            </div>
+            <div class="bar-name">Gemini</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">88.9%</div>
+            <div class="bar-track">
+              <div class="bar-fill bar-emph" style="height:88.9%;background:#0f9d8a"></div>
+            </div>
+            <div class="bar-name">모아봄</div>
+          </div></div>
+      </div>
+      <div class="chart">
+        <div class="chart-title">AI별 평균 분석 댓글 수</div>
+        <div class="bar-area">
+          <div class="bar-col">
+            <div class="bar-value">0</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:2.0%;background:#9aa3af"></div>
+            </div>
+            <div class="bar-name">GPT</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">0</div>
+            <div class="bar-track">
+              <div class="bar-fill" style="height:2.0%;background:#c4b5d6"></div>
+            </div>
+            <div class="bar-name">Gemini</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-value">2,693</div>
+            <div class="bar-track">
+              <div class="bar-fill bar-emph" style="height:100.0%;background:#0f9d8a"></div>
+            </div>
+            <div class="bar-name">모아봄</div>
+          </div></div>
+      </div></div>
+    </section>
+    
+    <section>
+      <div class="section-head"><h2>비교 테이블</h2>
+        <span class="hint">행은 (제품 × AI) 단위 요약 · 음영 행이 모아봄</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>제품명</th><th>비교 대상 AI</th><th>실행 횟수</th><th>최종 판정</th>
+              <th>근거 추적률</th><th>판정 일관성</th><th>분석 영상 수</th>
+              <th>분석 댓글 수</th><th>데이터 부족</th><th>비고</th>
+            </tr>
+          </thead>
+          <tbody>
+        <tr class="">
+          <td class="t-prod">Galaxy S25</td>
+          <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+          <td class="t-num">46.7%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">범용 답변 기반(재실행)</td>
+        </tr>
+        <tr class="">
+          <td class="t-prod">Galaxy S25</td>
+          <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+          <td class="t-num">56.7%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">검색 요약 기반(재실행)</td>
+        </tr>
+        <tr class="row-emph">
+          <td class="t-prod">Galaxy S25</td>
+          <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+          <td class="t-num">83.3%</td>
+          <td class="t-num">100.0%</td>
+          <td class="t-num">6</td>
+          <td class="t-num">4,480</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">영상·자막·댓글 수집 기반(재실행)</td>
+        </tr>
+        <tr class="">
+          <td class="t-prod">Pixel 9a</td>
+          <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+          <td class="t-num">43.3%</td>
+          <td class="t-num">100.0%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">범용 답변 기반(재실행)</td>
+        </tr>
+        <tr class="">
+          <td class="t-prod">Pixel 9a</td>
+          <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+          <td class="t-num">46.7%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">검색 요약 기반(재실행)</td>
+        </tr>
+        <tr class="row-emph">
+          <td class="t-prod">Pixel 9a</td>
+          <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#eef1f4;color:#4b5563">데이터 부족</span></td>
+          <td class="t-num">80.6%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">3</td>
+          <td class="t-num">260</td>
+          <td class="t-center">예</td>
+          <td class="t-note">추가 수집 후 조건부 판정 가능</td>
+        </tr>
+        <tr class="">
+          <td class="t-prod">iPhone 16</td>
+          <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+          <td class="t-num">50.0%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">범용 답변 기반(재실행)</td>
+        </tr>
+        <tr class="">
+          <td class="t-prod">iPhone 16</td>
+          <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+          <td class="t-num">56.7%</td>
+          <td class="t-num">66.7%</td>
+          <td class="t-num">0</td>
+          <td class="t-num">0</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">검색 요약 기반(재실행)</td>
+        </tr>
+        <tr class="row-emph">
+          <td class="t-prod">iPhone 16</td>
+          <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+          <td class="t-num">3</td>
+          <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+          <td class="t-num">86.7%</td>
+          <td class="t-num">100.0%</td>
+          <td class="t-num">5</td>
+          <td class="t-num">3,340</td>
+          <td class="t-center">아니오</td>
+          <td class="t-note">영상·자막·댓글 수집 기반(재실행)</td>
+        </tr></tbody>
+        </table>
+      </div>
+    </section>
+    
+    <section>
+      <div class="section-head"><h2>제품별 상세</h2>
+        <select id="product-select" class="select no-print" onchange="selectProduct(this.value)">
+          <option value="iphone-16">iPhone 16</option><option value="galaxy-s25">Galaxy S25</option><option value="pixel-9a">Pixel 9a</option>
+        </select>
+      </div>
+      <div id="detail-area">
+        <div class="detail-block" data-product="iphone-16">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>run_id</th><th>실행 날짜</th><th>AI</th><th>최종 판정</th>
+                  <th>전체 핵심 주장</th><th>근거 연결 주장</th><th>근거 추적률</th>
+                  <th>분석 영상</th><th>분석 댓글</th><th>대표 근거 요약</th>
+                </tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="t-mono">gpt-001</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-002</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">4</td>
+              <td class="t-num">40.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-003</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">6</td>
+              <td class="t-num">60.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-001</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">6</td>
+              <td class="t-num">60.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-002</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-003</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">6</td>
+              <td class="t-num">60.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-001</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">9</td>
+              <td class="t-num">90.0%</td>
+              <td class="t-num">5</td>
+              <td class="t-num">3,200</td>
+              <td class="t-note">영상 5편 · 자막 5건 · 댓글 3,200건 수집, 대표 댓글 30건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-002</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">9</td>
+              <td class="t-num">90.0%</td>
+              <td class="t-num">5</td>
+              <td class="t-num">3,120</td>
+              <td class="t-note">영상 5편 · 자막 5건 · 댓글 3,120건 수집, 대표 댓글 30건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-003</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">8</td>
+              <td class="t-num">80.0%</td>
+              <td class="t-num">5</td>
+              <td class="t-num">3,340</td>
+              <td class="t-note">영상 5편 · 자막 5건 · 댓글 3,340건 수집, 대표 댓글 28건 인용</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="detail-block hidden" data-product="galaxy-s25">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>run_id</th><th>실행 날짜</th><th>AI</th><th>최종 판정</th>
+                  <th>전체 핵심 주장</th><th>근거 연결 주장</th><th>근거 추적률</th>
+                  <th>분석 영상</th><th>분석 댓글</th><th>대표 근거 요약</th>
+                </tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="t-mono">gpt-101</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-102</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">4</td>
+              <td class="t-num">40.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-103</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-101</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">6</td>
+              <td class="t-num">60.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-102</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">6</td>
+              <td class="t-num">60.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-103</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fdeaea;color:#b91c1c">비추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-101</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">8</td>
+              <td class="t-num">80.0%</td>
+              <td class="t-num">6</td>
+              <td class="t-num">4,500</td>
+              <td class="t-note">영상 6편 · 자막 6건 · 댓글 4,500건 수집, 대표 댓글 32건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-102</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">8</td>
+              <td class="t-num">80.0%</td>
+              <td class="t-num">6</td>
+              <td class="t-num">4,380</td>
+              <td class="t-note">영상 6편 · 자막 6건 · 댓글 4,380건 수집, 대표 댓글 32건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-103</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">9</td>
+              <td class="t-num">90.0%</td>
+              <td class="t-num">6</td>
+              <td class="t-num">4,480</td>
+              <td class="t-note">영상 6편 · 자막 6건 · 댓글 4,480건 수집, 대표 댓글 34건 인용</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="detail-block hidden" data-product="pixel-9a">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>run_id</th><th>실행 날짜</th><th>AI</th><th>최종 판정</th>
+                  <th>전체 핵심 주장</th><th>근거 연결 주장</th><th>근거 추적률</th>
+                  <th>분석 영상</th><th>분석 댓글</th><th>대표 근거 요약</th>
+                </tr>
+              </thead>
+              <tbody>
+            <tr>
+              <td class="t-mono">gpt-201</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">4</td>
+              <td class="t-num">40.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-202</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gpt-203</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#9aa3af1a;color:#9aa3af">GPT</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">4</td>
+              <td class="t-num">40.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-201</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-202</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#e7f6f3;color:#0f766e">추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">5</td>
+              <td class="t-num">50.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">gemini-203</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#c4b5d61a;color:#c4b5d6">Gemini</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">10</td>
+              <td class="t-num">4</td>
+              <td class="t-num">40.0%</td>
+              <td class="t-num">0</td>
+              <td class="t-num">0</td>
+              <td class="t-note">외부 데이터 미수집 — 모델 내부 지식 기반 답변</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-201</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#eef1f4;color:#4b5563">데이터 부족</span></td>
+              <td class="t-num">6</td>
+              <td class="t-num">5</td>
+              <td class="t-num">83.3%</td>
+              <td class="t-num">2</td>
+              <td class="t-num">180</td>
+              <td class="t-note">영상 2편 · 자막 2건 · 댓글 180건 수집, 대표 댓글 8건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-202</td>
+              <td>2026-05-30</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#eef1f4;color:#4b5563">데이터 부족</span></td>
+              <td class="t-num">6</td>
+              <td class="t-num">5</td>
+              <td class="t-num">83.3%</td>
+              <td class="t-num">2</td>
+              <td class="t-num">210</td>
+              <td class="t-note">영상 2편 · 자막 2건 · 댓글 210건 수집, 대표 댓글 8건 인용</td>
+            </tr>
+            <tr>
+              <td class="t-mono">moabom-203</td>
+              <td>2026-05-31</td>
+              <td><span class="sys-chip" style="background:#0f9d8a1a;color:#0f9d8a">모아봄</span></td>
+              <td><span class="badge" style="background:#fff7e6;color:#b45309">조건부 추천</span></td>
+              <td class="t-num">8</td>
+              <td class="t-num">6</td>
+              <td class="t-num">75.0%</td>
+              <td class="t-num">3</td>
+              <td class="t-num">260</td>
+              <td class="t-note">영상 3편 · 자막 3건 · 댓글 260건 수집, 대표 댓글 10건 인용</td>
+            </tr></tbody>
+            </table>
+          </div>
+        </div></div>
+    </section>
+    
+    <section class="quote-section">
+      <div class="section-head"><h2>발표용 요약</h2></div>
+      <p class="quote-dynamic">본 데이터 기준, 모아봄의 평균 근거 추적률은 83.5%, 평균 판정 일관성은 88.9%이며, 제품당 평균 2,693건의 댓글을 분석 근거로 사용했습니다.</p>
+      <ul class="quote-list"><li>시중 AI가 범용 검색·답변 도구라면, 모아봄은 제품 리뷰 분석에 특화된 데이터 수집·검증·판정 시스템입니다.</li><li>모아봄은 근거 추적률, 판정 일관성, 분석 근거량을 수치화하여 결과의 신뢰성을 설명할 수 있습니다.</li><li>따라서 본 비교는 '어떤 AI가 더 똑똑한가'가 아니라, '제품 리뷰 분석이라는 특정 과업에서 누가 더 추적 가능하고 일관된 결과를 내는가'를 확인하는 방식입니다.</li></ul>
+    </section>
+    <footer>
+      ※ 본 비교는 정확도 우열이 아니라 '근거 추적 가능성·판정 일관성·분석 근거량'을 수치화한 것입니다.
+      샘플 데이터 기준이며 benchmark/data.py 에서 수정할 수 있습니다.
+    </footer>
+  </div>
+  <script>
+    function selectProduct(pid) {
+      document.querySelectorAll('.detail-block').forEach(function (b) {
+        b.hidden = (b.getAttribute('data-product') !== pid);
+      });
+    }
+    </script>
+</body>
+</html>
