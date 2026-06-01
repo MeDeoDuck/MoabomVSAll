@@ -29,7 +29,7 @@ RUN_MOABOM = True   # DB·키 미구비 시 자동 skip (graceful)
 # ── 모델 문자열 (RunYourAI 게이트웨이 provider/model 형식) ─────────
 # GPT/Gemini 모두 동일 게이트웨이로 호출 — 모델만 교체.
 GPT_MODEL = os.getenv("EXP_GPT_MODEL", "openai/gpt-4.1-2025-04-14")
-GEMINI_MODEL = os.getenv("EXP_GEMINI_MODEL", "gemini/gemini-2.5-flash")
+GEMINI_MODEL = os.getenv("EXP_GEMINI_MODEL", "gemini/gemini-3.1-pro-preview")
 # 근거 추적률을 채점하는 중립 심판 모델 (어느 시스템을 채점하든 동일).
 JUDGE_MODEL = os.getenv("EXP_JUDGE_MODEL", "openai/gpt-4.1-2025-04-14")
 
