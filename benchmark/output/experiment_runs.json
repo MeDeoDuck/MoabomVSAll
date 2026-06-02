@@ -1,0 +1,2702 @@
+[
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "GPT",
+    "runId": "gpt-galaxy-21-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-21-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-21",
+    "productName": "갤럭시21",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-21-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "GPT",
+    "runId": "gpt-iphone-16-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "Gemini",
+    "runId": "gemini-iphone-16-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-16",
+    "productName": "iPhone 16",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-16-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-2",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-3",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-5",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-7",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "GPT",
+    "runId": "gpt-galaxy-s25-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-7",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "Gemini",
+    "runId": "gemini-galaxy-s25-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-1",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-2",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-3",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-4",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-5",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-6",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-7",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-8",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-9",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "galaxy-s25",
+    "productName": "Galaxy S25",
+    "system": "모아봄",
+    "runId": "모아봄-galaxy-s25-10",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "GPT",
+    "runId": "gpt-pixel-9a-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-3",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-5",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-7",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "Gemini",
+    "runId": "gemini-pixel-9a-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-1",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-2",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-3",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-4",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-6",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-7",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-8",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-9",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "pixel-9a",
+    "productName": "Pixel 9a",
+    "system": "모아봄",
+    "runId": "모아봄-pixel-9a-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-5",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-7",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "GPT",
+    "runId": "gpt-airpods-pro3-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-2",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-3",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-5",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "Gemini",
+    "runId": "gemini-airpods-pro3-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-1",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-2",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-3",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-4",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-5",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-6",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-7",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-8",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-9",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-pro3",
+    "productName": "에어팟 프로3",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-pro3-10",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-2",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-3",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-5",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-7",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "GPT",
+    "runId": "gpt-iphone-17-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-1",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-2",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "Gemini",
+    "runId": "gemini-iphone-17-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-1",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-2",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-3",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-4",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-5",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-6",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-7",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-8",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-9",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-17",
+    "productName": "아이폰 17",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-17-10",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "GPT",
+    "runId": "gpt-gopro-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "Gemini",
+    "runId": "gemini-gopro-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "gopro",
+    "productName": "고프로",
+    "system": "모아봄",
+    "runId": "모아봄-gopro-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-2",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-3",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-4",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-6",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-8",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-9",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "GPT",
+    "runId": "gpt-airpods-4-10",
+    "decision": "데이터 부족",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "Gemini",
+    "runId": "gemini-airpods-4-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-4",
+    "productName": "에어팟 4",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-4-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "GPT",
+    "runId": "gpt-iphone-12-pro-max-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "Gemini",
+    "runId": "gemini-iphone-12-pro-max-10",
+    "decision": "비추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-1",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-2",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-3",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-4",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-5",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-6",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-7",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-8",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-9",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "iphone-12-pro-max",
+    "productName": "아이폰 12 Pro Max",
+    "system": "모아봄",
+    "runId": "모아봄-iphone-12-pro-max-10",
+    "decision": "추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "GPT",
+    "runId": "gpt-airpods-2-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / openai/gpt-4.1-2025-04-14"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "Gemini",
+    "runId": "gemini-airpods-2-10",
+    "decision": "비추천",
+    "executedAt": "2026-06-02",
+    "note": "RunYourAI 게이트웨이 / gemini/gemini-3.1-pro-preview"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-1",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-2",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-3",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-4",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-5",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-6",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-7",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-8",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-9",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  },
+  {
+    "productId": "airpods-2",
+    "productName": "에어팟 2세대",
+    "system": "모아봄",
+    "runId": "모아봄-airpods-2-10",
+    "decision": "조건부 추천",
+    "executedAt": "2026-06-02",
+    "note": "파이프라인 직접 호출 (openai/gpt-4.1-2025-04-14)"
+  }
+]

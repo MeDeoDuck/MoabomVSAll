@@ -1,18 +1,19 @@
 #!/usr/bin/env python3
 """
-정량 비교 실험 — 한 방 실행 오케스트레이터.
+정량 비교 실험 — 한 방 실행 오케스트레이터 (v3: 판정 일관성 단일 지표).
 
     python experiment/run_experiment.py
 
 흐름 (제품 × 시스템 × REPEAT 회):
-  1) GPT / Gemini  : RunYourAI 게이트웨이로 동일 구매판단 프롬프트 호출 → 원시 출력
-  2) 모아봄        : 운영 파이프라인 직접 호출 → 7섹션 보고서 생성
-  3) 심판(judge)   : 모든 출력의 근거 추적률을 동일 기준으로 채점
-  4) 집계          : benchmark/metrics.py 의 지표 함수로 계산
-  5) 산출          : 결과 JSON 저장 + benchmark 대시보드 HTML 재생성·오픈
+  1) GPT / Gemini  : RunYourAI 게이트웨이로 동일 구매판단 프롬프트 호출 → 판정
+  2) 모아봄        : 운영 파이프라인 직접 호출 → 7섹션 보고서 생성 → 판정
+  3) 집계          : benchmark/metrics.py 의 판정 일관성 계산
+  4) 산출          : 결과 JSON 저장 + benchmark 대시보드 HTML 재생성·오픈
 
-DB·키 미구비 시 해당 단계만 graceful 하게 건너뛰고 나머지는 계속 진행한다.
-실제 API 를 호출하므로 토큰·쿼터 비용이 발생한다.
+지표: 판정 일관성(같은 제품 REPEAT회 다수결 비율) 하나.
+실행시간·근거 추적률·분석 근거량·심판 LLM 은 사용하지 않는다(v3).
+
+모아봄 단계는 prepare_data.py 로 데이터를 미리 수집해 두면 빠르고 안정적이다.
 """
 import json
 import os
@@ -30,7 +31,7 @@ try:
 except Exception:
     pass
 
-from experiment import config, providers, judge  # noqa: E402
+from experiment import config, providers  # noqa: E402
 
 
 def _init_db_if_possible() -> bool:
@@ -45,21 +46,14 @@ def _init_db_if_possible() -> bool:
         return False
 
 
-def _record(product, system, idx, decision, judged, counts, note):
-    """benchmark/data.py 와 동일한 스키마의 run 레코드 생성."""
+def _record(product, system, idx, decision, note):
+    """benchmark/data.py 와 동일한 스키마의 run 레코드 생성 (v3)."""
     return {
         "productId": product["productId"],
         "productName": product["productName"],
         "system": system,
         "runId": f"{system.lower()}-{product['productId']}-{idx + 1}",
         "decision": decision,
-        "totalClaims": judged["total_claims"],
-        "evidenceLinkedClaims": judged["evidence_linked_claims"],
-        "videoCount": counts.get("video_count", 0),
-        "captionCount": counts.get("caption_count", 0),
-        "commentCount": counts.get("comment_count", 0),
-        "representativeCommentCount": counts.get("representative_comment_count", 0),
-        "hasDataInsufficient": counts.get("has_data_insufficient", decision == "데이터 부족"),
         "executedAt": date.today().isoformat(),
         "note": note,
     }
@@ -70,17 +64,13 @@ def run_generic_system(product, system, model, runs):
     for i in range(config.REPEAT):
         tag = f"{system} | {product['productName']} | {i + 1}/{config.REPEAT}"
         try:
-            text, decision = providers.call_generic_llm(model, product["productName"])
+            decision = providers.call_generic_llm(model, product["productName"])
         except Exception as e:  # noqa: BLE001 — 한 회 실패가 전체를 막지 않음
             print(f"[WARN][{tag}] 호출 실패: {type(e).__name__}: {e} — skip")
             continue
-        judged = judge.score_evidence_traceability(product["productName"], text)
-        runs.append(
-            _record(product, system, i, decision, judged,
-                     counts={"has_data_insufficient": decision == "데이터 부족"},
-                     note=f"RunYourAI 게이트웨이 / {model}")
-        )
-        print(f"[OK][{tag}] 판정={decision} 추적={judged['evidence_linked_claims']}/{judged['total_claims']}")
+        runs.append(_record(product, system, i, decision,
+                            note=f"RunYourAI 게이트웨이 / {model}"))
+        print(f"[OK][{tag}] 판정={decision}")
 
 
 def run_moabom_system(product, runs, db_ready):
@@ -99,18 +89,13 @@ def run_moabom_system(product, runs, db_ready):
         if res is None:
             print(f"[INFO][{tag}] 모아봄 단계 skip (위 경고 참고)")
             return  # 이 제품은 모아봄 불가 → 반복 중단
-        judged = judge.score_evidence_traceability(product["productName"], res["report_text"])
-        runs.append(_record(product, "모아봄", i, res["decision"], judged, res, res["note"]))
-        print(
-            f"[OK][{tag}] 판정={res['decision']} "
-            f"추적={judged['evidence_linked_claims']}/{judged['total_claims']} "
-            f"영상={res['video_count']} 댓글={res['comment_count']}"
-        )
+        runs.append(_record(product, "모아봄", i, res["decision"], res["note"]))
+        print(f"[OK][{tag}] 판정={res['decision']}")
 
 
 def main():
     print("=" * 70)
-    print("  모아봄 vs 시중 AI — 정량 비교 실험 시작")
+    print("  모아봄 vs 시중 AI — 정량 비교 실험 시작 (v3: 판정 일관성)")
     print(f"  제품 {len(config.PRODUCTS)}개 × 반복 {config.REPEAT}회")
     print("=" * 70)
 
