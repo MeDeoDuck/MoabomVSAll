@@ -17,9 +17,9 @@
 
 - Python 3.12+
 - Docker Desktop
-- API 키 2개:
+- API 키:
   - [YouTube Data API v3](https://console.cloud.google.com/apis/credentials)
-  - [Groq Console](https://console.groq.com/keys)
+  - **RunYourAI API 키** (`RUNYOURAI_API_KEY`) — OpenAI/Gemini 등을 단일 키로 쓰는 LLM 통합 게이트웨이
 
 ### 2. 환경 설정
 
@@ -31,11 +31,13 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-`.env` 파일에 API 키를 입력합니다 (DATABASE_URL은 docker 사용 시 기본값 그대로 두면 됩니다):
+`.env` 파일에 키를 입력합니다 (DATABASE_URL은 docker 사용 시 기본값 그대로 두면 됩니다):
 
 ```
 YOUTUBE_API_KEY=...
-GROQ_API_KEY=...
+RUNYOURAI_API_KEY=...
+RUNYOURAI_BASE_URL=https://api.runyour.ai/v1
+RUNYOURAI_MODEL=openai/gpt-4.1-2025-04-14
 ```
 
 ### 3. 실행
@@ -66,7 +68,7 @@ Moabom_Prototype/
 │   ├── database/                 #   PostgreSQL 연결 / 스키마 / 쿼리 헬퍼
 │   ├── youtube/                  #   YouTube API + yt-dlp 자막 추출
 │   ├── analysis/                 #   감정분석 / 제품 관련도 필터
-│   ├── reports/                  #   Groq Llama 보고서 생성 + PDF 출력
+│   ├── reports/                  #   RunYourAI GPT-4.1 보고서 생성 + PDF 출력
 │   └── utils/                    #   LLM 프롬프트 템플릿
 ├── templates/                    # Jinja2 HTML
 ├── comment_filtering_agent/      # 차세대 댓글 필터 Agent (개발 중, 운영 미연결)
@@ -83,15 +85,16 @@ Moabom_Prototype/
 |---|---|---|
 | `DATABASE_URL` | PostgreSQL 연결 문자열 | `postgresql://postgres:postgres@localhost:5432/techdb` |
 | `YOUTUBE_API_KEY` | YouTube Data API v3 키 | (필수) |
-| `GROQ_API_KEY` | Groq API 키 | (필수) |
-| `GROQ_MODEL` | Llama 모델명 | `llama-3.3-70b-versatile` |
+| `RUNYOURAI_API_KEY` | RunYourAI API 키 (LLM 통합 게이트웨이) | (필수) |
+| `RUNYOURAI_BASE_URL` | RunYourAI 엔드포인트 | `https://api.runyour.ai/v1` |
+| `RUNYOURAI_MODEL` | 기본 LLM 모델 문자열 | `openai/gpt-4.1-2025-04-14` |
 | `PORT` | FastAPI 포트 | `8000` |
 
 ## 기술 스택
 
 - **Backend**: FastAPI, uvicorn
 - **DB**: PostgreSQL 15 (psycopg2)
-- **외부 API**: YouTube Data API v3, Groq (Llama 3.3 70B)
+- **외부 API**: YouTube Data API v3, RunYourAI (OpenAI/Gemini 통합 게이트웨이, 기본 GPT-4.1)
 - **자막**: yt-dlp + requests (json3 / vtt 직접 파싱)
 - **PDF**: ReportLab + 맑은 고딕
 
@@ -112,7 +115,7 @@ Moabom_Prototype/
 | `connection refused` | `docker compose up -d postgres` 실행 |
 | `ModuleNotFoundError` | venv 활성화 / `pip install -r requirements.txt` |
 | YouTube 403 | API 키 또는 일일 할당량(10,000 units) 확인 |
-| Groq `model_not_found` | `.env`의 `GROQ_MODEL`을 [최신 지원 모델](https://console.groq.com/docs/models)로 변경 |
+| RunYourAI 4xx / model 오류 | `.env`의 `RUNYOURAI_API_KEY` 확인, `RUNYOURAI_MODEL`은 `provider/model` 형식(예: `openai/gpt-4.1-2025-04-14`) |
 | 포트 8000 충돌 | `python main.py 8001` |
 
 ## 정량 비교 벤치마크 (모아봄 vs 시중 AI)
